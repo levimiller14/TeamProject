@@ -22,4 +22,31 @@ public class buttonFunctions : MonoBehaviour
             Application.Quit();
         #endif
     }
+
+    //// Levi additions
+    //// open dialog menus (closes pause menu, opens specific dialog)
+    //public void openSettings()
+    //{
+    //    gameManager.instance.menuPause.SetActive(false);
+    //}
+    
+    //public void openStats()
+    //{
+
+    //}
+
+    //public void openCustomization()
+    //{
+
+    //}
+
+    //public void openCheats()
+    //{
+
+    //}
+
+    //public void backToPause()
+    //{
+
+    //}
 }
