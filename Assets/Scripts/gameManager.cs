@@ -10,6 +10,7 @@ public class gameManager : MonoBehaviour
     // Levi additions
     // reusable dialog framework
     [Header("----Dialog Menus----")]
+    public GameObject menuActive;
     public GameObject menuPause;
     public GameObject menuWin;
     public GameObject menuLose;
@@ -19,8 +20,8 @@ public class gameManager : MonoBehaviour
     public GameObject menuCheats;
     // end Levi additions
 
-    [SerializeField] GameObject menuActive;
-    //[SerializeField] GameObject menuPause; // moving these to dialog framework as public instead of Serialized Fields for access in other scripts
+    //[SerializeField] GameObject menuActive; // moving these to dialog framework as public instead of Serialized Fields for access in other script
+    //[SerializeField] GameObject menuPause; 
     //[SerializeField] GameObject menuWin;
     //[SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text gameGoalCountText;
