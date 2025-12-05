@@ -9,6 +9,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
+    [SerializeField] int FOV;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -17,6 +18,7 @@ public class enemyAI : MonoBehaviour, IDamage
     Color colorOrig;
 
     float shootTimer;
+    float angleToPlayer;
 
     bool playerInRange;
 
@@ -34,21 +36,39 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         shootTimer += Time.deltaTime;
 
-        if(playerInRange)
+        if(playerInRange && canSeePlayer())
         {
-            playerDir = gameManager.instance.player.transform.position - transform.position;
-            agent.SetDestination(gameManager.instance.player.transform.position);
+            
+        }
+    }
 
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                faceTarget();
-            }
+    bool canSeePlayer()
+    {
+        playerDir = gameManager.instance.player.transform.position - transform.position;
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
-            if(shootTimer >= shootRate)
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, playerDir, out hit))
+        {
+            if(angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
             {
-                shoot();
+                agent.SetDestination(gameManager.instance.player.transform.position);
+
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    faceTarget();
+                }
+
+                if (shootTimer >= shootRate)
+                {
+                    shoot();
+                }
+
+                return true;
             }
         }
+
+        return false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,6 +102,7 @@ public class enemyAI : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
