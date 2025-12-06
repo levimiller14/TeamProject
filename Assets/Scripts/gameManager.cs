@@ -7,10 +7,23 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
-    [SerializeField] GameObject menuWin;
-    [SerializeField] GameObject menuLose;
+    // Levi additions
+    // reusable dialog framework
+    [Header("----Dialog Menus----")]
+    public GameObject menuActive;
+    public GameObject menuPause;
+    public GameObject menuWin;
+    public GameObject menuLose;
+    public GameObject menuSettings;
+    public GameObject menuStats;
+    public GameObject menuCustomization;
+    public GameObject menuCheats;
+    // end Levi additions
+
+    //[SerializeField] GameObject menuActive; // moving these to dialog framework as public instead of Serialized Fields for access in other script
+    //[SerializeField] GameObject menuPause; 
+    //[SerializeField] GameObject menuWin;
+    //[SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text gameGoalCountText;
 
     public GameObject player;

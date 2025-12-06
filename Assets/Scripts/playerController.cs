@@ -9,7 +9,10 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] LayerMask ignoreLayer;
 
     [Header("----- Stats -----")]
-    [Range(1, 10)] [SerializeField] int HP;
+    // Levi edit
+    // changing HP to public for access in cheatManager.cs
+    [Range(1, 10)] public int HP;
+    //[Range(1, 10)] [SerializeField] int HP;
     [Range(1, 5)] [SerializeField] int speed;
     [Range(2, 5)] [SerializeField] int sprintMod;
     [Range(5, 20)] [SerializeField] int jumpSpeed;
@@ -22,9 +25,11 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float shootRate;
 
     int jumpCount;
-    int HPOrig;
+    // making HPOrig public for cheatManager.cs
+    public int HPOrig;
 
     float shootTimer;
+    private Coroutine poisoned;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -129,6 +134,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         }
     }
 
+
     public void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
@@ -141,15 +147,29 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         gameManager.instance.playerDamageScreen.SetActive(false);
     }
 
-    IEnumerator flashGreen() //flash green for heal
+    // poison routines
+    public void poison(int damage, float rate, float duration)
     {
-        gameManager.instance.playerHealScreen.SetActive(true);
-        yield return new WaitForSeconds(0.2f); //active flash time
-        gameManager.instance.playerHealScreen.SetActive(false);
+        if (poisoned != null)
+        {
+            StopCoroutine(poisoned); // cuts off current poison, effective duration reset
+        }
+        poisoned = StartCoroutine(PoisonRoutine(damage, rate, duration));
     }
 
-    public void heal(int healAmount)
+    private IEnumerator PoisonRoutine(int damage, float rate, float duration)
     {
-        throw new System.NotImplementedException();
+        float timer = 0f;
+        WaitForSeconds wait = new WaitForSeconds(rate);
+
+        yield return wait;
+
+        while (timer < duration)
+        {
+            takeDamage(damage);
+            timer += rate;
+            yield return wait;
+        }
+        poisoned = null;
     }
 }

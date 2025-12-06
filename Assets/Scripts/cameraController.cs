@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-    [SerializeField] int sens;
+    // Levi edits/additions
+    // changing Serialized Fields to public so I can access in settingsManager.cs
+    public int sens;
+    public bool invertY;
+    //[SerializeField] int sens;
+    //[SerializeField] bool invertY;
     [SerializeField] int lockVertMin, lockVertMax;
-    [SerializeField] bool invertY;
 
     float camRotX;
 

@@ -20,6 +20,8 @@ public class enemyAI : MonoBehaviour, IDamage
     float shootTimer;
     float angleToPlayer;
 
+    private Coroutine poisoned;
+
     bool playerInRange;
 
     Vector3 playerDir;
@@ -120,5 +122,29 @@ public class enemyAI : MonoBehaviour, IDamage
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
+    }
+
+    // poison routines
+    public void poison(int damage, float rate, float duration)
+    {
+        if (poisoned != null)
+        {
+            StopCoroutine(poisoned); // cuts off current poison, effective duration reset
+        }
+        poisoned = StartCoroutine(PoisonRoutine(damage, rate, duration));
+    }
+
+    private IEnumerator PoisonRoutine(int damage, float rate, float duration)
+    {
+        float timer = 0f;
+        WaitForSeconds wait = new WaitForSeconds(rate);
+
+        while (timer < duration)
+        {
+            takeDamage(damage);
+            timer += rate;
+            yield return wait;
+        }
+        poisoned = null;
     }
 }
