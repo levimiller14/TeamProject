@@ -8,7 +8,7 @@ public class keyFunction : MonoBehaviour
 
     movableObject movable;
 
-    float rotateSpeed = 45;
+    float rotateSpeed = 45; // Degrees per second.
 
     Vector3 rotationAxis = Vector3.up;
 

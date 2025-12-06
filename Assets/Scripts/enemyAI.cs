@@ -25,12 +25,14 @@ public class enemyAI : MonoBehaviour, IDamage
     bool playerInRange;
 
     Vector3 playerDir;
+    Transform playerTransform;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         colorOrig = model.material.color;
         gameManager.instance.UpdateGameGoal(1);
+        if (gameManager.instance.player != null)
+            playerTransform = gameManager.instance.player.transform;
     }
 
     // Update is called once per frame
@@ -46,7 +48,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     bool canSeePlayer()
     {
-        playerDir = gameManager.instance.player.transform.position - transform.position;
+        if (playerTransform == null) return false;
+
+        Vector3 playerPos = playerTransform.position;
+        playerDir = playerPos - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         RaycastHit hit;
@@ -54,7 +59,7 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             if(angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
             {
-                agent.SetDestination(gameManager.instance.player.transform.position);
+                agent.SetDestination(playerPos);
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -104,7 +109,8 @@ public class enemyAI : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        if (playerTransform != null)
+            agent.SetDestination(playerTransform.position);
 
         if (HP <= 0)
         {

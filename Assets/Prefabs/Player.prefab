@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cameraController
   sens: 300
+  invertY: 0
   lockVertMin: -90
   lockVertMax: 90
-  invertY: 0
 --- !u!20 &94385008531243389
 Camera:
   m_ObjectHideFlags: 0
@@ -215,6 +215,9 @@ MonoBehaviour:
   shootDamage: 1
   shootDist: 150
   shootRate: 0.5
+  playerBullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
+  playerShootPos: {fileID: 0}
+  HPOrig: 0
 --- !u!143 &8718686386831521244
 CharacterController:
   m_ObjectHideFlags: 0
