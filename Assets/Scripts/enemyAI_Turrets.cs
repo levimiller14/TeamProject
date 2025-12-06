@@ -37,13 +37,9 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         {
             facePlayer();
         }
-        if (playerInRange)
+        if (playerInRange && canSeePlayer())
         {
-            facePlayer();
-            if(canSeePlayer())
-            {
-
-            }
+            
         }
     }
 
