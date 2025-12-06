@@ -38,10 +38,11 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.menuStats.SetActive(true);
         gameManager.instance.menuActive = gameManager.instance.menuStats;
 
+        // coming back
         // update stats on open
-        //if()
+        //if (statTracker.instance != null)
         //{
-
+        //    statTracker.instance.UpdateStatsDisplay();
         //}
     }
 
