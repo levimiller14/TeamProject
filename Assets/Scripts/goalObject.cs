@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class goalObject : MonoBehaviour
 {
-    //private int goalChangeAmmount = 1;
+    private int goalChangeAmmount = 1;
 
     private void Start()
     {
-        //gameManager.instance.UpdateGameGoal(goalChangeAmmount);
+        gameManager.instance.UpdateGameGoal(goalChangeAmmount);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +15,7 @@ public class goalObject : MonoBehaviour
         {
             if (gameManager.instance != null)
             {
-                //gameManager.instance.UpdateGameGoal(-goalChangeAmmount);
+                gameManager.instance.UpdateGameGoal(-goalChangeAmmount);
                 Destroy(gameObject);
             }
         }
