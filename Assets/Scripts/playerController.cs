@@ -23,6 +23,8 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] int shootDamage;
     [SerializeField] int shootDist;
     [SerializeField] float shootRate;
+    [SerializeField] GameObject playerBullet;
+    [SerializeField] Transform playerShootPos;
 
     int jumpCount;
     int speedOrig;
@@ -117,6 +119,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     void shoot()
     {
         shootTimer = 0;
+        Instantiate(playerBullet, playerShootPos.position, transform.rotation);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
