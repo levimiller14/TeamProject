@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Reflection;
+using System.Diagnostics;
 
 public class movableObject : MonoBehaviour
 {
@@ -8,8 +9,13 @@ public class movableObject : MonoBehaviour
     [SerializeField] Transform secondPosition;
     [SerializeField] GameObject objectToMove;
     [SerializeField] float movementTime;
-    [SerializeField] float delayAmount;
     [SerializeField] bool isReversible;
+    [SerializeField] float delayAmount;
+    //[SerializeField] bool isPlatform;
+    //[SerializeField] bool isDoor;
+
+    GameObject recallButton1;
+    GameObject recallButton2;
     
     bool atOppositeEnd;
     bool isMoving;
@@ -22,7 +28,31 @@ public class movableObject : MonoBehaviour
     float speed;
 
     private void OnValidate()
-    {      
+    {     
+        //if(isPlatform && recallButton1 == null || recallButton2 == null)
+        //{
+        //    if (recallButton1 == null)
+        //    {
+        //        GameObject newButton = new GameObject("Platform Recall Button");
+        //        if (newButton.CompareTag("PlatformRecallButton"))
+        //        {
+        //            newButton.transform.parent = this.transform;
+        //            newButton.transform.position = Vector3.zero;
+        //            newButton.name = "Recall Button 1";
+        //            newButton.AddComponent<customTriggerObject>();
+        //            Component trigger = newButton.GetComponent<customTriggerObject>();
+        //            if (trigger != null)
+        //            {
+        //                newButton.GetComponent<customTriggerObject>().SetConnectedObject(transform.parent.gameObject);
+        //            }
+        //        }
+        //    }
+        //    if(recallButton2 == null)
+        //    {
+
+        //    }
+        //}
+
         //if(secondPosition == null)
         //{
         //    GameObject newChild = new GameObject();

@@ -4,7 +4,7 @@ public class customTriggerObject : MonoBehaviour
 {
     [SerializeField] GameObject connectedObject;
 
-    public movableObject moveable;
+    movableObject movable;
 
     private void Start()
     {
@@ -13,14 +13,19 @@ public class customTriggerObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        moveable = connectedObject.GetComponent<movableObject>();
+        movable = connectedObject.GetComponent<movableObject>();
 
-        if (other.CompareTag("Player") && moveable != null)
+        if (other.CompareTag("Player") && movable != null)
         {
-            if(!moveable.GetIsMoving() && moveable.GetDelayTimer() >= moveable.GetDelayAmount())
+            if(!movable.GetIsMoving() && movable.GetDelayTimer() >= movable.GetDelayAmount())
             {
                 connectedObject.GetComponent<movableObject>().SetIsMoving(true);
             }
         }
     }
+
+    //public void SetConnectedObject(GameObject obj)
+    //{
+    //    connectedObject = obj;
+    //}
 }

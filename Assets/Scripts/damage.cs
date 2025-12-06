@@ -5,16 +5,18 @@ using Unity.VisualScripting;
 
 public class damage : MonoBehaviour
 {
-    enum damageType {moving, stationary, DOT, homing}
+    enum damageType {moving, stationary, DOT, homing, poison}
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;
 
     [SerializeField] int damageAmount;
     [SerializeField] float damageRate;
+    [SerializeField] float duration;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
 
     bool isDamaging;
+    float lastTick;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,18 +57,26 @@ public class damage : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other) // DOT and Poison
     {
         if (other.isTrigger)
             return;
 
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if(dmg != null && type == damageType.DOT && !isDamaging)
+        if (dmg != null)
         {
-            StartCoroutine(damageOther(dmg));
+            if(type == damageType.DOT && !isDamaging)
+            {
+                StartCoroutine(damageOther(dmg));
+            }
+            if(type == damageType.poison && !isDamaging)
+            {
+                StartCoroutine(poisonOther(dmg));
+            }    
         }
     }
 
@@ -74,6 +84,13 @@ public class damage : MonoBehaviour
     {
         isDamaging = true;
         d.takeDamage(damageAmount);
+        yield return new WaitForSeconds(damageRate);
+        isDamaging = false;
+    }
+    IEnumerator poisonOther(IDamage d)
+    {
+        isDamaging = true;
+        d.poison(damageAmount, damageRate, duration);
         yield return new WaitForSeconds(damageRate);
         isDamaging = false;
     }
