@@ -10,9 +10,8 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
-
-    [SerializeField] int biteDmg;
-    [SerializeField] int chaseRange;
+    [SerializeField] GameObject bitePos;
+    [SerializeField] 
 
     Color colorOrig;
 
@@ -87,7 +86,8 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
 
     void bite()
     {
-
+        biteTimer = 0;
+        
     }
     public void takeDamage(int amount)
     {
