@@ -24,10 +24,14 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     Vector3 playerDir;
 
     bool playerInRange;
+    Transform playerTransform;
+
     void Start()
     {
         colorOrig = model.material.color;
         gameManager.instance.UpdateGameGoal(1);
+        if (gameManager.instance.player != null)
+            playerTransform = gameManager.instance.player.transform;
     }
     void Update()
     {
@@ -45,7 +49,9 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 
     bool canSeePlayer()
     {
-        playerDir = gameManager.instance.player.transform.position - transform.position;
+        if (playerTransform == null) return false;
+
+        playerDir = playerTransform.position - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         RaycastHit hit;
@@ -81,16 +87,16 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     }
     void facePlayer()
     {
-        if(head == null)
+        if(head == null || playerTransform == null)
         {
             return;
         }
-        Vector3 targetDir = gameManager.instance.player.transform.position;
+        Vector3 targetDir = playerTransform.position;
         targetDir.y = 0;
 
         playerDir = targetDir - head.position;
 
-        if(playerDir.sqrMagnitude < 0.00f)
+        if(playerDir.sqrMagnitude < 0.001f)
         {
             return;
         }

@@ -29,6 +29,9 @@ public class LightOptimization : MonoBehaviour
     IEnumerator DistanceCheckRoutine()
     {
         WaitForSeconds wait = new WaitForSeconds(0.25f);
+        float sqrFullQuality = fullQualityDistance * fullQualityDistance;
+        float sqrLowQuality = lowQualityDistance * lowQualityDistance;
+        float sqrOff = offDistance * offDistance;
 
         while (true)
         {
@@ -37,19 +40,19 @@ public class LightOptimization : MonoBehaviour
                 yield break;
             }
 
-            float dist = Vector3.Distance(player.position, transform.position);
+            float sqrDist = (player.position - transform.position).sqrMagnitude;
 
-            if (dist <= fullQualityDistance)
+            if (sqrDist <= sqrFullQuality)
             {
                 lightSource.enabled = true;
                 lightSource.shadows = LightShadows.Soft;
             }
-            else if (dist <= lowQualityDistance)
+            else if (sqrDist <= sqrLowQuality)
             {
                 lightSource.enabled = true;
                 lightSource.shadows = LightShadows.None;
             }
-            else if (dist > offDistance)
+            else if (sqrDist > sqrOff)
             {
                 lightSource.enabled = false;
             }

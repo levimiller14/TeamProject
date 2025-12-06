@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6110690482502279613}
   - component: {fileID: 8136094529112181347}
   - component: {fileID: 3605970232631316583}
+  - component: {fileID: 2151276161239564864}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -155,6 +156,23 @@ MonoBehaviour:
   invertY: 0
   lockVertMin: -90
   lockVertMax: 90
+--- !u!114 &2151276161239564864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212610449017487283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132e6b3c539418347a28fa259c0bed86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::viewBobbing
+  controller: {fileID: 7207170826525197004}
+  walkBobSpeed: 14
+  walkBobAmount: 0.05
+  sprintBobMultiplier: 1.5
+  smoothTime: 0.1
 --- !u!1 &3834399077637058629
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,8 +409,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1831996051309936448, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7298407527378050900}
   m_SourcePrefab: {fileID: 100100000, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
+--- !u!1 &2655573381261219613 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1831996051309936448, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
+  m_PrefabInstance: {fileID: 4447009243189602397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7298407527378050900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2655573381261219613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac0aec76bd2caf4aa0e1a0629199cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Flashlight
+  range: 30
+  spotAngle: 45
+  intensity: 45
+  lightColor: {r: 1, g: 1, b: 1, a: 1}
+  toggleKey: 102
 --- !u!4 &5274542662088418657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8395839739556367676, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}

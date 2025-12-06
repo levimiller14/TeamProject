@@ -65,16 +65,18 @@ public class securityCamera : MonoBehaviour
     bool CheckForPlayer()
     {
         Vector3 dirToPlayer = playerTransform.position - transform.position;
-        float distToPlayer = dirToPlayer.magnitude;
+        float sqrDistToPlayer = dirToPlayer.sqrMagnitude;
+        float sqrDetectionRadius = detectionRadius * detectionRadius;
 
-        if (distToPlayer > detectionRadius)
+        if (sqrDistToPlayer > sqrDetectionRadius)
             return false;
 
         float angle = Vector3.Angle(transform.forward, dirToPlayer);
         if (angle > fieldOfView / 2f)
             return false;
 
-        if (Physics.Raycast(transform.position, dirToPlayer.normalized, out RaycastHit hit, distToPlayer, obstacleMask))
+        float distToPlayer = Mathf.Sqrt(sqrDistToPlayer);
+        if (Physics.Raycast(transform.position, dirToPlayer / distToPlayer, out RaycastHit hit, distToPlayer, obstacleMask))
         {
             if (!hit.collider.CompareTag("Player"))
                 return false;

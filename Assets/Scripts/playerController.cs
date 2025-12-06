@@ -37,11 +37,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     Vector3 moveDir;
     Vector3 playerVel;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    Camera mainCam;
+
     void Start()
     {
         HPOrig = HP;
         speedOrig = speed;
+        mainCam = Camera.main;
         updatePlayerUI();
     }
 
@@ -59,7 +61,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     {
         shootTimer += Time.deltaTime;
 
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.yellow);
+#if UNITY_EDITOR
+        Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * shootDist, Color.yellow);
+#endif
 
         if(Input.GetButton("Fire1") && shootTimer >= shootRate)
         {
@@ -119,12 +123,11 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     void shoot()
     {
         shootTimer = 0;
-        Instantiate(playerBullet, playerShootPos.position, transform.rotation);
+        Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreLayer))
+        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
         {
-            Debug.Log(hit.collider.name);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (dmg != null)

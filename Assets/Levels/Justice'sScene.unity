@@ -20731,6 +20731,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2151276161239564864, guid: 5457dee13040708478acb0855636c248, type: 3}
+      propertyPath: walkBobAmount
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 3834399077637058629, guid: 5457dee13040708478acb0855636c248, type: 3}
       propertyPath: m_Name
       value: Player with gun

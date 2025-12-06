@@ -30,10 +30,14 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
     }
 
     Vector3 playerDir;
+    Transform playerTransform;
+
     void Start()
     {
         colorOrig = model.material.color;
         gameManager.instance.UpdateGameGoal(1);
+        if (gameManager.instance.player != null)
+            playerTransform = gameManager.instance.player.transform;
     }
 
     void Update()
@@ -47,9 +51,9 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
                 barkTimer = barkCooldown;
             }
         }
-        if(canScentPlayer())
+        if(canScentPlayer() && playerTransform != null)
         {
-            agent.SetDestination(gameManager.instance.player.transform.position);
+            agent.SetDestination(playerTransform.position);
             if(agent.remainingDistance <= agent.stoppingDistance)
             {
                 facePlayer();
@@ -90,7 +94,8 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        if (playerTransform != null)
+            agent.SetDestination(playerTransform.position);
 
         if(doghandler != null)
         {
@@ -117,7 +122,9 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
 
     void bark()
     {
-        Vector3 pDir = gameManager.instance.player.transform.position;
+        if (playerTransform == null) return;
+
+        Vector3 pDir = playerTransform.position;
         Vector3 dir = pDir - transform.position;
         dir.y = 0;
 
