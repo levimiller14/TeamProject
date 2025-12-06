@@ -51,8 +51,11 @@ MonoBehaviour:
   rb: {fileID: 0}
   damageAmount: 1
   damageRate: 0.5
+  duration: 0
   speed: 0
   destroyTime: 0
+  playerSlowedSpeed: 0.1
+  slowedSpeed: 0
 --- !u!33 &226774984391315373
 MeshFilter:
   m_ObjectHideFlags: 0
