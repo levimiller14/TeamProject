@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1419142}
   - component: {fileID: 1419141}
   - component: {fileID: 1419140}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 9709708}
   - component: {fileID: 9709707}
   - component: {fileID: 9709706}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,6 +345,103 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9709704}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &13519580
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2371089512776362476, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_Name
+      value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167428967107724891, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
 --- !u!1 &17309942
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +454,7 @@ GameObject:
   - component: {fileID: 17309946}
   - component: {fileID: 17309945}
   - component: {fileID: 17309944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +567,7 @@ GameObject:
   - component: {fileID: 31323344}
   - component: {fileID: 31323343}
   - component: {fileID: 31323342}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +680,7 @@ GameObject:
   - component: {fileID: 104268428}
   - component: {fileID: 104268427}
   - component: {fileID: 104268426}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Frost Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,117 +779,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104268424}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &133836072
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 133836073}
-  - component: {fileID: 133836076}
-  - component: {fileID: 133836075}
-  - component: {fileID: 133836074}
-  m_Layer: 0
-  m_Name: Frost Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &133836073
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133836072}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.95, y: 1.3, z: 0.9}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1255114394}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &133836074
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133836072}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &133836075
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133836072}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 48da8b11444829345852ded8bc125d36, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &133836076
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133836072}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &174403031
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +791,7 @@ GameObject:
   - component: {fileID: 174403035}
   - component: {fileID: 174403034}
   - component: {fileID: 174403033}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +904,7 @@ GameObject:
   - component: {fileID: 180872010}
   - component: {fileID: 180872009}
   - component: {fileID: 180872008}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1017,7 @@ GameObject:
   - component: {fileID: 189083286}
   - component: {fileID: 189083285}
   - component: {fileID: 189083284}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1130,7 @@ GameObject:
   - component: {fileID: 224209555}
   - component: {fileID: 224209554}
   - component: {fileID: 224209553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1257,7 +1243,7 @@ GameObject:
   - component: {fileID: 238028192}
   - component: {fileID: 238028191}
   - component: {fileID: 238028190}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1381,7 +1367,7 @@ GameObject:
   - component: {fileID: 252972589}
   - component: {fileID: 252972588}
   - component: {fileID: 252972587}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1494,7 +1480,7 @@ GameObject:
   - component: {fileID: 281813075}
   - component: {fileID: 281813074}
   - component: {fileID: 281813073}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1607,7 +1593,7 @@ GameObject:
   - component: {fileID: 286433709}
   - component: {fileID: 286433708}
   - component: {fileID: 286433707}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1720,7 +1706,7 @@ GameObject:
   - component: {fileID: 291701010}
   - component: {fileID: 291701009}
   - component: {fileID: 291701008}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1833,7 +1819,7 @@ GameObject:
   - component: {fileID: 319681845}
   - component: {fileID: 319681844}
   - component: {fileID: 319681843}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1946,7 +1932,7 @@ GameObject:
   - component: {fileID: 328654115}
   - component: {fileID: 328654114}
   - component: {fileID: 328654113}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2059,7 +2045,7 @@ GameObject:
   - component: {fileID: 344892505}
   - component: {fileID: 344892504}
   - component: {fileID: 344892503}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2172,7 +2158,7 @@ GameObject:
   - component: {fileID: 394574795}
   - component: {fileID: 394574794}
   - component: {fileID: 394574793}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2291,7 +2277,7 @@ GameObject:
   - component: {fileID: 398821555}
   - component: {fileID: 398821554}
   - component: {fileID: 398821553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2392,98 +2378,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398821551}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &399518425
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 399518428}
-  - component: {fileID: 399518427}
-  - component: {fileID: 399518426}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &399518426
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399518425}
-  m_Enabled: 1
---- !u!20 &399518427
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399518425}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &399518428
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399518425}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &400650404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,7 +2390,7 @@ GameObject:
   - component: {fileID: 400650408}
   - component: {fileID: 400650407}
   - component: {fileID: 400650406}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2609,7 +2503,7 @@ GameObject:
   - component: {fileID: 427086073}
   - component: {fileID: 427086072}
   - component: {fileID: 427086071}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2722,7 +2616,7 @@ GameObject:
   - component: {fileID: 466133665}
   - component: {fileID: 466133664}
   - component: {fileID: 466133663}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2841,7 +2735,7 @@ GameObject:
   - component: {fileID: 509518110}
   - component: {fileID: 509518109}
   - component: {fileID: 509518108}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2954,7 +2848,7 @@ GameObject:
   - component: {fileID: 513091064}
   - component: {fileID: 513091063}
   - component: {fileID: 513091062}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3067,7 +2961,7 @@ GameObject:
   - component: {fileID: 578661121}
   - component: {fileID: 578661120}
   - component: {fileID: 578661119}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3180,7 +3074,7 @@ GameObject:
   - component: {fileID: 623727383}
   - component: {fileID: 623727382}
   - component: {fileID: 623727381}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3293,7 +3187,7 @@ GameObject:
   - component: {fileID: 692300024}
   - component: {fileID: 692300023}
   - component: {fileID: 692300022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3406,7 +3300,7 @@ GameObject:
   - component: {fileID: 712405907}
   - component: {fileID: 712405906}
   - component: {fileID: 712405905}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3525,7 +3419,7 @@ GameObject:
   - component: {fileID: 718824321}
   - component: {fileID: 718824320}
   - component: {fileID: 718824319}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3644,7 +3538,7 @@ GameObject:
   - component: {fileID: 719800887}
   - component: {fileID: 719800886}
   - component: {fileID: 719800885}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3757,7 +3651,7 @@ GameObject:
   - component: {fileID: 767871413}
   - component: {fileID: 767871412}
   - component: {fileID: 767871411}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3870,7 +3764,7 @@ GameObject:
   - component: {fileID: 774868810}
   - component: {fileID: 774868809}
   - component: {fileID: 774868808}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3983,7 +3877,7 @@ GameObject:
   - component: {fileID: 794693136}
   - component: {fileID: 794693135}
   - component: {fileID: 794693134}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4090,118 +3984,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794693132}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &821747694
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 821747698}
-  - component: {fileID: 821747697}
-  - component: {fileID: 821747696}
-  - component: {fileID: 821747695}
-  m_Layer: 0
-  m_Name: Burn Trap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &821747695
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821747694}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &821747696
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821747694}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 46d236f8eca46c24b87e3a82d16e1dc5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &821747697
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821747694}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &821747698
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821747694}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: -2}
-  m_LocalScale: {x: 2, y: 0.2, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1715419061}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &826116790
 GameObject:
   m_ObjectHideFlags: 0
@@ -4214,7 +3996,7 @@ GameObject:
   - component: {fileID: 826116794}
   - component: {fileID: 826116793}
   - component: {fileID: 826116792}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4327,7 +4109,7 @@ GameObject:
   - component: {fileID: 832469120}
   - component: {fileID: 832469119}
   - component: {fileID: 832469118}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4440,7 +4222,7 @@ GameObject:
   - component: {fileID: 851066317}
   - component: {fileID: 851066316}
   - component: {fileID: 851066315}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4559,7 +4341,7 @@ GameObject:
   - component: {fileID: 933621431}
   - component: {fileID: 933621430}
   - component: {fileID: 933621429}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4672,7 +4454,7 @@ GameObject:
   - component: {fileID: 984946811}
   - component: {fileID: 984946810}
   - component: {fileID: 984946809}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4785,7 +4567,7 @@ GameObject:
   - component: {fileID: 989593954}
   - component: {fileID: 989593953}
   - component: {fileID: 989593952}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4898,7 +4680,7 @@ GameObject:
   - component: {fileID: 1003842453}
   - component: {fileID: 1003842452}
   - component: {fileID: 1003842451}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5011,7 +4793,7 @@ GameObject:
   - component: {fileID: 1004727087}
   - component: {fileID: 1004727086}
   - component: {fileID: 1004727085}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5133,7 +4915,7 @@ GameObject:
   - component: {fileID: 1019740303}
   - component: {fileID: 1019740302}
   - component: {fileID: 1019740301}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5252,7 +5034,7 @@ GameObject:
   - component: {fileID: 1041387868}
   - component: {fileID: 1041387867}
   - component: {fileID: 1041387866}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5365,7 +5147,7 @@ GameObject:
   - component: {fileID: 1044902460}
   - component: {fileID: 1044902459}
   - component: {fileID: 1044902458}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5478,7 +5260,7 @@ GameObject:
   - component: {fileID: 1062116015}
   - component: {fileID: 1062116014}
   - component: {fileID: 1062116013}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5591,7 +5373,7 @@ GameObject:
   - component: {fileID: 1082229641}
   - component: {fileID: 1082229640}
   - component: {fileID: 1082229639}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5692,6 +5474,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082229637}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1121024281
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305980902024669013, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
 --- !u!1 &1175901232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,7 +5543,7 @@ GameObject:
   - component: {fileID: 1175901236}
   - component: {fileID: 1175901235}
   - component: {fileID: 1175901234}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5944,7 +5783,7 @@ GameObject:
   - component: {fileID: 1253827945}
   - component: {fileID: 1253827944}
   - component: {fileID: 1253827943}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6045,118 +5884,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253827941}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1255114390
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1255114394}
-  - component: {fileID: 1255114393}
-  - component: {fileID: 1255114392}
-  - component: {fileID: 1255114391}
-  m_Layer: 0
-  m_Name: Poison Trap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1255114391
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255114390}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1255114392
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255114390}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 46d236f8eca46c24b87e3a82d16e1dc5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1255114393
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255114390}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1255114394
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255114390}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 0.2, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 133836073}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1267382405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6169,7 +5896,7 @@ GameObject:
   - component: {fileID: 1267382409}
   - component: {fileID: 1267382408}
   - component: {fileID: 1267382407}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6282,7 +6009,7 @@ GameObject:
   - component: {fileID: 1303313056}
   - component: {fileID: 1303313055}
   - component: {fileID: 1303313054}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6395,7 +6122,7 @@ GameObject:
   - component: {fileID: 1320717388}
   - component: {fileID: 1320717387}
   - component: {fileID: 1320717386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6508,7 +6235,7 @@ GameObject:
   - component: {fileID: 1329424846}
   - component: {fileID: 1329424845}
   - component: {fileID: 1329424844}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6621,7 +6348,7 @@ GameObject:
   - component: {fileID: 1352196587}
   - component: {fileID: 1352196586}
   - component: {fileID: 1352196585}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6734,7 +6461,7 @@ GameObject:
   - component: {fileID: 1368822480}
   - component: {fileID: 1368822479}
   - component: {fileID: 1368822478}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6847,7 +6574,7 @@ GameObject:
   - component: {fileID: 1436247188}
   - component: {fileID: 1436247187}
   - component: {fileID: 1436247186}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6960,7 +6687,7 @@ GameObject:
   - component: {fileID: 1442664831}
   - component: {fileID: 1442664830}
   - component: {fileID: 1442664829}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Frost Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7072,7 +6799,7 @@ GameObject:
   - component: {fileID: 1475194122}
   - component: {fileID: 1475194121}
   - component: {fileID: 1475194120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7185,7 +6912,8 @@ GameObject:
   - component: {fileID: 1500966081}
   - component: {fileID: 1500966080}
   - component: {fileID: 1500966079}
-  m_Layer: 0
+  - component: {fileID: 1500966083}
+  m_Layer: 9
   m_Name: Spike Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7207,12 +6935,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!23 &1500966080
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7285,6 +7013,25 @@ Transform:
   - {fileID: 238028189}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500966083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500966078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e170ff527cca7f42a3e9cab6a16f2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::damage
+  type: 1
+  rb: {fileID: 0}
+  damageAmount: 2
+  damageRate: 0
+  duration: 0
+  speed: 0
+  destroyTime: 0
 --- !u!1 &1522024245
 GameObject:
   m_ObjectHideFlags: 0
@@ -7297,7 +7044,7 @@ GameObject:
   - component: {fileID: 1522024249}
   - component: {fileID: 1522024248}
   - component: {fileID: 1522024247}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7410,7 +7157,7 @@ GameObject:
   - component: {fileID: 1551478018}
   - component: {fileID: 1551478017}
   - component: {fileID: 1551478016}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7523,7 +7270,7 @@ GameObject:
   - component: {fileID: 1557939020}
   - component: {fileID: 1557939019}
   - component: {fileID: 1557939018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7636,7 +7383,7 @@ GameObject:
   - component: {fileID: 1705117954}
   - component: {fileID: 1705117953}
   - component: {fileID: 1705117952}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7737,117 +7484,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705117950}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1715419060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1715419061}
-  - component: {fileID: 1715419064}
-  - component: {fileID: 1715419063}
-  - component: {fileID: 1715419062}
-  m_Layer: 0
-  m_Name: Fire/Grill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1715419061
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715419060}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.95, y: 1.3, z: 0.9}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 821747698}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1715419062
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715419060}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1715419063
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715419060}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: c721fe7f052ae3c4185aa5b44838c105, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1715419064
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715419060}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1735104090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7860,7 +7496,7 @@ GameObject:
   - component: {fileID: 1735104094}
   - component: {fileID: 1735104093}
   - component: {fileID: 1735104092}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7973,7 +7609,7 @@ GameObject:
   - component: {fileID: 1797816559}
   - component: {fileID: 1797816558}
   - component: {fileID: 1797816557}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8086,7 +7722,7 @@ GameObject:
   - component: {fileID: 1883983951}
   - component: {fileID: 1883983950}
   - component: {fileID: 1883983949}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8199,7 +7835,7 @@ GameObject:
   - component: {fileID: 1894267272}
   - component: {fileID: 1894267271}
   - component: {fileID: 1894267270}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blunt Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8412,14 +8048,129 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &873627874118071789
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2151713609605759371, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_Name
+      value: Poison Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
+--- !u!1001 &8679168099100175210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570612903412680244, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603037642731401184, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
+      propertyPath: m_Name
+      value: Burn Trap
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 318b145343e641e47857fab9dcb87afb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 399518428}
   - {fileID: 1185809347}
+  - {fileID: 13519580}
   - {fileID: 2075087036}
   - {fileID: 1500966082}
-  - {fileID: 821747698}
+  - {fileID: 8679168099100175210}
   - {fileID: 1442664832}
-  - {fileID: 1255114394}
+  - {fileID: 873627874118071789}
+  - {fileID: 1121024281}

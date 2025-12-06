@@ -25,6 +25,7 @@ public class playerController : MonoBehaviour, IDamage
     int HPOrig;
 
     float shootTimer;
+    private Coroutine poisoned;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -123,6 +124,7 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+
     public void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
@@ -135,4 +137,29 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.playerDamageScreen.SetActive(false);
     }
 
+    // poison routines
+    public void poison(int damage, float rate, float duration)
+    {
+        if (poisoned != null)
+        {
+            StopCoroutine(poisoned); // cuts off current poison, effective duration reset
+        }
+        poisoned = StartCoroutine(PoisonRoutine(damage, rate, duration));
+    }
+
+    private IEnumerator PoisonRoutine(int damage, float rate, float duration)
+    {
+        float timer = 0f;
+        WaitForSeconds wait = new WaitForSeconds(rate);
+
+        yield return wait;
+
+        while (timer < duration)
+        {
+            takeDamage(damage);
+            timer += rate;
+            yield return wait;
+        }
+        poisoned = null;
+    }
 }
