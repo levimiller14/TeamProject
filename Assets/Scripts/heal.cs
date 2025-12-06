@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 
-//public event Action<float, float> OnHealthChanged;
+
 public class heal : MonoBehaviour
 {
-   // public event Action<float, float> OnHealthChanged;
+   public event Action<float, float> OnHealthChanged;
     enum HealType {HOT, still} //HOT capsule that disappears after healed
     [SerializeField] int healAmount; //total heal amount
     [SerializeField] int healTime; //how long it heals
@@ -17,10 +18,11 @@ public class heal : MonoBehaviour
     bool healing;
     private float maxHealth = 100f;
     private float cHealth;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        cHealth = maxHealth; //set hp to max on start
     }
 
     // Update is called once per frame
@@ -35,14 +37,12 @@ public class heal : MonoBehaviour
 
         IHeal health = other.GetComponent<IHeal>(); //does it have IHeal
 
-        if(cHealth != maxHealth && _heal == HealType.HOT) //if not null and is Heal over time
+        if(health != null && cHealth < maxHealth && _heal == HealType.HOT) //if not null and is Heal over time
         {
            //health.heal(healAmount);
             healPlayer(healAmount); //heal for that amount
-            if(cHealth == maxHealth)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
+            
             
         }
         
@@ -51,8 +51,7 @@ public class heal : MonoBehaviour
     }
     private void OnTriggerStay(Collider other) //heal area
     {
-        if (other.isTrigger)
-            return;
+        
         IHeal health = other.GetComponent<IHeal>();
 
         if(health != null && _heal == HealType.still && !healing) //if health isnt null and type is still
@@ -63,18 +62,19 @@ public class heal : MonoBehaviour
 
     public void healPlayer(int healAmount)
     {
-        healAmount = Mathf.Abs(healAmount);
+        healAmount = Mathf.Abs(healAmount); //get value 
 
         cHealth = Mathf.Min(cHealth + healAmount, maxHealth);
 
+        OnHealthChanged?.Invoke(cHealth, maxHealth);
         
     }
     IEnumerator healOther(IHeal h)
     {
-        healing = true;
-        h.heal(healAmount);
+        healing = true; //heal
+        h.heal(healAmount); //heal for that amount
         yield return new WaitForSeconds(healTime); //how fast is heal time
-        healing = false;
+        healing = false; //stop
     }
     
 }
