@@ -5,6 +5,7 @@ using System.Collections;
 public class enemyAI_Turrets : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
+    [SerializeField] Renderer modelHead;
     [SerializeField] Transform head;
 
     [SerializeField] int HP;
@@ -16,6 +17,7 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     [SerializeField] Transform firePos;
 
     Color colorOrig;
+    Color colorOrigHead;
 
     float fireTimer;
     float angleToPlayer;
@@ -29,6 +31,7 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
+        colorOrigHead = modelHead.material.color;
         gameManager.instance.UpdateGameGoal(1);
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
@@ -40,10 +43,11 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         if (isAggro == true)
         {
             facePlayer();
+            canSeePlayer();
         }
         if (playerInRange && canSeePlayer())
         {
-            
+            facePlayer();
         }
     }
 
@@ -129,8 +133,10 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     IEnumerator flashRed()
     {
         model.material.color = Color.red;
+        modelHead.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
+        modelHead.material.color = colorOrigHead;
     }
     public void poison(int damage, float rate, float duration)
     {
