@@ -10,6 +10,8 @@ public class cameraController : MonoBehaviour
     //[SerializeField] bool invertY;
     [SerializeField] int lockVertMin, lockVertMax;
 
+    public float wallTiltZ;
+
     float camRotX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,7 +38,7 @@ public class cameraController : MonoBehaviour
 
         camRotX = Mathf.Clamp(camRotX, lockVertMin, lockVertMax);
 
-        transform.localRotation = Quaternion.Euler(camRotX, 0, 0);
+        transform.localRotation = Quaternion.Euler(camRotX, 0, wallTiltZ);
 
         transform.parent.Rotate(Vector3.up * mouseX);
     }

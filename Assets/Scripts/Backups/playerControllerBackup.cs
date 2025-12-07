@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.DualShock;
 
-public class playerController : MonoBehaviour, IDamage, IHeal
+public class playerControllerBackup : MonoBehaviour, IDamage, IHeal
 {
     [Header("----- Component -----")]
     [SerializeField] CharacterController controller;
@@ -13,11 +13,11 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     // changing HP to public for access in cheatManager.cs
     [Range(1, 10)] public int HP;
     //[Range(1, 10)] [SerializeField] int HP;
-    [Range(1, 5)] [SerializeField] int speed;
-    [Range(2, 5)] [SerializeField] int sprintMod;
-    [Range(5, 20)] [SerializeField] int jumpSpeed;
-    [Range(1, 3)] [SerializeField] int jumpMax;
-    [Range(15, 50)] [SerializeField] int gravity;
+    [Range(1, 5)][SerializeField] int speed;
+    [Range(2, 5)][SerializeField] int sprintMod;
+    [Range(5, 20)][SerializeField] int jumpSpeed;
+    [Range(1, 3)][SerializeField] int jumpMax;
+    [Range(15, 50)][SerializeField] int gravity;
 
     [Header("----- Guns -----")]
     [SerializeField] int shootDamage;
@@ -25,9 +25,6 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     [SerializeField] float shootRate;
     [SerializeField] GameObject playerBullet;
     [SerializeField] Transform playerShootPos;
-
-    private wallRun wallRun;
-    bool wasWallRunning;
 
     int jumpCount;
     int speedOrig;
@@ -56,20 +53,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         speedOrig = speed;
         mainCam = Camera.main;
         grappleHook = GetComponent<GrapplingHook>();
-        wallRun = GetComponent<wallRun>();
-        if(wallRun != null)
-        {
-            wallRun.controller = controller;
-            wallRun.orientation = transform;
-            wallRun.cam = Camera.main.transform;
-        }
         updatePlayerUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!gameManager.instance.isPaused)
+        if (!gameManager.instance.isPaused)
         {
             movement();
         }
@@ -84,7 +74,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * shootDist, Color.yellow);
 #endif
 
-        if(Input.GetButton("Fire1") && shootTimer >= shootRate)
+        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
         {
             shoot();
         }
@@ -95,7 +85,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         // debug - remove after testing
         // if (grappleHook != null) Debug.Log($"isGrappling: {isGrappling}, lineExtending: {grappleHook.IsLineExtending()}");
 
-        if(controller.isGrounded)
+        if (controller.isGrounded)
         {
             jumpCount = 0;
             playerVel.y = 0;
@@ -118,56 +108,22 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         if (!isGrappling)
         {
             moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-            // wall run start
-            if (wallRun != null)
-            {
-                wallRun.ProcessWallRun(ref moveDir, ref playerVel, controller.isGrounded);
-            }
-            bool isWallRunningNow = wallRun != null && wallRun.IsWallRunning;
-            if (!isWallRunningNow && wasWallRunning)
-            {
-                externalVelocity = Vector3.zero;
-                playerVel.x = 0f;
-                playerVel.z = 0f;
-            }
-            wasWallRunning = isWallRunningNow;
-            // wall run end
-
             controller.Move(moveDir * speed * Time.deltaTime);
 
-            // Wall run start
-            if(wallRun == null || !wallRun.IsWallRunning)
+            jump();
+
+            if (externalVelocity.magnitude > 0.1f)
             {
-                jump();
-
-                if (externalVelocity.magnitude > 0.1f)
-                {
-                    controller.Move(externalVelocity * Time.deltaTime);
-                }
-
-                controller.Move(playerVel * Time.deltaTime);
-                playerVel.y -= gravity * Time.deltaTime;
+                controller.Move(externalVelocity * Time.deltaTime);
             }
-            else
-            {
-                if (externalVelocity.magnitude > 0.1f)
-                {
-                    controller.Move(externalVelocity * Time.deltaTime);
-                }
 
-                controller.Move(playerVel * Time.deltaTime);
-            } // Wall run end
+            controller.Move(playerVel * Time.deltaTime);
+            playerVel.y -= gravity * Time.deltaTime;
         }
         else
         {
             playerVel.y -= gravity * 0.3f * Time.deltaTime;
         }
-
-        // Wall run start
-        if (wallRun != null)
-        {
-            wallRun.UpdateCameraTilt();
-        } // Wall run end
     }
 
     void jump()
@@ -176,7 +132,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         if (grappleJumpedThisFrame)
             return;
 
-        if(Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             playerVel.y = jumpSpeed;
             jumpCount++;
@@ -190,11 +146,11 @@ public class playerController : MonoBehaviour, IDamage, IHeal
 
     void sprint()
     {
-        if(Input.GetButtonDown("Sprint"))
+        if (Input.GetButtonDown("Sprint"))
         {
             speed *= sprintMod;
         }
-        else if(Input.GetButtonUp("Sprint"))
+        else if (Input.GetButtonUp("Sprint"))
         {
             speed = speedOrig;
         }
@@ -202,7 +158,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("FrostTrap"))
+        if (other.CompareTag("FrostTrap"))
         {
             damage trapSlow = other.GetComponent<damage>();
             speed = Mathf.RoundToInt(speedOrig * trapSlow.slowedSpeed);
@@ -240,7 +196,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
             updatePlayerUI();
         }
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
             // You Died!
             gameManager.instance.youLose();
@@ -268,7 +224,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal
 
     public void heal(int healAmount)
     {
-        if(HP < HPOrig)
+        if (HP < HPOrig)
         {
             HP += healAmount;
             updatePlayerUI();
@@ -302,9 +258,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         grappleJumpedThisFrame = true;
     }
 
-    
-//<<<<<<< HEAD
-//=======
+
+    //<<<<<<< HEAD
+    //=======
     // poison routines
     public void poison(int damage, float rate, float duration)
     {
@@ -329,6 +285,6 @@ public class playerController : MonoBehaviour, IDamage, IHeal
             yield return wait;
         }
         poisoned = null;
-//>>>>>>> 1bb9c2b6da50e57523c371620cff226582621ee7
-}
+        //>>>>>>> 1bb9c2b6da50e57523c371620cff226582621ee7
+    }
 }
