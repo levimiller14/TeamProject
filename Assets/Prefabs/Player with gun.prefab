@@ -156,6 +156,7 @@ MonoBehaviour:
   invertY: 0
   lockVertMin: -90
   lockVertMax: 90
+  wallTiltZ: 0
 --- !u!114 &2151276161239564864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +188,8 @@ GameObject:
   - component: {fileID: 798818694246833282}
   - component: {fileID: 7207170826525197004}
   - component: {fileID: 5975179707992272538}
+  - component: {fileID: 7007502587474825607}
+  - component: {fileID: 5713765023524137452}
   m_Layer: 3
   m_Name: Player with gun
   m_TagString: Player
@@ -208,6 +211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7642987605847085021}
+  - {fileID: 6346118020789667773}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &8824050506704167548
@@ -342,6 +346,91 @@ MonoBehaviour:
   playerBullet: {fileID: 7754668077929706730, guid: e9ac31fdd937851409d15864ad32bb03, type: 3}
   playerShootPos: {fileID: 5274542662088418657}
   HPOrig: 10
+  groundedVelocityDecay: 15
+  airVelocityDecay: 0.5
+--- !u!114 &7007502587474825607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3834399077637058629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297dc17773e8401499cf8da0971d7e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrapplingHook
+  maxGrappleDistance: 50
+  grappleSpeed: 15
+  pullAcceleration: 25
+  airControlStrength: 8
+  swingResponsiveness: 12
+  momentumRetention: 0.85
+  minDistanceToDetach: 2
+  grappleableLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lineRenderer: {fileID: 0}
+  grappleOrigin: {fileID: 6346118020789667773}
+  lineExtendSpeed: 100
+  lineWidth: 0.04
+--- !u!114 &5713765023524137452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3834399077637058629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871a9a5152ae62f43988fd5cdbba50b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::wallRun
+  controller: {fileID: 7207170826525197004}
+  orientation: {fileID: 6508605988028803658}
+  cam: {fileID: 7642987605847085021}
+  wallRunLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  wallCheckDistance: 1.5
+  minWallRunHeight: 1.5
+  wallRunSpeed: 12
+  wallRunGravity: 0.5
+  wallJumpForce: 15
+  tiltAngle: 10
+  tiltSpeed: 7
+  playerControl: {fileID: 5975179707992272538}
+--- !u!1 &4623639730471504110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6346118020789667773}
+  m_Layer: 3
+  m_Name: GrappleTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6346118020789667773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4623639730471504110}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6508605988028803658}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4447009243189602397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -410,6 +499,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7173815278906741782, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7488051339960944148}
     - targetCorrespondingSourceObject: {fileID: 1831996051309936448, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7298407527378050900}
@@ -446,3 +538,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7549530855202475692, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
   m_PrefabInstance: {fileID: 4447009243189602397}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6789301390581726283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7173815278906741782, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
+  m_PrefabInstance: {fileID: 4447009243189602397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7488051339960944148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789301390581726283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965cecbf196457e4e9ac02db3165339b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunIdleAnimations
+  idleThreshold: 15
+  animationInterval: 5
+  returnDuration: 0.25
+  spinSpeed: 360
+  flipDuration: 0.6
+  tossHeight: 0.15
+  tossDuration: 0.8
+  twiddleDuration: 1.2
+  inspectDuration: 2
+  juggleDuration: 1.4
+  flourishDuration: 1.8

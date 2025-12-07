@@ -15,11 +15,21 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
     [SerializeField] float barkCooldown;
 
     Color colorOrig;
+
     private Coroutine poisoned;
 
     //Range in which dog can smell player
     bool playerInScentRange;
     float barkTimer;
+    public Transform forwardAnchor;
+
+    public enum dogState
+    {
+        Idle,
+        Patrol,
+        Alerted,
+        Chase
+    }
 
     Vector3 playerDir;
     Transform playerTransform;
@@ -78,7 +88,10 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
-
+        public void onGuardHit(Vector3 alertPosition)
+    {
+        agent.SetDestination(alertPosition);
+    }
 
     public void takeDamage(int amount)
     {
@@ -122,7 +135,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
             transform.rotation = Quaternion.LookRotation(dir);
         }
 
-        gameManager.instance.alertSys.raiseAlert(transform.position, alertRadius);
+        gameManager.instance.alertSys.raiseAlert(forwardAnchor.position, alertRadius);
     }
 
     public void poison(int damage, float rate, float duration)

@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
@@ -7,6 +8,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
 
+    [SerializeField] enemyAI_Dog dog;
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
@@ -19,6 +21,15 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
 
     float shootTimer;
     float angleToPlayer;
+
+    //States for the Guards to switch through as we need them
+    public enum guardHandlerState
+    {
+        Idle,
+        Patrol,
+        Alerted,
+        Chase
+    }
 
     private Coroutine poisoned;
 
@@ -108,6 +119,11 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
         if (playerTransform != null)
             agent.SetDestination(playerTransform.position);
 
+        if (dog != null)
+        {
+            dog.onGuardHit(transform.position);
+        }
+
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
@@ -127,12 +143,12 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     }
     public void onAlert(Vector3 alertPosition)
     {
-        Vector3 playerDir = alertPosition + transform.position;
+        Vector3 playerDir = alertPosition - transform.position;
         playerDir.y = 0;
 
         if (playerDir.sqrMagnitude > 0.01f)
         {
-            Quaternion rot = Quaternion.LookRotation(-playerDir);
+            Quaternion rot = Quaternion.LookRotation(playerDir);
             transform.rotation = rot;
         }
     }

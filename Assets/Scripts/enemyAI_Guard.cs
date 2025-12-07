@@ -10,12 +10,11 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
-    [SerializeField] int turnSpeed;
+    //[SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
-    [SerializeField] float alertTimer;
-    [SerializeField] float alertRepeatTime;
+
     Color colorOrig;
 
     float shootTimer;
@@ -23,6 +22,14 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
 
     private Coroutine poisoned;
 
+    //States for the Guards to switch through as we need them
+    public enum guardState
+    {
+        Idle,
+        Patrol,
+        Alerted,
+        Chase
+    }
     //Range in which guard can see player to shoot
     bool playerInSightRange;
 
@@ -41,18 +48,6 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     void Update()
     {
         shootTimer += Time.deltaTime;
-        if (alertTimer >= 0)
-        {
-            alertTimer -= Time.deltaTime;
-            Vector3 dir = lastAlertPosition - transform.position;
-            dir.y = 0;
-
-            if(dir.sqrMagnitude >0.0f)
-            {
-                Quaternion targetRot = Quaternion.LookRotation(dir);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnSpeed * Time.deltaTime);
-            }
-        }
         if (playerInSightRange && canSeePlayer())
         {
 
@@ -140,16 +135,14 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     }
     public void onAlert(Vector3 alertPosition)
     {
-        Vector3 playerDir = alertPosition + transform.position;
+        Vector3 playerDir = alertPosition - transform.position;
         playerDir.y = 0;
 
-        if(playerDir.sqrMagnitude > 0.01f)
+        if (playerDir.sqrMagnitude > 0.01f)
         {
-            Quaternion rot = Quaternion.LookRotation(-playerDir);
+            Quaternion rot = Quaternion.LookRotation(playerDir);
             transform.rotation = rot;
         }
-        lastAlertPosition = alertPosition;
-        alertTimer = alertRepeatTime;
     }
     public void poison(int damage, float rate, float duration)
     {

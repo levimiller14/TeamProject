@@ -696,6 +696,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1129848758241390624, guid: 8110e497bf2178c4f9b591615b83ce4b, type: 3}
   m_PrefabInstance: {fileID: 1574976002}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &370511206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+  m_PrefabInstance: {fileID: 777150690507789532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271603ace7468ce4383c659dffc2689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Dog
 --- !u!1 &518521213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,6 +1445,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1024024811 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5496527880835942608, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+  m_PrefabInstance: {fileID: 777150690507789532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1241605337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,6 +1791,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4614956433496028095, guid: 7bd612d578f3e0841b6e15b0fc2b07e8, type: 3}
+      propertyPath: modelHead
+      value: 
+      objectReference: {fileID: 1815649899}
     - target: {fileID: 5811351100485377980, guid: 7bd612d578f3e0841b6e15b0fc2b07e8, type: 3}
       propertyPath: m_Name
       value: RapidFireCannon_Homing
@@ -2383,6 +2403,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1815649899 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4537971426709538888, guid: 7bd612d578f3e0841b6e15b0fc2b07e8, type: 3}
+  m_PrefabInstance: {fileID: 1506959773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1848739160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2519,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1880432991 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4537971426709538888, guid: 4da23c3729c2c114eaaf00da51d5b3a8, type: 3}
+  m_PrefabInstance: {fileID: 5323874682164407446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1918383482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,9 +2816,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2243394827107223301, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243394827107223301, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 3630786666404078027, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.17655697
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 3630786666404078027, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2796,7 +2834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3630786666404078027, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.277626
+      value: 38.74
       objectReference: {fileID: 0}
     - target: {fileID: 3630786666404078027, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2826,6 +2864,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6099605865421929188, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
+      propertyPath: turnSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6237515858331850640, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
       propertyPath: m_Name
       value: Standard Guard
@@ -2847,13 +2889,17 @@ PrefabInstance:
       propertyPath: doghandler
       value: 
       objectReference: {fileID: 797939918}
+    - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+      propertyPath: forwardAnchor
+      value: 
+      objectReference: {fileID: 1024024811}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog
       objectReference: {fileID: 0}
     - target: {fileID: 3400128368430793713, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3422713
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3400128368430793713, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2861,7 +2907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3400128368430793713, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.866913
+      value: 36.62
       objectReference: {fileID: 0}
     - target: {fileID: 3400128368430793713, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2908,6 +2954,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.845
       objectReference: {fileID: 0}
+    - target: {fileID: 4614956433496028095, guid: 4da23c3729c2c114eaaf00da51d5b3a8, type: 3}
+      propertyPath: modelHead
+      value: 
+      objectReference: {fileID: 1880432991}
     - target: {fileID: 5811351100485377980, guid: 4da23c3729c2c114eaaf00da51d5b3a8, type: 3}
       propertyPath: m_Name
       value: RapidFireCannon_Standard
@@ -3062,6 +3112,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1845839994028746194, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+      propertyPath: dog
+      value: 
+      objectReference: {fileID: 370511206}
     - target: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.17655766
