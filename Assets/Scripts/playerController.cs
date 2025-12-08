@@ -34,6 +34,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     // making HPOrig public for cheatManager.cs
     public int HPOrig;
 
+    // GODMODE
+    public bool isGodMode = false;
+
     float shootTimer;
     private Coroutine poisoned;
 
@@ -246,6 +249,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal
 
     public void takeDamage(int amount)
     {
+        // godmode
+        if (isGodMode) return;
+
         if (amount > 0)
         {
             HP -= amount;
