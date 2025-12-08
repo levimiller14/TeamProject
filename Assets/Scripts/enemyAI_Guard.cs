@@ -30,10 +30,14 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
         Alerted,
         Chase
     }
+
+    public guardState state = guardState.Idle;
     //Range in which guard can see player to shoot
     bool playerInSightRange;
 
     Vector3 playerDir;
+    Vector3 alertTargetPos;
+    Vector3 alertLookDir;
     Vector3 lastAlertPosition;
     Transform playerTransform;
 
@@ -133,9 +137,11 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
     }
-    public void onAlert(Vector3 alertPosition)
+    public void onAlert(Vector3 alertPosition, Vector3 alertForward)
     {
-        Vector3 playerDir = alertPosition - transform.position;
+        alertTargetPos = alertPosition;
+
+        Vector3 playerDir = alertForward;
         playerDir.y = 0;
 
         if (playerDir.sqrMagnitude > 0.01f)
@@ -143,6 +149,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
             Quaternion rot = Quaternion.LookRotation(playerDir);
             transform.rotation = rot;
         }
+        state = guardState.Alerted;
     }
     public void poison(int damage, float rate, float duration)
     {

@@ -31,12 +31,16 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
         Chase
     }
 
+    public guardHandlerState state = guardHandlerState.Idle;
+
     private Coroutine poisoned;
 
     //Range in which guard can see player to shoot
     bool playerInSightRange;
 
     Vector3 playerDir;
+    Vector3 alertTargetPos;
+    Vector3 alertLookDir;
     Transform playerTransform;
 
     void Start()
@@ -141,9 +145,11 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
     }
-    public void onAlert(Vector3 alertPosition)
+    public void onAlert(Vector3 alertPosition, Vector3 alertForward)
     {
-        Vector3 playerDir = alertPosition - transform.position;
+        alertTargetPos = alertPosition;
+
+        Vector3 playerDir = alertForward;
         playerDir.y = 0;
 
         if (playerDir.sqrMagnitude > 0.01f)
@@ -151,6 +157,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
             Quaternion rot = Quaternion.LookRotation(playerDir);
             transform.rotation = rot;
         }
+        state = guardHandlerState.Alerted;   
     }
 
     public void onDogHit(Vector3 alertPosition)

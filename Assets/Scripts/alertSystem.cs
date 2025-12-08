@@ -4,7 +4,7 @@ public class alertSystem : MonoBehaviour
 {
     [SerializeField] LayerMask enemyMask;
 
-    public void raiseAlert(Vector3 position, float radius)
+    public void raiseAlert(Vector3 position, Vector3 forward, float radius)
     {
         Collider[] hits = Physics.OverlapSphere(position, radius, enemyMask);
         
@@ -13,12 +13,12 @@ public class alertSystem : MonoBehaviour
             enemyAI_Guard guard = hits[i].GetComponent<enemyAI_Guard>();
             if(guard != null)
             {
-                guard.onAlert(position);
+                guard.onAlert(position, forward);
             }
             enemyAI_Guard_Handler handler = hits[i].GetComponent<enemyAI_Guard_Handler>();
             if (handler != null)
             {
-                handler.onAlert(position);
+                handler.onAlert(position, forward);
             }
         }
     }

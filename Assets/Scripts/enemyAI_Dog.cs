@@ -140,7 +140,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
             transform.rotation = Quaternion.LookRotation(dir);
         }
 
-        gameManager.instance.alertSys.raiseAlert(forwardAnchor.position, alertRadius);
+        gameManager.instance.alertSys.raiseAlert(forwardAnchor.position, forwardAnchor.forward, alertRadius);
     }
 
     public void poison(int damage, float rate, float duration)
