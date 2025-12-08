@@ -46,13 +46,13 @@ public class statTracker : MonoBehaviour
 
     public void UpdateStatsDisplay()
     {
-        enemiesDefeatedText.text = "Enemies Defeated: " + enemiesDefeated.ToString();
-        distanceTravelledText.text = "Distance Travelled: " + distanceTravelled.ToString("F1") + "m";
-        objectivesCompletedText.text = "Objectives Completed: " + objectivesCompleted.ToString();
-        shotsFiredText.text = "Shots Fired: " + shotsFired.ToString();
+        enemiesDefeatedText.text = enemiesDefeated.ToString();
+        distanceTravelledText.text = distanceTravelled.ToString("F1") + "m";
+        objectivesCompletedText.text = objectivesCompleted.ToString();
+        shotsFiredText.text = shotsFired.ToString();
 
         float accuracy = shotsFired > 0 ? ((float)shotsHit / shotsFired) * 100f : 0f;
-        accuracyText.text = "Accuracy: " + accuracy.ToString("F1") + "%";
+        accuracyText.text = accuracy.ToString("F1") + "%";
 
     }
 

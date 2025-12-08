@@ -217,6 +217,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     void shoot()
     {
         shootTimer = 0;
+
+        // Levi addition, statTracking
+        if(statTracker.instance != null)
+        {
+            statTracker.instance.IncrementShotsFired();
+        }
+
         Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
 
         RaycastHit hit;
@@ -227,6 +234,12 @@ public class playerController : MonoBehaviour, IDamage, IHeal
             if (dmg != null)
             {
                 dmg.takeDamage(shootDamage);
+
+                // stat tracking
+                if(statTracker.instance != null)
+                {
+                    statTracker.instance.IncrementShotsHit();
+                }
             }
         }
     }

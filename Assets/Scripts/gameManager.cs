@@ -25,7 +25,7 @@ public class gameManager : MonoBehaviour
     //[SerializeField] GameObject menuWin;
     //[SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text gameGoalCountText;
-    
+
     public alertSystem alertSys;
     public GameObject player;
     public playerController playerScript;
