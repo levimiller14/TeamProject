@@ -11,6 +11,10 @@ public class LightOptimization : MonoBehaviour
     [SerializeField] float lowQualityDistance = 18f;
     [SerializeField] float offDistance = 25f;
 
+    [Header("---Occlusion---")]
+    [SerializeField] LayerMask obstacleMask;
+    [SerializeField] float playerEyeHeight = 1.7f;
+
     public Light lightSource;
     private Transform player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,12 +39,30 @@ public class LightOptimization : MonoBehaviour
 
         while (true)
         {
-            if (player == null)
+            if (player == null || lightSource == null)
             {
                 yield break;
             }
 
-            float sqrDist = (player.position - transform.position).sqrMagnitude;
+            Vector3 origin = player.position + Vector3.up * playerEyeHeight;
+            Vector3 toLight = transform.position - origin;
+            float sqrDist = toLight.sqrMagnitude;  //(player.position - transform.position).sqrMagnitude;
+
+            if (sqrDist > sqrOff)
+            {
+                lightSource.enabled = false;
+                yield return wait;
+                continue;
+            }
+
+            float dist = Mathf.Sqrt(sqrDist);
+            Ray ray = new Ray(origin, toLight.normalized);
+            if(Physics.Raycast(ray, dist, obstacleMask, QueryTriggerInteraction.Ignore))
+            {
+                lightSource.enabled = false;
+                yield return wait;
+                continue;
+            }
 
             if (sqrDist <= sqrFullQuality)
             {

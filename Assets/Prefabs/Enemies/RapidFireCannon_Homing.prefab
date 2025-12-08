@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Turrets
   model: {fileID: 6026158617385300929}
+  modelHead: {fileID: 4537971426709538888}
   head: {fileID: 3364523330047243047}
   HP: 5
   facePlayerSpeed: 20
@@ -253,7 +254,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 30
   m_Center: {x: -0.000000029802322, y: 0.5, z: 0}
 --- !u!136 &8997835344989490557
 CapsuleCollider:
