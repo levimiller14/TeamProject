@@ -4,7 +4,7 @@ public class cameraController : MonoBehaviour
 {
     // Levi edits/additions
     // changing Serialized Fields to public so I can access in settingsManager.cs
-    public int sens;
+    public float sens;
     public bool invertY;
     //[SerializeField] int sens;
     //[SerializeField] bool invertY;

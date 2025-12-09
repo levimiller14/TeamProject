@@ -12,9 +12,20 @@ public class settingsManager : MonoBehaviour
     [Header("----Invert Y Settings----")]
     [SerializeField] Toggle invertYToggle;
 
+    private void Start()
+    {
+        if(sensitivitySlider != null && gameManager.instance.player != null)
+        {
+            cameraController camScript = gameManager.instance.player.GetComponentInChildren<cameraController>();
+            if(camScript != null)
+            {
+                sensitivitySlider.value = camScript.sens;
+            }
+        }
+    }
     public void UpdateSensitivity()
     {
-        int newSens = (int)sensitivitySlider.value;
+        float newSens = sensitivitySlider.value;
         cameraController camScript = gameManager.instance.player.GetComponentInChildren<cameraController>();
         if(camScript != null)
         {

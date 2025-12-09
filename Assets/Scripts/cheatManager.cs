@@ -56,7 +56,7 @@ public class cheatManager : MonoBehaviour
 
     void KillAllEnemies()
     {
-        IDamage[] enemies = FindObjectsOfType<MonoBehaviour>().OfType<IDamage>().ToArray();
+        IDamage[] enemies = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IDamage>().ToArray();
 
         int killCount = 0;
 
@@ -65,10 +65,11 @@ public class cheatManager : MonoBehaviour
             if (enemy is playerController) continue;
 
             enemy.takeDamage(999);
+            killCount++;
 
         }
 
-        feedbackText.text = "ALL ENEMIES DEAD";
+        feedbackText.text = "KILLED " + killCount + " ENEMIES";
 
     }
 
