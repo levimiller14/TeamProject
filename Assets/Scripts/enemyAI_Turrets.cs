@@ -32,7 +32,7 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         colorOrigHead = modelHead.material.color;
-        gameManager.instance.UpdateGameGoal(1);
+        //gameManager.instance.UpdateGameGoal(1);
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
     }

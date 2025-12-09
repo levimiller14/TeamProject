@@ -46,7 +46,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        gameManager.instance.UpdateGameGoal(1);
+        //gameManager.instance.UpdateGameGoal(1);
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
     }
