@@ -121,10 +121,14 @@ public class playerController : MonoBehaviour, IDamage, IHeal
         if (!isGrappling)
         {
             moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+
+            // calculate actual velocity for wall run (moveDir * speed + external + playerVel)
+            Vector3 currentVelocity = (moveDir * speed) + externalVelocity + playerVel;
+
             // wall run start
             if (wallRun != null)
             {
-                wallRun.ProcessWallRun(ref moveDir, ref playerVel, controller.isGrounded);
+                wallRun.ProcessWallRun(ref moveDir, ref playerVel, controller.isGrounded, currentVelocity);
             }
             bool isWallRunningNow = wallRun != null && wallRun.IsWallRunning;
             if (!isWallRunningNow && wasWallRunning)
