@@ -123,6 +123,13 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
+
+            // incrementing enemies defeated in stats
+            if(statTracker.instance != null)
+            {
+                statTracker.instance.IncrementEnemiesDefeated();
+            }
+
             Destroy(gameObject);
         }
         else

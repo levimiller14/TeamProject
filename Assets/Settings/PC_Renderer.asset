@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b400b7cbd0ccc45beac741296f72f4, type: 3}
   m_Name: PixelationRenderFeature
   m_EditorClassIdentifier: Assembly-CSharp::PixelationRenderFeature
-  m_Active: 0
+  m_Active: 1
   settings:
     renderPassEvent: 600
     pixelSize: 4

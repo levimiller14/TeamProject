@@ -34,6 +34,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     // making HPOrig public for cheatManager.cs
     public int HPOrig;
 
+    // GODMODE
+    public bool isGodMode = false;
+
     float shootTimer;
     private Coroutine poisoned;
 
@@ -217,6 +220,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal
     void shoot()
     {
         shootTimer = 0;
+
+        // Levi addition, statTracking
+        if(statTracker.instance != null)
+        {
+            statTracker.instance.IncrementShotsFired();
+        }
+
         Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
 
         RaycastHit hit;
@@ -227,12 +237,21 @@ public class playerController : MonoBehaviour, IDamage, IHeal
             if (dmg != null)
             {
                 dmg.takeDamage(shootDamage);
+
+                // stat tracking
+                if(statTracker.instance != null)
+                {
+                    statTracker.instance.IncrementShotsHit();
+                }
             }
         }
     }
 
     public void takeDamage(int amount)
     {
+        // godmode
+        if (isGodMode) return;
+
         if (amount > 0)
         {
             HP -= amount;

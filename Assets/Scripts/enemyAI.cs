@@ -31,8 +31,10 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         gameManager.instance.UpdateGameGoal(1);
+
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
+
     }
 
     // Update is called once per frame
@@ -115,6 +117,10 @@ public class enemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
+           if(statTracker.instance != null)
+            {
+                statTracker.instance.IncrementEnemiesDefeated();
+            }
             Destroy(gameObject);
         }
         else
