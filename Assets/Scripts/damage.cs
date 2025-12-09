@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 
 public class damage : MonoBehaviour
 {
-    enum damageType {moving, stationary, DOT, homing, poison, frost}
+    enum damageType {moving, stationary, DOT, homing, poison, frost, shock}
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;
 
@@ -67,6 +67,10 @@ public class damage : MonoBehaviour
             dmg.takeDamage(damageAmount);
         }
 
+        if(type == damageType.shock)
+        {
+
+        }
     }
 
     private void OnTriggerStay(Collider other) // DOT and Poison
