@@ -357,14 +357,15 @@ public class playerController : MonoBehaviour, IDamage, IHeal
 
     public void taze(int damage, float duration)
     {
-        float timer = 0f;
-        
-        while (timer < duration)
-        {
-            timer += Time.deltaTime;
-            tazed = true;
-            speed = 0;
-        }
+        StartCoroutine(TazeRoutine(duration));
+    }
+
+    private IEnumerator TazeRoutine(float duration)
+    {
+        tazed = true;
+
+        yield return new WaitForSeconds(duration);
+
         tazed = false;
         speed = speedOrig;
     }
