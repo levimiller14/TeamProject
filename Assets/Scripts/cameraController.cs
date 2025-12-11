@@ -11,8 +11,14 @@ public class cameraController : MonoBehaviour
     [SerializeField] int lockVertMin, lockVertMax;
 
     public float wallTiltZ;
+    public float slideTiltZ;
+
+    [Header("----- Movement Tilt -----")]
+    [SerializeField] float moveTiltAmount = 2f;
+    [SerializeField] float moveTiltSpeed = 8f;
 
     float camRotX;
+    float currentMoveTilt;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,7 +44,11 @@ public class cameraController : MonoBehaviour
 
         camRotX = Mathf.Clamp(camRotX, lockVertMin, lockVertMax);
 
-        transform.localRotation = Quaternion.Euler(camRotX, 0, wallTiltZ);
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float targetMoveTilt = -horizontalInput * moveTiltAmount;
+        currentMoveTilt = Mathf.Lerp(currentMoveTilt, targetMoveTilt, Time.deltaTime * moveTiltSpeed);
+
+        transform.localRotation = Quaternion.Euler(camRotX, 0, wallTiltZ + slideTiltZ + currentMoveTilt);
 
         transform.parent.Rotate(Vector3.up * mouseX);
     }

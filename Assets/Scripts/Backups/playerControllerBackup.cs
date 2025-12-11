@@ -32,7 +32,10 @@ public class playerControllerBackup : MonoBehaviour, IDamage, IHeal
     public int HPOrig;
 
     float shootTimer;
+
+    //status effects
     private Coroutine poisoned;
+    private bool tazed;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -259,8 +262,6 @@ public class playerControllerBackup : MonoBehaviour, IDamage, IHeal
     }
 
 
-    //<<<<<<< HEAD
-    //=======
     // poison routines
     public void poison(int damage, float rate, float duration)
     {
@@ -285,6 +286,18 @@ public class playerControllerBackup : MonoBehaviour, IDamage, IHeal
             yield return wait;
         }
         poisoned = null;
-        //>>>>>>> 1bb9c2b6da50e57523c371620cff226582621ee7
+    }
+    public void taze(int damage, float duration)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            tazed = true;
+            speed = 0;
+        }
+        tazed = false;
+        speed = speedOrig;
     }
 }

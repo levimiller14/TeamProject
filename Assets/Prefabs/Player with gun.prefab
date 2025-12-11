@@ -157,6 +157,7 @@ MonoBehaviour:
   lockVertMin: -90
   lockVertMax: 90
   wallTiltZ: 0
+  slideTiltZ: 0
 --- !u!114 &2151276161239564864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +191,7 @@ GameObject:
   - component: {fileID: 5975179707992272538}
   - component: {fileID: 7007502587474825607}
   - component: {fileID: 5713765023524137452}
+  - component: {fileID: 8070560764861606123}
   m_Layer: 3
   m_Name: Player with gun
   m_TagString: Player
@@ -346,6 +348,7 @@ MonoBehaviour:
   playerBullet: {fileID: 7754668077929706730, guid: e9ac31fdd937851409d15864ad32bb03, type: 3}
   playerShootPos: {fileID: 5274542662088418657}
   HPOrig: 10
+  isGodMode: 0
   groundedVelocityDecay: 15
   airVelocityDecay: 0.5
 --- !u!114 &7007502587474825607
@@ -393,13 +396,58 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   wallCheckDistance: 1.5
+  wallCheckRadius: 0.3
+  wallCheckRays: 5
   minWallRunHeight: 1.5
-  wallRunSpeed: 12
+  minEntrySpeed: 4
+  maxWallApproachAngle: 70
+  minWallApproachAngle: 10
+  wallRunFriction: 2
   wallRunGravity: 0.5
+  maxWallRunDuration: 2.5
+  initialVerticalBoost: 0.15
+  maxInitialVerticalSpeed: 6
+  momentumTransferRatio: 0.85
   wallJumpForce: 15
+  wallJumpOutwardRatio: 0.6
+  wallJumpUpwardRatio: 0.8
   tiltAngle: 10
   tiltSpeed: 7
   playerControl: {fileID: 5975179707992272538}
+--- !u!114 &8070560764861606123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3834399077637058629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d844b9df1555ca44888b31bd64aadd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::crouchSlide
+  controller: {fileID: 7207170826525197004}
+  cam: {fileID: 7642987605847085021}
+  playerModel: {fileID: 6508605988028803658}
+  crouchHeight: 1
+  standHeight: 2
+  crouchSpeed: 2
+  crouchTransitionSpeed: 10
+  crouchKey: 99
+  minSlideSpeed: 5
+  slideBoost: 2
+  slideFriction: 6
+  slideSlopeFriction: 3
+  maxSlideDuration: 1.5
+  slideCooldown: 0.5
+  slideTiltAngle: -8
+  tiltSpeed: 10
+  sparkParticles: {fileID: 0}
+  sparkSpawnPoint: {fileID: 0}
+  sparkEmissionRate: 50
+  autoCreateSparks: 1
+  sparkColor: {r: 1, g: 0.6, b: 0.2, a: 1}
+  sparkColorEnd: {r: 1, g: 0.3, b: 0, a: 0}
 --- !u!1 &4623639730471504110
 GameObject:
   m_ObjectHideFlags: 0

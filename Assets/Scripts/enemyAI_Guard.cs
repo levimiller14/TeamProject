@@ -20,7 +20,9 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     float shootTimer;
     float angleToPlayer;
 
-    
+    //status effects
+    private Coroutine poisoned;
+    private bool tazed;
 
     //States for the Guards to switch through as we need them
     public enum guardState
@@ -33,10 +35,6 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
 
     public guardState state = guardState.Idle;
 
-
-
-
-    private Coroutine poisoned;
     //Range in which guard can see player to shoot
     bool playerInSightRange;
 
@@ -116,8 +114,11 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     }
     void shoot()
     {
-        shootTimer = 0;
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        if (!tazed)
+        {
+            shootTimer = 0;
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
     }
     public void takeDamage(int amount)
     {
@@ -184,6 +185,31 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
             yield return wait;
         }
         poisoned = null;
+    }
+
+    // tazed effect
+    public void taze(int damage, float duration)
+    {
+        takeDamage(damage);
+        if (!tazed)
+        {
+            StartCoroutine(StunRoutine(duration));
+        }
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        tazed = true;
+        if (agent != null)
+        {
+            agent.isStopped = true;
+        }
+        yield return new WaitForSeconds(duration);
+        tazed = false;
+        if (agent != null)
+        {
+            agent.isStopped = false;
+        }
     }
 }
 

@@ -23,6 +23,10 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     float angleToPlayer;
     bool isAggro;
 
+    // status effects
+    private Coroutine poisoned;
+    private bool tazed;
+
     Vector3 playerDir;
 
     bool playerInRange;
@@ -111,8 +115,11 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 
     void fire()
     {
-        fireTimer = 0;
-        Instantiate(bullet, firePos.position, head.transform.rotation);
+        if (!tazed)
+        {
+            fireTimer = 0;
+            Instantiate(bullet, firePos.position, head.transform.rotation);
+        }
     }
     public void takeDamage(int amount)
     {
@@ -147,7 +154,51 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     }
     public void poison(int damage, float rate, float duration)
     {
+        if (poisoned != null)
+        {
+            StopCoroutine(poisoned); // cuts off current poison, effective duration reset
+        }
+        poisoned = StartCoroutine(PoisonRoutine(damage, rate, duration));
+    }
 
+    private IEnumerator PoisonRoutine(int damage, float rate, float duration)
+    {
+        float timer = 0f;
+        WaitForSeconds wait = new WaitForSeconds(rate);
+
+        while (timer < duration)
+        {
+            takeDamage(damage);
+            timer += rate;
+            yield return wait;
+        }
+        poisoned = null;
+    }
+
+    // Tazed effect
+    public void taze(int damage, float duration)
+    {
+        takeDamage(damage);
+        if (!tazed)
+        {
+            StartCoroutine(StunRoutine(duration));
+        }
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        // no movement in turrets
+        tazed = true;
+        //if (agent != null)
+        //{
+        //    agent.isStopped = true;
+        //}
+        yield return new WaitForSeconds(duration);
+        tazed = false;
+        //if (agent != null)
+        //{
+        //    agent.isStopped = false;
+        //}
     }
 
 }
