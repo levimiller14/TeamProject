@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
@@ -7,6 +8,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
 
+    [SerializeField] enemyAI_Dog dog;
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
@@ -20,16 +22,34 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     float shootTimer;
     float angleToPlayer;
 
+    //States for the Guards to switch through as we need them
+    public enum guardHandlerState
+    {
+        Idle,
+        Patrol,
+        Alerted,
+        Chase
+    }
+
+    public guardHandlerState state = guardHandlerState.Idle;
+    // status effects
     private Coroutine poisoned;
+    private bool tazed;
 
     //Range in which guard can see player to shoot
     bool playerInSightRange;
 
     Vector3 playerDir;
+    Vector3 alertTargetPos;
+    Vector3 alertLookDir;
+    Transform playerTransform;
+
     void Start()
     {
         colorOrig = model.material.color;
-        gameManager.instance.UpdateGameGoal(1);
+        //gameManager.instance.UpdateGameGoal(1);
+        if (gameManager.instance.player != null)
+            playerTransform = gameManager.instance.player.transform;
     }
 
     void Update()
@@ -44,7 +64,10 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
 
     bool canSeePlayer()
     {
-        playerDir = gameManager.instance.player.transform.position - transform.position;
+        if (playerTransform == null) return false;
+
+        Vector3 playerPos = playerTransform.position;
+        playerDir = playerPos - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         RaycastHit hit;
@@ -52,7 +75,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
         {
             if (angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
             {
-                agent.SetDestination(gameManager.instance.player.transform.position);
+                agent.SetDestination(playerPos);
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -92,17 +115,33 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     }
     void shoot()
     {
-        shootTimer = 0;
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        if (!tazed)
+        {
+            shootTimer = 0;
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
     }
     public void takeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        if (playerTransform != null)
+            agent.SetDestination(playerTransform.position);
+
+        if (dog != null)
+        {
+            dog.onGuardHit(transform.position);
+        }
 
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
+
+            // incrementing enemies defeated in stats
+            if (statTracker.instance != null)
+            {
+                statTracker.instance.IncrementEnemiesDefeated();
+            }
+
             Destroy(gameObject);
         }
         else
@@ -117,16 +156,19 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
     }
-    public void onAlert(Vector3 alertPosition)
+    public void onAlert(Vector3 alertPosition, Vector3 alertForward)
     {
-        Vector3 playerDir = alertPosition + transform.position;
+        alertTargetPos = alertPosition;
+
+        Vector3 playerDir = alertForward;
         playerDir.y = 0;
 
         if (playerDir.sqrMagnitude > 0.01f)
         {
-            Quaternion rot = Quaternion.LookRotation(-playerDir);
+            Quaternion rot = Quaternion.LookRotation(playerDir);
             transform.rotation = rot;
         }
+        state = guardHandlerState.Alerted;   
     }
 
     public void onDogHit(Vector3 alertPosition)
@@ -154,5 +196,30 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
             yield return wait;
         }
         poisoned = null;
+    }
+
+    // Tazed effect
+    public void taze(int damage, float duration)
+    {
+        takeDamage(damage);
+        if (!tazed)
+        {
+            StartCoroutine(StunRoutine(duration));
+        }
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        tazed = true;
+        if (agent != null)
+        {
+            agent.isStopped = true;
+        }
+        yield return new WaitForSeconds(duration);
+        tazed = false;
+        if (agent != null)
+        {
+            agent.isStopped = false;
+        }
     }
 }

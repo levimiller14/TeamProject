@@ -18,6 +18,7 @@ public class heal : MonoBehaviour
     bool healing;
     private float maxHealth = 100f;
     private float cHealth;
+    private Coroutine healCoroutine;
    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,7 +62,7 @@ public class heal : MonoBehaviour
 
         if(health != null && _heal == HealType.still && !healing) //if health isnt null and type is still
         {
-            StartCoroutine(healOther(health)); 
+            healCoroutine = StartCoroutine(healOther(health));
         }
     }
     private void OnTriggerExit(Collider other) //leaving heal area
@@ -71,7 +72,11 @@ public class heal : MonoBehaviour
         if(health != null)
         {
             healing = false;
-            StopCoroutine(healOther(health));
+            if (healCoroutine != null)
+            {
+                StopCoroutine(healCoroutine);
+                healCoroutine = null;
+            }
         }
     }
     public void healPlayer(int healAmount)

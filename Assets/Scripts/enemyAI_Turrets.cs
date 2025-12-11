@@ -5,6 +5,7 @@ using System.Collections;
 public class enemyAI_Turrets : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
+    [SerializeField] Renderer modelHead;
     [SerializeField] Transform head;
 
     [SerializeField] int HP;
@@ -16,18 +17,28 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     [SerializeField] Transform firePos;
 
     Color colorOrig;
+    Color colorOrigHead;
 
     float fireTimer;
     float angleToPlayer;
     bool isAggro;
 
+    // status effects
+    private Coroutine poisoned;
+    private bool tazed;
+
     Vector3 playerDir;
 
     bool playerInRange;
+    Transform playerTransform;
+
     void Start()
     {
         colorOrig = model.material.color;
-        gameManager.instance.UpdateGameGoal(1);
+        colorOrigHead = modelHead.material.color;
+        //gameManager.instance.UpdateGameGoal(1);
+        if (gameManager.instance.player != null)
+            playerTransform = gameManager.instance.player.transform;
     }
     void Update()
     {
@@ -36,20 +47,19 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         if (isAggro == true)
         {
             facePlayer();
+            canSeePlayer();
         }
-        if (playerInRange)
+        if (playerInRange && canSeePlayer())
         {
             facePlayer();
-            if(canSeePlayer())
-            {
-
-            }
         }
     }
 
     bool canSeePlayer()
     {
-        playerDir = gameManager.instance.player.transform.position - transform.position;
+        if (playerTransform == null) return false;
+
+        playerDir = playerTransform.position - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         RaycastHit hit;
@@ -85,16 +95,16 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     }
     void facePlayer()
     {
-        if(head == null)
+        if(head == null || playerTransform == null)
         {
             return;
         }
-        Vector3 targetDir = gameManager.instance.player.transform.position;
+        Vector3 targetDir = playerTransform.position;
         targetDir.y = 0;
 
         playerDir = targetDir - head.position;
 
-        if(playerDir.sqrMagnitude < 0.00f)
+        if(playerDir.sqrMagnitude < 0.001f)
         {
             return;
         }
@@ -105,8 +115,11 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 
     void fire()
     {
-        fireTimer = 0;
-        Instantiate(bullet, firePos.position, transform.rotation);
+        if (!tazed)
+        {
+            fireTimer = 0;
+            Instantiate(bullet, firePos.position, head.transform.rotation);
+        }
     }
     public void takeDamage(int amount)
     {
@@ -116,6 +129,13 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
+
+            // incrementing enemies defeated in stats
+            if (statTracker.instance != null)
+            {
+                statTracker.instance.IncrementEnemiesDefeated();
+            }
+
             Destroy(gameObject);
         }
         else
@@ -127,12 +147,58 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     IEnumerator flashRed()
     {
         model.material.color = Color.red;
+        modelHead.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
+        modelHead.material.color = colorOrigHead;
     }
     public void poison(int damage, float rate, float duration)
     {
+        if (poisoned != null)
+        {
+            StopCoroutine(poisoned); // cuts off current poison, effective duration reset
+        }
+        poisoned = StartCoroutine(PoisonRoutine(damage, rate, duration));
+    }
 
+    private IEnumerator PoisonRoutine(int damage, float rate, float duration)
+    {
+        float timer = 0f;
+        WaitForSeconds wait = new WaitForSeconds(rate);
+
+        while (timer < duration)
+        {
+            takeDamage(damage);
+            timer += rate;
+            yield return wait;
+        }
+        poisoned = null;
+    }
+
+    // Tazed effect
+    public void taze(int damage, float duration)
+    {
+        takeDamage(damage);
+        if (!tazed)
+        {
+            StartCoroutine(StunRoutine(duration));
+        }
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        // no movement in turrets
+        tazed = true;
+        //if (agent != null)
+        //{
+        //    agent.isStopped = true;
+        //}
+        yield return new WaitForSeconds(duration);
+        tazed = false;
+        //if (agent != null)
+        //{
+        //    agent.isStopped = false;
+        //}
     }
 
 }

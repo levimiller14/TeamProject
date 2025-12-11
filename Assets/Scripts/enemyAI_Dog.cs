@@ -15,17 +15,39 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
     [SerializeField] float barkCooldown;
 
     Color colorOrig;
-    private Coroutine poisoned;
+
+   
 
     //Range in which dog can smell player
     bool playerInScentRange;
     float barkTimer;
+    public Transform forwardAnchor;
+
+    //States of dog for use in transitioning the dog behavior
+    public enum dogState
+    {
+        Idle,
+        Patrol,
+        Alerted,
+        Chase
+    }
+
+    public dogState state = dogState.Idle;
 
     Vector3 playerDir;
+    Transform playerTransform;
+
+    // status effects
+    private Coroutine poisoned;
+    private bool tazed;
+
+
     void Start()
     {
         colorOrig = model.material.color;
-        gameManager.instance.UpdateGameGoal(1);
+        //gameManager.instance.UpdateGameGoal(1);
+        if (gameManager.instance.player != null)
+            playerTransform = gameManager.instance.player.transform;
     }
 
     void Update()
@@ -39,10 +61,10 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
                 barkTimer = barkCooldown;
             }
         }
-        if(canScentPlayer())
+        if (canScentPlayer() && playerTransform != null && state == dogState.Chase)
         {
-            agent.SetDestination(gameManager.instance.player.transform.position);
-            if(agent.remainingDistance <= agent.stoppingDistance)
+            agent.SetDestination(playerTransform.position);
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 facePlayer();
             }
@@ -59,6 +81,8 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
         {
             playerInScentRange = true;
             barkTimer = 0;
+
+            state = dogState.Alerted;
         }
     }
 
@@ -74,12 +98,16 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
-
+        public void onGuardHit(Vector3 alertPosition)
+    {
+        agent.SetDestination(alertPosition);
+    }
 
     public void takeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        if (playerTransform != null)
+            agent.SetDestination(playerTransform.position);
 
         if(doghandler != null)
         {
@@ -89,6 +117,13 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
+
+            // incrementing enemies defeated in stats
+            if (statTracker.instance != null)
+            {
+                statTracker.instance.IncrementEnemiesDefeated();
+            }
+
             Destroy(gameObject);
         }
         else
@@ -106,7 +141,9 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
 
     void bark()
     {
-        Vector3 pDir = gameManager.instance.player.transform.position;
+        if (playerTransform == null) return;
+
+        Vector3 pDir = playerTransform.position;
         Vector3 dir = pDir - transform.position;
         dir.y = 0;
 
@@ -115,7 +152,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
             transform.rotation = Quaternion.LookRotation(dir);
         }
 
-        gameManager.instance.alertSys.raiseAlert(transform.position, alertRadius);
+        gameManager.instance.alertSys.raiseAlert(forwardAnchor.position, forwardAnchor.forward, alertRadius);
     }
 
     public void poison(int damage, float rate, float duration)
@@ -139,5 +176,30 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
             yield return wait;
         }
         poisoned = null;
+    }
+
+    // tazed effect
+    public void taze(int damage, float duration)
+    {
+        takeDamage(damage);
+        if (!tazed)
+        {
+            StartCoroutine(StunRoutine(duration));
+        }
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        tazed = true;
+        if (agent != null)
+        {
+            agent.isStopped = true;
+        }
+        yield return new WaitForSeconds(duration);
+        tazed = false;
+        if (agent != null)
+        {
+            agent.isStopped = false;
+        }
     }
 }

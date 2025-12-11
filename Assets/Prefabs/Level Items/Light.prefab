@@ -158,7 +158,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.9245283, g: 0.8741543, b: 0.3532396, a: 1}
   m_Intensity: 100
-  m_Range: 10
+  m_Range: 190.06
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -256,4 +256,8 @@ MonoBehaviour:
   fullQualityDistance: 10
   lowQualityDistance: 30
   offDistance: 50
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1
+  playerEyeHeight: 1.7
   lightSource: {fileID: 3340060152392072204}

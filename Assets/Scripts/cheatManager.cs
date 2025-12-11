@@ -1,5 +1,8 @@
 using UnityEngine;
 using TMPro;
+using System.Linq;
+
+// can my push work?
 
 public class cheatManager : MonoBehaviour
 {
@@ -30,7 +33,11 @@ public class cheatManager : MonoBehaviour
         switch(cheatCode)
         {
             case "GODMODE":
-                feedbackText.text = "GODMODE ACTIVATED";
+                if(gameManager.instance.playerScript != null)
+                {
+                    gameManager.instance.playerScript.isGodMode = !gameManager.instance.playerScript.isGodMode;
+                    feedbackText.text = gameManager.instance.playerScript.isGodMode ? "GODMODE ACTIVATED" : "GODMODE DEACTIVATED";
+                }
                 break;
             case "KILLALL":
                 KillAllEnemies();
@@ -49,10 +56,16 @@ public class cheatManager : MonoBehaviour
 
     void KillAllEnemies()
     {
-        enemyAI[] enemies = FindObjectsOfType<enemyAI>();
-        foreach(enemyAI enemy in enemies)
+        IDamage[] enemies = FindObjectsOfType<MonoBehaviour>().OfType<IDamage>().ToArray();
+
+        int killCount = 0;
+
+        foreach(IDamage enemy in enemies)
         {
+            if (enemy is playerController) continue;
+
             enemy.takeDamage(999);
+
         }
 
         feedbackText.text = "ALL ENEMIES DEAD";
