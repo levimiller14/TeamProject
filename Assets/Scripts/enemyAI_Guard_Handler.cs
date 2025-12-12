@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static enemyAI_Guard;
 
 public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
 {
@@ -14,6 +15,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     [SerializeField] int FOV;
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTime;
+    [SerializeField] float alertDur;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -26,6 +28,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     float roamTimer;
     float angleToPlayer;
     float stoppingDistOrig;
+    float alertedTimer;
 
     //States for the Guards to switch through as we need them
     public enum guardHandlerState
@@ -57,6 +60,8 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         //gameManager.instance.UpdateGameGoal(1);
+        startingPos = transform.position;
+        stoppingDistOrig = agent.stoppingDistance;
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
     }
@@ -65,16 +70,38 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     {
         shootTimer += Time.deltaTime;
 
+        switch (state)
+        {
+            case guardHandlerState.Idle:
+                IdleBehavior();
+                break;
+
+            case guardHandlerState.Alerted:
+                AlertedBehavior();
+                break;
+
+            case guardHandlerState.Chase:
+                ChaseBehavior();
+                break;
+        }
+
+    }
+    void IdleBehavior()
+    {
         if (agent.remainingDistance < 0.01f)
             roamTimer += Time.deltaTime;
 
-        if (playerInSightRange && !canSeePlayer())
+        if (playerInSightRange && canSeePlayer())
         {
             checkRoam();
         }
         else if (!playerInSightRange)
         {
-            checkRoam();  
+            checkRoam();
+        }
+        else
+        {
+            state = guardHandlerState.Chase;
         }
     }
     void checkRoam()
@@ -95,6 +122,13 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
             NavMeshHit hit;
             NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
             agent.SetDestination(hit.position);
+    }
+    void ChaseBehavior()
+    {
+        if (!canSeePlayer())
+        {
+            state = guardHandlerState.Alerted;
+        }
     }
     bool canSeePlayer()
     {
@@ -202,12 +236,36 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
             Quaternion rot = Quaternion.LookRotation(playerDir);
             transform.rotation = rot;
         }
-        state = guardHandlerState.Alerted;   
+        //moves guard toward anchor
+        agent.stoppingDistance = 0;
+        agent.SetDestination(alertTargetPos);
+        //sets state to alerted
+        state = guardHandlerState.Alerted;
+        alertedTimer = 0;
     }
 
     public void onDogHit(Vector3 alertPosition)
     {
         agent.SetDestination(alertPosition);
+    }
+
+    void AlertedBehavior()
+    {
+        if (canSeePlayer())
+        {
+            state = guardHandlerState.Chase;
+            return;
+        }
+        if (agent.remainingDistance <= 0.1f)
+        {
+            alertedTimer += Time.deltaTime;
+
+            if (alertedTimer >= alertDur)
+            {
+                state = guardHandlerState.Idle;
+            }
+        }
+
     }
     public void poison(int damage, float rate, float duration)
     {

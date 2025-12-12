@@ -35,6 +35,8 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
     public dogState state = dogState.Idle;
 
     Vector3 playerDir;
+    Vector3 startingPos;
+
     Transform playerTransform;
 
     // status effects
@@ -46,6 +48,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
     {
         colorOrig = model.material.color;
         //gameManager.instance.UpdateGameGoal(1);
+        startingPos = doghandler.transform.position;
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
     }

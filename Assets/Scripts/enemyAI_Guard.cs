@@ -12,6 +12,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     [SerializeField] int FOV;
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTime;
+    [SerializeField] float alertDur;
 
     //[SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet;
@@ -25,6 +26,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     float roamTimer;
     float angleToPlayer;
     float stoppingDistOrig;
+    float alertedTimer;
 
     //status effects
     private Coroutine poisoned;
@@ -40,6 +42,14 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     }
 
     public guardState state = guardState.Idle;
+
+    public enum guardType
+    {
+        Standard,
+        Handler,
+        Elite,
+        EliteHandler
+    }
 
     //Range in which guard can see player to shoot
     bool playerInSightRange;
@@ -67,6 +77,25 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     {
         shootTimer += Time.deltaTime;
 
+        switch(state)
+        {
+            case guardState.Idle:
+                IdleBehavior();
+                break;
+
+            case guardState.Alerted:
+                AlertedBehavior();
+                break;
+
+            case guardState.Chase:
+                ChaseBehavior();
+                break;
+        }
+     
+    }
+
+    void IdleBehavior()
+    {
         if (agent.remainingDistance < 0.01f)
             roamTimer += Time.deltaTime;
 
@@ -74,9 +103,13 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
         {
             checkRoam();
         }
-        else if(!playerInSightRange)
+        else if (!playerInSightRange)
         {
             checkRoam();
+        }
+        else
+        {
+            state = guardState.Chase;
         }
     }
 
@@ -98,6 +131,14 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
         NavMeshHit hit;
         NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
         agent.SetDestination(hit.position);
+    }
+
+    void ChaseBehavior()
+    {
+        if(!canSeePlayer())
+        {
+            state = guardState.Alerted;
+        }
     }
     bool canSeePlayer()
     {
@@ -200,7 +241,31 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
             Quaternion rot = Quaternion.LookRotation(playerDir);
             transform.rotation = rot;
         }
+        //moves guard toward anchor
+        agent.stoppingDistance = 0;
+        agent.SetDestination(alertTargetPos);
+        //sets state to alerted
         state = guardState.Alerted;
+        alertedTimer = 0;
+    }
+
+    void AlertedBehavior()
+    {
+        if(canSeePlayer())
+        {
+            state = guardState.Chase;
+            return;
+        }
+        if(agent.remainingDistance <= 0.1f)
+        {
+            alertedTimer += Time.deltaTime;
+
+            if(alertedTimer >= alertDur)
+            {
+                state = guardState.Idle;
+            }
+        }
+        
     }
     public void poison(int damage, float rate, float duration)
     {
