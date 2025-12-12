@@ -371,6 +371,14 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
         yield return new WaitForSeconds(duration);
 
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            tazed = true;
+            speed = 0;
+        }
         tazed = false;
         speed = speedOrig;
     }
@@ -402,11 +410,49 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
             gunListPos++; //increment
             changeGun(); //changegun
         }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0) //if smaller than zero and within list
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0) //if smaller than zero and within list
         {
             gunListPos--; //decrement
             changeGun(); //changegun
         }
     }
 
+    // UpgradeShop stuff - JC
+    public void applyUpgrade(upgradeData upgrade)
+    {
+        switch (upgrade.type)
+        {
+            // Player upgrades
+            case upgradeType.playerMaxHP:
+                HPOrig += Mathf.RoundToInt(upgrade.amount);
+                HP = HPOrig;
+                updatePlayerUI();
+                break;
+            case upgradeType.playerMoveSpeed:
+                speedOrig += Mathf.RoundToInt(upgrade.amount);
+                if (speedOrig < 1)
+                    speedOrig = 1;
+                speed = speedOrig;
+                break;
+            case upgradeType.playerJumpMax:
+                jumpMax += Mathf.RoundToInt(upgrade.amount);
+                if (jumpMax < 1)
+                    jumpMax = 1;
+                break;
+            // Gun upgrades
+            case upgradeType.gunDamage:
+                shootDamage = Mathf.RoundToInt(shootDamage * (1f + upgrade.amount));
+                break;
+            case upgradeType.gunFireRate:
+                shootRate *= (1f - upgrade.amount);
+                if (shootRate < 0.05f)
+                    shootRate = 0.05f;
+                break;
+            case upgradeType.gunRange:
+                shootDist += Mathf.RoundToInt(upgrade.amount);
+                if (shootDist < 1)
+                    shootDist = 1;
+                break;
+        }
+    }
 }
