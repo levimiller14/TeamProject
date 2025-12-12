@@ -12,15 +12,20 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
+    [SerializeField] int roamDist;
+    [SerializeField] int roamPauseTime;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
+    [SerializeField] GameObject dropItem;
 
     Color colorOrig;
 
     float shootTimer;
+    float roamTimer;
     float angleToPlayer;
+    float stoppingDistOrig;
 
     //States for the Guards to switch through as we need them
     public enum guardHandlerState
@@ -38,10 +43,14 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
 
     //Range in which guard can see player to shoot
     bool playerInSightRange;
+    //Returning to StartPos
+    bool isReturningToStrPos;
 
     Vector3 playerDir;
     Vector3 alertTargetPos;
     Vector3 alertLookDir;
+    Vector3 startingPos;
+
     Transform playerTransform;
 
     void Start()
@@ -56,12 +65,37 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
     {
         shootTimer += Time.deltaTime;
 
-        if (playerInSightRange && canSeePlayer())
-        {
+        if (agent.remainingDistance < 0.01f)
+            roamTimer += Time.deltaTime;
 
+        if (playerInSightRange && !canSeePlayer())
+        {
+            checkRoam();
+        }
+        else if (!playerInSightRange)
+        {
+            checkRoam();  
         }
     }
+    void checkRoam()
+    {
+        if (agent.remainingDistance < 0.01f && roamTimer >= roamPauseTime)
+        {
+            roam();
+        }
+    }
+    void roam()
+    {
+            roamTimer = 0;
+            agent.stoppingDistance = 0;
 
+            Vector3 ranPos = Random.insideUnitSphere * roamDist;
+            ranPos += startingPos;
+
+            NavMeshHit hit;
+            NavMesh.SamplePosition(ranPos, out hit, roamDist, 1);
+            agent.SetDestination(hit.position);
+    }
     bool canSeePlayer()
     {
         if (playerTransform == null) return false;
@@ -156,7 +190,7 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
     }
-    public void onAlert(Vector3 alertPosition, Vector3 alertForward)
+    public void onBarkAlert(Vector3 alertPosition, Vector3 alertForward)
     {
         alertTargetPos = alertPosition;
 

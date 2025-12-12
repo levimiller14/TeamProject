@@ -13,12 +13,12 @@ public class alertSystem : MonoBehaviour
             enemyAI_Guard guard = hits[i].GetComponent<enemyAI_Guard>();
             if(guard != null)
             {
-                guard.onAlert(position, forward);
+                guard.onBarkAlert(position, forward);
             }
             enemyAI_Guard_Handler handler = hits[i].GetComponent<enemyAI_Guard_Handler>();
             if (handler != null)
             {
-                handler.onAlert(position, forward);
+                handler.onBarkAlert(position, forward);
             }
         }
     }
