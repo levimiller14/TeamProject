@@ -15,11 +15,6 @@ public class alertSystem : MonoBehaviour
             {
                 guard.onBarkAlert(position, forward);
             }
-            enemyAI_Guard_Handler handler = hits[i].GetComponent<enemyAI_Guard_Handler>();
-            if (handler != null)
-            {
-                handler.onBarkAlert(position, forward);
-            }
         }
     }
 }

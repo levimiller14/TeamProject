@@ -161,7 +161,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
-        public void onGuardHit(Vector3 alertPosition)
+    public void onGuardHit(Vector3 alertPosition)
     {
         agent.SetDestination(alertPosition);
     }
@@ -179,7 +179,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            //gameManager.instance.UpdateGameGoal(-1);
+            gameManager.instance.UpdateGameGoal(-1);
 
             // incrementing enemies defeated in stats
             if (statTracker.instance != null)

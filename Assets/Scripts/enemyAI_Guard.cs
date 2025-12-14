@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
+using static enemyAI_Guard_Handler;
 
 public class enemyAI_Guard : MonoBehaviour, IDamage
 {
@@ -13,6 +14,11 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTime;
     [SerializeField] float alertDur;
+    [SerializeField] guardType type;
+
+    //Dogs for use for Hanndler 1 and 2 (2 is for elites)
+    [SerializeField] enemyAI_Dog dog;
+    [SerializeField] enemyAI_Dog dog2;
 
     //[SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet;
@@ -45,11 +51,15 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
 
     public enum guardType
     {
-        Standard,
+        Guard,
         Handler,
-        Elite,
+        EliteGuard,
         EliteHandler
     }
+
+    //Is guard Handler or Guard?
+    bool isHandler => type == guardType.Handler || type == guardType.EliteHandler;
+    bool isElite => type == guardType.EliteGuard || type == guardType.EliteHandler;
 
     //Range in which guard can see player to shoot
     bool playerInSightRange;
@@ -205,6 +215,20 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
         if (playerTransform != null)
             agent.SetDestination(playerTransform.position);
 
+        //if Guard is Handler, Dogs will rush player on Guard Hit
+        if(isHandler)
+        {
+            if(dog != null)
+            {
+                dog.onGuardHit(playerTransform.position);
+            }
+            //If guard is ELITE Handler, Second dog will rush player on hit.
+            if(isElite && dog2 != null)
+            {
+                dog2.onGuardHit(playerTransform.position);
+            }
+        }
+
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
@@ -231,6 +255,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
     }
     public void onBarkAlert(Vector3 alertPosition, Vector3 alertForward)
     {
+        //if(isHandler || isElite && )
         alertTargetPos = alertPosition;
 
         Vector3 playerDir = alertForward;
@@ -247,6 +272,11 @@ public class enemyAI_Guard : MonoBehaviour, IDamage
         //sets state to alerted
         state = guardState.Alerted;
         alertedTimer = 0;
+    }
+    public void onDogHit(Vector3 alertPosition)
+    {
+        if(dog != null || dog != null && dog2 != null)
+            agent.SetDestination(alertPosition);
     }
 
     void AlertedBehavior()
