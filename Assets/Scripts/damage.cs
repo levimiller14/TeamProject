@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 
 public class damage : MonoBehaviour
 {
-    enum damageType {moving, stationary, DOT, homing, poison, frost, shock}
+    enum damageType {moving, stationary, DOT, homing, poison, frost, shock, laser}
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;
 
@@ -17,6 +17,7 @@ public class damage : MonoBehaviour
     [Range(1, 0.1f)] [SerializeField] float playerSlowedSpeed;
 
     bool isDamaging;
+    float laserTimer;
     public float slowedSpeed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,6 +41,10 @@ public class damage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(type == damageType.laser)
+        {
+            laserTimer = Time.deltaTime;
+        }
         if(type == damageType.homing)
         {
             rb.linearVelocity = (gameManager.instance.player.transform.position - transform.position).normalized * speed * Time.deltaTime * 35;
@@ -90,6 +95,11 @@ public class damage : MonoBehaviour
             {
                 StartCoroutine(poisonOther(dmg));
             }    
+            if(type == damageType.laser && !isDamaging && laserTimer >= damageRate)
+            {
+                laserTimer = 0;
+                damageOther(dmg);
+            }
         }
     }
 
