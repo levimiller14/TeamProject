@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class customTriggerObject : MonoBehaviour
@@ -17,6 +18,11 @@ public class customTriggerObject : MonoBehaviour
 
         if (other.CompareTag("Player") && movable != null)
         {
+            if(!transform.CompareTag("PlatformRecallButton") && other.gameObject.transform.parent != transform.parent)
+            {
+                other.gameObject.transform.parent = transform.parent;
+            }
+
             if(!movable.GetIsMoving() && movable.GetDelayTimer() >= movable.GetDelayAmount())
             {
                 connectedObject.GetComponent<movableObject>().SetIsMoving(true);
@@ -24,8 +30,11 @@ public class customTriggerObject : MonoBehaviour
         }
     }
 
-    //public void SetConnectedObject(GameObject obj)
-    //{
-    //    connectedObject = obj;
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && other.gameObject.transform.parent != null)
+        {
+            other.gameObject.transform.parent = null;
+        }
+    }
 }
