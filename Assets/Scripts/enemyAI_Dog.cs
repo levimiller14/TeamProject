@@ -298,10 +298,10 @@ public class enemyAI_Dog : MonoBehaviour, IDamage, IHeal
         poisoned = null;
     }
 
-    // tazed effect
-    public void taze(int damage, float duration)
+    // Tazed effect
+    public void taze(/*int damage,*/ float duration)
     {
-        takeDamage(damage);
+        //takeDamage(damage);
         if (!tazed)
         {
             StartCoroutine(StunRoutine(duration));

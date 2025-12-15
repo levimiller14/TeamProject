@@ -17,6 +17,10 @@ public class enemyAI_Healer : MonoBehaviour, IDamage
     [SerializeField] float retreatDistance = 8f;
     [SerializeField] float moveSpeed = 3f;
 
+    // status effects
+    private Coroutine poisoned;
+    private bool tazed;
+
     Transform player;
     float lockedY;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -108,14 +112,52 @@ public class enemyAI_Healer : MonoBehaviour, IDamage
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, healRadius);
     }
-
     public void poison(int damage, float rate, float duration)
     {
-        return;
+        if (poisoned != null)
+        {
+            StopCoroutine(poisoned); // cuts off current poison, effective duration reset
+        }
+        poisoned = StartCoroutine(PoisonRoutine(damage, rate, duration));
     }
 
-    public void taze(int damage, float duration)
+    private IEnumerator PoisonRoutine(int damage, float rate, float duration)
     {
-        return;
+        float timer = 0f;
+        WaitForSeconds wait = new WaitForSeconds(rate);
+
+        while (timer < duration)
+        {
+            takeDamage(damage);
+            timer += rate;
+            yield return wait;
+        }
+        poisoned = null;
+    }
+
+    // Tazed effect
+    public void taze(/*int damage,*/ float duration)
+    {
+        //takeDamage(damage);
+        if (!tazed)
+        {
+            StartCoroutine(StunRoutine(duration));
+        }
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        // TODO: UNCOMMENT BELOW ONCE NAV AGENT IS ADDED
+        tazed = true;
+        //if (agent != null)
+        //{
+        //    agent.isStopped = true;
+        //}
+        yield return new WaitForSeconds(duration);
+        tazed = false;
+        //if (agent != null)
+        //{
+        //    agent.isStopped = false;
+        //}
     }
 }

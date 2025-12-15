@@ -208,9 +208,9 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     }
 
     // Tazed effect
-    public void taze(int damage, float duration)
+    public void taze(/*int damage,*/ float duration)
     {
-        takeDamage(damage);
+        //takeDamage(damage);
         if (!tazed)
         {
             StartCoroutine(StunRoutine(duration));

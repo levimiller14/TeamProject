@@ -61,6 +61,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
     Camera mainCam;
 
+    // launch pad control member - Aaron k
+    public Vector3 launchVelocity;
+
     void Start()
     {
         HPOrig = HP;
@@ -85,6 +88,19 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
             movement();
         }
         sprint();
+
+        // launch pad mechanic - Aaron K
+        if(launchVelocity != Vector3.zero || !controller.isGrounded)
+        {
+            launchVelocity.y += gravity * Time.deltaTime;
+        }
+
+        //controller.Move(launchVelocity * Time.deltaTime);
+
+        if (controller.isGrounded && launchVelocity.y < 0)
+        {
+            launchVelocity = Vector3.zero;
+        }
     }
 
     void movement()
@@ -226,7 +242,10 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
     private void OnTriggerExit(Collider other)
     {
-        speed = speedOrig;
+        if (other.CompareTag("FrostTrap"))
+        {
+            speed = speedOrig;
+        }
     }
 
     void shoot()
@@ -333,8 +352,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         grappleJumpedThisFrame = true;
     }
 
-    
-    // poison routines
+    // Launch Pad functionality - per no rigidbody - Aaron K
+    public void Launch(Vector3 direction, float force)
+    {
+        launchVelocity = direction * force;
+    }
+        
+    // poison routines- Aaron K
     public void poison(int damage, float rate, float duration)
     {
         if (poisoned != null)
@@ -360,7 +384,8 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         poisoned = null;
     }
 
-    public void taze(int damage, float duration)
+    // Tazed Effect
+    public void taze(/*int damage,*/ float duration)
     {
         StartCoroutine(TazeRoutine(duration));
     }

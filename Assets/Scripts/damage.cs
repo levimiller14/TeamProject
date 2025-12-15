@@ -61,6 +61,10 @@ public class damage : MonoBehaviour
         if(dmg != null && type != damageType.DOT)
         {
             dmg.takeDamage(damageAmount);
+            if (type == damageType.shock)
+            {
+                dmg.taze(/*damageAmount,*/ duration);
+            }
         }
 
         if(type == damageType.homing || type == damageType.moving)
@@ -72,10 +76,7 @@ public class damage : MonoBehaviour
             dmg.takeDamage(damageAmount);
         }
 
-        if(type == damageType.shock)
-        {
-            dmg.taze(damageAmount, duration);
-        }
+        
     }
 
     private void OnTriggerStay(Collider other) // DOT and Poison

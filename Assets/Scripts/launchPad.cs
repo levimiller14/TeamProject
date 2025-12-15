@@ -1,16 +1,19 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class launchPad : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    [SerializeField] float force;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        playerController player = other.GetComponent<playerController>();
+
+        if (player != null)
+        {
+            player.Launch(transform.forward, force);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

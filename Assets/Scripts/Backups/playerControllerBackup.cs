@@ -287,8 +287,18 @@ public class playerControllerBackup : MonoBehaviour, IDamage, IHeal
         }
         poisoned = null;
     }
-    public void taze(int damage, float duration)
+    // Tazed Effect
+    public void taze(/*int damage,*/ float duration)
     {
+        StartCoroutine(TazeRoutine(duration));
+    }
+
+    private IEnumerator TazeRoutine(float duration)
+    {
+        tazed = true;
+
+        yield return new WaitForSeconds(duration);
+
         float timer = 0f;
 
         while (timer < duration)
