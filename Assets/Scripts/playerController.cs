@@ -247,7 +247,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
             launchPad padScript = other.GetComponent<launchPad>();
             if (padScript != null)
             {
-                playerVel.y = padScript.force;
+                Vector3 launchVel = padScript.GetLaunchVelocity();
+                externalVelocity = new Vector3(launchVel.x, 0f, launchVel.z);
+                playerVel.y = launchVel.y;
             }
         }
     }
