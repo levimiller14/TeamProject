@@ -606,7 +606,7 @@ GameObject:
   - component: {fileID: 8783455123472154135}
   m_Layer: 7
   m_Name: Dog Handler
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -642,12 +642,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard_Handler
   model: {fileID: 6268937054921265771}
   agent: {fileID: 4188803168541586762}
+  dog: {fileID: 0}
   HP: 3
+  maxHP: 0
   faceTargetSpeed: 6
   FOV: 80
+  roamDist: 0
+  roamPauseTime: 0
+  alertDur: 0
   bullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
   shootRate: 0.5
   shootPos: {fileID: 3392860874586418139}
+  dropItem: {fileID: 0}
+  state: 0
 --- !u!195 &4188803168541586762
 NavMeshAgent:
   m_ObjectHideFlags: 0

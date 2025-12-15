@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using static enemyAI_Guard_Handler;
 
-public class enemyAI_Dog : MonoBehaviour, IDamage
+public class enemyAI_Dog : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
 
     [SerializeField] enemyAI_Guard_Handler doghandler;
     [SerializeField] int HP;
+    [SerializeField] int maxHP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
     [SerializeField] float alertRadius;
@@ -52,6 +53,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
 
     void Start()
     {
+        maxHP = HP;
         colorOrig = model.material.color;
         // difficulty mults
         if(difficultyManager.instance != null)
@@ -300,5 +302,29 @@ public class enemyAI_Dog : MonoBehaviour, IDamage
         {
             agent.isStopped = false;
         }
+    }
+
+    public void heal(int healAmount)
+    {
+        if (healAmount <= 0)
+            return;
+        if (HP <= 0)
+            return;
+
+        int origHP = HP;
+
+        HP = Mathf.Min(HP + healAmount, maxHP);
+
+        if (HP > origHP)
+        {
+            StartCoroutine(flashGreen());
+        }
+    }
+
+    IEnumerator flashGreen()
+    {
+        model.material.color = new Color(0.4f, 1f, 0.4f);
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = colorOrig;
     }
 }

@@ -2122,7 +2122,7 @@ GameObject:
   - component: {fileID: 8991943456451841461}
   m_Layer: 7
   m_Name: Dog
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2183,11 +2183,13 @@ MonoBehaviour:
   agent: {fileID: 441044843293906150}
   doghandler: {fileID: 0}
   HP: 2
+  maxHP: 0
   faceTargetSpeed: 5
   FOV: 90
   alertRadius: 5
   barkCooldown: 1
   forwardAnchor: {fileID: 5496527880835942608}
+  state: 0
 --- !u!195 &441044843293906150
 NavMeshAgent:
   m_ObjectHideFlags: 0

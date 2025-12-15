@@ -2,12 +2,13 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class enemyAI : MonoBehaviour, IDamage
+public class enemyAI : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
 
     [SerializeField] int HP;
+    [SerializeField] int maxHP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int FOV;
     [SerializeField] int roamDist;
@@ -38,6 +39,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
+        maxHP = HP;
         colorOrig = model.material.color;
         gameManager.instance.UpdateGameGoal(1);
         startingPos = transform.position;
@@ -222,4 +224,27 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
+    public void heal(int healAmount)
+    {
+        if (healAmount <= 0)
+            return;
+        if (HP <= 0)
+            return;
+
+        int origHP = HP;
+
+        HP = Mathf.Min(HP + healAmount, maxHP);
+
+        if (HP > origHP)
+        {
+            StartCoroutine(flashGreen());
+        }
+    }
+    
+    IEnumerator flashGreen()
+    {
+        model.material.color = new Color(0.4f, 1f, 0.4f);
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = colorOrig;
+    }
 }

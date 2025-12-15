@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GunDamageUpgrade
   m_EditorClassIdentifier: Assembly-CSharp::upgradeData
   upgradeName: Damage Upgrade
-  description: Increases your Guns damage by 10
+  description: multiplys your Guns damage by 2
   cost: 20
   type: 3
-  amount: 10
+  amount: 2
   icon: {fileID: 0}

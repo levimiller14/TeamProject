@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 5248415651474435077}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -770,12 +770,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI
   model: {fileID: 1641402607618490183}
   agent: {fileID: 6770019176000849088}
-  HP: 3
+  HP: 4
+  maxHP: 4
   faceTargetSpeed: 5
   FOV: 90
+  roamDist: 75
+  roamPauseTime: 3
   bullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
   shootRate: 0.5
   shootPos: {fileID: 9079118974599687205}
+  dropItem: {fileID: 0}
 --- !u!195 &6770019176000849088
 NavMeshAgent:
   m_ObjectHideFlags: 0
