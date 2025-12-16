@@ -33,6 +33,9 @@ public class PixelationRenderFeature : ScriptableRendererFeature
         if (renderingData.cameraData.cameraType == CameraType.Preview)
             return;
 
+        if (!Application.isPlaying)
+            return;
+
         renderer.EnqueuePass(pixelationPass);
     }
 
