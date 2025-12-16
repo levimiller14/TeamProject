@@ -8,8 +8,9 @@ public class enemyAI_Dog : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
-    [SerializeField] enemyAI_Guard_Handler doghandler;
+    [SerializeField] enemyAI_Guard doghandler;
     [SerializeField] int HP;
     [SerializeField] int maxHP;
     [SerializeField] int faceTargetSpeed;
@@ -19,6 +20,11 @@ public class enemyAI_Dog : MonoBehaviour, IDamage, IHeal
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTime;
     [SerializeField] float alertDur;
+
+    //Speeds for changing animation for Dog
+    [SerializeField] float roamSpeed;
+    [SerializeField] float chaseSpeed;
+    [SerializeField] float animTranSpeed;
 
     Color colorOrig;
 
@@ -83,6 +89,9 @@ public class enemyAI_Dog : MonoBehaviour, IDamage, IHeal
 
     void Update()
     {
+        applyStateMovement();
+        locomotionAnim();
+
         switch (state)
         {
             case dogState.Idle:
@@ -95,6 +104,32 @@ public class enemyAI_Dog : MonoBehaviour, IDamage, IHeal
 
             case dogState.Chase:
                 ChaseBehavior();
+                break;
+        }
+    }
+
+    void locomotionAnim()
+    {
+        float agentCurSpeed = agent.velocity.magnitude / agent.speed;
+        float agentSpeedAnim = anim.GetFloat("Speed");
+        anim.SetFloat("Speed", Mathf.Lerp(agentSpeedAnim, agentCurSpeed, Time.deltaTime * animTranSpeed));
+    }
+
+    void applyStateMovement()
+    {
+        switch(state)
+        {
+            case dogState.Idle:
+                agent.speed = roamSpeed;
+                break;
+
+            case dogState.Alerted:
+
+                agent.speed = roamSpeed;
+                break;
+
+            case dogState.Chase:
+                agent.speed = chaseSpeed;
                 break;
         }
     }
@@ -239,6 +274,7 @@ public class enemyAI_Dog : MonoBehaviour, IDamage, IHeal
 
     void bark()
     {
+        anim.SetTrigger("Bark");
         if (playerTransform == null) return;
 
         Vector3 pDir = playerTransform.position;

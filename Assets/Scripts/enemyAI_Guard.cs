@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static enemyAI_Dog;
 using static enemyAI_Guard_Handler;
 
 public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
+    [SerializeField] int animTranSpeed;
     [SerializeField] int HP;
     [SerializeField] int maxHP;
     [SerializeField] int faceTargetSpeed;
@@ -16,6 +19,9 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     [SerializeField] int roamPauseTime;
     [SerializeField] float alertDur;
     [SerializeField] guardType type;
+
+    [SerializeField] float roamSpeed;
+    [SerializeField] float chaseSpeed;
 
     //Dogs for use for Hanndler 1 and 2 (2 is for elites)
     [SerializeField] enemyAI_Dog dog;
@@ -95,6 +101,8 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 
     void Update()
     {
+        locomotionAnim();
+
         shootTimer += Time.deltaTime;
 
         switch(state)
@@ -113,7 +121,31 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
         }
      
     }
+    void locomotionAnim()
+    {
+        float agentSpeedCur = agent.velocity.magnitude / agent.speed;
+        float agentSpeedAnim = anim.GetFloat("Speed");
 
+        anim.SetFloat("Speed", Mathf.Lerp(agentSpeedAnim, agentSpeedCur, Time.deltaTime * animTranSpeed));
+    }
+    void applyStateMovement()
+    {
+        switch (state)
+        {
+            case guardState.Idle:
+                agent.speed = roamSpeed;
+                break;
+
+            case guardState.Alerted:
+
+                agent.speed = roamSpeed;
+                break;
+
+            case guardState.Chase:
+                agent.speed = chaseSpeed;
+                break;
+        }
+    }
     void IdleBehavior()
     {
         if (agent.remainingDistance < 0.01f)
@@ -215,6 +247,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     {
         if (!tazed)
         {
+            anim.SetTrigger("Shoot");
             shootTimer = 0;
 
             // Levi addition damage multiplier
