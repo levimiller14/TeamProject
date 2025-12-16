@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4971481113342446873}
-  - component: {fileID: 4581640948599637731}
+  - component: {fileID: 7707294789715266589}
   - component: {fileID: 4079314625979702981}
   - component: {fileID: 2126475170917913067}
   - component: {fileID: 2240961216986902026}
@@ -35,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4581640948599637731
+--- !u!114 &7707294789715266589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,9 +44,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6552089930694962740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f3ec185d7f5db41bf490deb12f2f64, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a795b32a836b25468f66c9151984eba, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::customTriggerObject
+  m_EditorClassIdentifier: Assembly-CSharp::platformRecallButton
   connectedObject: {fileID: 0}
 --- !u!33 &4079314625979702981
 MeshFilter:

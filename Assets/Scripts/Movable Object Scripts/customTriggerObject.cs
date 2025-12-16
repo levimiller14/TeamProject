@@ -9,25 +9,29 @@ public class customTriggerObject : MonoBehaviour
 
     private void Start()
     {
-        
+        movable = connectedObject.GetComponent<movableObject>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        movable = connectedObject.GetComponent<movableObject>();
-
-        if (other.CompareTag("Player") && movable != null)
+        if (other.CompareTag("Player"))
         {
-            if(!transform.CompareTag("PlatformRecallButton") && other.gameObject.transform.parent != transform.parent)
+            if(other.gameObject.transform.parent != transform.parent)
             {
                 other.gameObject.transform.parent = transform.parent;
-            }
+            }  
+        }
+    }
 
-            if(!movable.GetIsMoving() && movable.GetDelayTimer() >= movable.GetDelayAmount())
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Player") && movable != null)
+        {
+            if (!movable.GetIsMoving() && movable.GetDelayTimer() >= movable.GetDelayAmount())
             {
                 connectedObject.GetComponent<movableObject>().SetIsMoving(true);
             }
-        }
+        }   
     }
 
     private void OnTriggerExit(Collider other)

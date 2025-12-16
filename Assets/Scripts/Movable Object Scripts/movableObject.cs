@@ -144,4 +144,29 @@ public class movableObject : MonoBehaviour
     {
         return delayAmount;
     }
+
+    public Vector3 GetPlatformActivePosition()
+    {
+        return objectToMove.transform.position;
+    }
+
+    public Vector3 GetPlatformFirstPosition()
+    {
+        return firstPosition;
+    }
+
+    public Vector3 GetPlatformSecondPosition()
+    {
+        return secondPosition.position;
+    }
+
+    public float GetPlatformPathLength()
+    {
+        return Vector3.Distance(firstPosition, secondPosition.position);
+    }
+
+    public bool GetAtOppositeEnd()
+    {
+        return atOppositeEnd;
+    }
 }

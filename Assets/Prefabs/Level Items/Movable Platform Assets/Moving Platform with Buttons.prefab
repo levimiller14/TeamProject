@@ -90,6 +90,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Original Side Recall Button
       objectReference: {fileID: 0}
+    - target: {fileID: 7707294789715266589, guid: fb898ff7c4f8c0d46b831131e20b6c54, type: 3}
+      propertyPath: connectedObject
+      value: 
+      objectReference: {fileID: 1590802127925131372}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -156,6 +160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Opposite Side Recall Button
       objectReference: {fileID: 0}
+    - target: {fileID: 7707294789715266589, guid: fb898ff7c4f8c0d46b831131e20b6c54, type: 3}
+      propertyPath: connectedObject
+      value: 
+      objectReference: {fileID: 1590802127925131372}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
