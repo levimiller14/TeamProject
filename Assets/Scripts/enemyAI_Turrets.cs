@@ -88,7 +88,10 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 
     void IdleBehavior()
     {
-
+        if (playerInRange && canSeePlayer())
+        {
+            facePlayer();
+        }
     }
 
     void AggroBehavior()
@@ -183,6 +186,7 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        turretState state = turretState.Aggro;
         isAggro = true;
 
         if (HP <= 0)
