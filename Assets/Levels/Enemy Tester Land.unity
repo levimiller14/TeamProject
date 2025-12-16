@@ -1752,7 +1752,7 @@ MonoBehaviour:
   model: {fileID: 873077259}
   agent: {fileID: 1489135501}
   anim: {fileID: 1489135505}
-  animTranSpeed: 0
+  animTranSpeed: 2
   HP: 3
   maxHP: 0
   faceTargetSpeed: 6
@@ -1761,6 +1761,8 @@ MonoBehaviour:
   roamPauseTime: 3
   alertDur: 2
   type: 1
+  roamSpeed: 2
+  chaseSpeed: 3
   dog: {fileID: 370511206}
   dog2: {fileID: 0}
   bullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
@@ -2849,8 +2851,20 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6099605865421929188, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
+      propertyPath: roamSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099605865421929188, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
       propertyPath: turnSpeed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099605865421929188, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
+      propertyPath: chaseSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099605865421929188, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
+      propertyPath: animTranSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6099605865421929188, guid: b0122e84be3966e4b86d869a78e4d2fc, type: 3}
       propertyPath: roamPauseTime

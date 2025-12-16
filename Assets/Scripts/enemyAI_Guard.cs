@@ -101,6 +101,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 
     void Update()
     {
+        applyStateMovement();
         locomotionAnim();
 
         shootTimer += Time.deltaTime;
@@ -216,7 +217,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
                 {
                     shoot();
                 }
-
+                agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }
         }
@@ -249,19 +250,23 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
         {
             anim.SetTrigger("Shoot");
             shootTimer = 0;
-
-            // Levi addition damage multiplier
-            GameObject bulletObj = Instantiate(bullet, shootPos.position, transform.rotation);
-
-            // appply dmg mult
-            damage bulletDmg = bulletObj.GetComponent<damage>();
-            
-            if(bulletDmg != null && difficultyManager.instance != null)
-            {
-                bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
-            }
         }
     }
+    
+    public void createBullet()
+    {
+        // Levi addition damage multiplier
+        GameObject bulletObj = Instantiate(bullet, shootPos.position, transform.rotation);
+
+        // appply dmg mult
+        damage bulletDmg = bulletObj.GetComponent<damage>();
+
+        if (bulletDmg != null && difficultyManager.instance != null)
+        {
+            bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+        }
+    }
+
     public void takeDamage(int amount)
     {
         HP -= amount;

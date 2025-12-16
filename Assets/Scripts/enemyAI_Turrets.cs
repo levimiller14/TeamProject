@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
+using static enemyAI_Guard;
 
 public class enemyAI_Turrets : MonoBehaviour, IDamage
 {
@@ -29,6 +30,14 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         Shock,
         Poison
     }
+
+    public enum turretState
+    {
+        Idle,
+        Aggro
+    }
+
+    public turretState state = turretState.Idle;
 
     Color colorOrig;
     Color colorOrigHead;
@@ -65,6 +74,25 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     {
         fireTimer += Time.deltaTime;
 
+        switch(state)
+        {
+            case turretState.Idle:
+                IdleBehavior();
+                break;
+
+            case turretState.Aggro:
+                AggroBehavior();
+                break;
+        }
+    }
+
+    void IdleBehavior()
+    {
+
+    }
+
+    void AggroBehavior()
+    {
         if (isAggro == true)
         {
             facePlayer();
@@ -75,7 +103,6 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
             facePlayer();
         }
     }
-
     bool canSeePlayer()
     {
         if (playerTransform == null) return false;
