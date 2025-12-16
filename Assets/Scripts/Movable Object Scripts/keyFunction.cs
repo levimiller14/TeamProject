@@ -10,7 +10,7 @@ public class keyFunction : MonoBehaviour
 
     float rotateSpeed = 45; // Degrees per second.
 
-    Vector3 rotationAxis = Vector3.up;
+    Vector3 rotationAxis = Vector3.right;
 
     private void OnValidate()
     {

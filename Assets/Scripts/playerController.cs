@@ -61,6 +61,8 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
     Camera mainCam;
 
+    
+
     // launch pad control member - Aaron k
     //public Vector3 launchVelocity;
 
@@ -274,22 +276,22 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
         Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
 
-        RaycastHit hit;
-        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
-        {
+        //RaycastHit hit;
+        //if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
+        //{
 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null)
-            {
-                dmg.takeDamage(shootDamage);
+        //    IDamage dmg = hit.collider.GetComponent<IDamage>();
+        //    if (dmg != null)
+        //    {
+        //        dmg.takeDamage(shootDamage);
 
-                // stat tracking
-                if(statTracker.instance != null)
-                {
-                    statTracker.instance.IncrementShotsHit();
-                }
-            }
-        }
+        //        // stat tracking
+        //        if(statTracker.instance != null)
+        //        {
+        //            statTracker.instance.IncrementShotsHit();
+        //        }
+        //    }
+        //}
     }
 
     public void takeDamage(int amount)
