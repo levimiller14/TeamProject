@@ -788,17 +788,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a6bb2b601e69a84ba51230fcf3a7d7c, type: 3}
---- !u!114 &923673645 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1845839994028746194, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
-  m_PrefabInstance: {fileID: 689807404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d412f54d992a74db214caa030b9dfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard_Handler
 --- !u!1 &1007987509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1022,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 923673645}
+      objectReference: {fileID: 0}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog
@@ -1370,9 +1359,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3489543025217460222, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: moveSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489543025217460222, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: retreatDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7178554002277047642, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
       propertyPath: m_Name
       value: healerEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178554002277047642, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
       propertyPath: m_LocalPosition.x

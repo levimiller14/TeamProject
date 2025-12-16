@@ -11227,17 +11227,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
   m_PrefabInstance: {fileID: 1599345118}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &506517416 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1845839994028746194, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
-  m_PrefabInstance: {fileID: 231048666}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d412f54d992a74db214caa030b9dfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard_Handler
 --- !u!4 &506517417 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
@@ -12416,6 +12405,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f022d5255714381468852b3020a6d84c, type: 3}
+--- !u!195 &554155564 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1914998757735214098, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+  m_PrefabInstance: {fileID: 1006202477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &554406638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4984130324246851708, guid: 0a6bb2b601e69a84ba51230fcf3a7d7c, type: 3}
@@ -14686,17 +14680,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6916943422250843626, guid: 03d59ea4f76a0e84485bd610bd00a0ee, type: 3}
   m_PrefabInstance: {fileID: 1291043831}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &684363753 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1845839994028746194, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
-  m_PrefabInstance: {fileID: 1178264309}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d412f54d992a74db214caa030b9dfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard_Handler
 --- !u!1 &687163578
 GameObject:
   m_ObjectHideFlags: 0
@@ -16293,17 +16276,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760995371}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &766885559 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1845839994028746194, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
-  m_PrefabInstance: {fileID: 2098200468}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d412f54d992a74db214caa030b9dfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard_Handler
 --- !u!4 &766885560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
@@ -21267,6 +21239,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001939866}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1006202477
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3489543025217460222, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 554155564}
+    - target: {fileID: 3489543025217460222, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: model
+      value: 
+      objectReference: {fileID: 1145737898}
+    - target: {fileID: 7178554002277047642, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_Name
+      value: healerEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178554002277047642, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 199.57399
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.12574
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871506763024825581, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
 --- !u!1001 &1007106510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24082,6 +24123,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143853191}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!137 &1145737898 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4910628961522881891, guid: ea325b930cb8d6c438db81e162e2ddee, type: 3}
+  m_PrefabInstance: {fileID: 1006202477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1149820721
 GameObject:
   m_ObjectHideFlags: 0
@@ -24259,17 +24305,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
---- !u!114 &1154301975 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1845839994028746194, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
-  m_PrefabInstance: {fileID: 1154301974}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d412f54d992a74db214caa030b9dfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard_Handler
 --- !u!4 &1154301976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
@@ -33686,7 +33721,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 684363753}
+      objectReference: {fileID: 0}
     - target: {fileID: 2697344929843741728, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: playerSlowedSpeed
       value: 0.1
@@ -34494,7 +34529,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 506517416}
+      objectReference: {fileID: 0}
     - target: {fileID: 2697344929843741728, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: playerSlowedSpeed
       value: 0.1
@@ -38928,7 +38963,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 766885559}
+      objectReference: {fileID: 0}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog
@@ -39788,17 +39823,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2062507643}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1857257737 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1845839994028746194, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
-  m_PrefabInstance: {fileID: 1326099164}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d412f54d992a74db214caa030b9dfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard_Handler
 --- !u!4 &1857257738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
@@ -39815,7 +39839,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 1857257737}
+      objectReference: {fileID: 0}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog (1)
@@ -42532,7 +42556,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 1154301975}
+      objectReference: {fileID: 0}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog (4)
@@ -45767,3 +45791,4 @@ SceneRoots:
   - {fileID: 2065161865}
   - {fileID: 572334313}
   - {fileID: 1965758817}
+  - {fileID: 1006202477}
