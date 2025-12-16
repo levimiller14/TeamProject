@@ -1,9 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 
 public class enemyAI_Healer : MonoBehaviour, IDamage
 {
+    [SerializeField] Renderer model;
+    [SerializeField] NavMeshAgent agent;
+
     [Header("Stats")]
     [SerializeField] int maxHP = 30;
     int currentHP;
@@ -17,6 +21,8 @@ public class enemyAI_Healer : MonoBehaviour, IDamage
     [SerializeField] float retreatDistance = 8f;
     [SerializeField] float moveSpeed = 3f;
 
+    Color colorOrig;
+
     // status effects
     private Coroutine poisoned;
     private bool tazed;
@@ -27,6 +33,7 @@ public class enemyAI_Healer : MonoBehaviour, IDamage
     void Start()
     {
         currentHP = maxHP;
+        colorOrig = model.material.color;
         lockedY = transform.position.y;
 
         GameObject playerObj = GameObject.FindWithTag("Player");
@@ -100,6 +107,10 @@ public class enemyAI_Healer : MonoBehaviour, IDamage
         {
             die();
         }
+        else
+        {
+            StartCoroutine(flashRed());
+        }
     }
 
     void die()
@@ -159,5 +170,12 @@ public class enemyAI_Healer : MonoBehaviour, IDamage
         //{
         //    agent.isStopped = false;
         //}
+    }
+
+    IEnumerator flashRed()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = colorOrig;
     }
 }

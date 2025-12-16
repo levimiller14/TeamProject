@@ -30,6 +30,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     [SerializeField] GameObject playerBullet;
     [SerializeField] Transform playerShootPos;
 
+    MeshFilter gunMeshFilter;
+    MeshRenderer gunMeshRenderer;
+
     private wallRun wallRun;
     bool wasWallRunning;
 
@@ -73,7 +76,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         mainCam = Camera.main;
         grappleHook = GetComponent<GrapplingHook>();
         wallRun = GetComponent<wallRun>();
-        //launchVelocity = Vector3.zero;
+
+        if (gunModel != null)
+        {
+            gunMeshFilter = gunModel.GetComponent<MeshFilter>();
+            gunMeshRenderer = gunModel.GetComponent<MeshRenderer>();
+        }
+
         if(wallRun != null)
         {
             wallRun.controller = controller;
@@ -441,8 +450,12 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
 
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh; //xfer mesh filter on pickup
-        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial; //xfer mesh renderer (shader, material, etc) on pinkup
+        if (gunMeshFilter != null && gunMeshRenderer != null)
+        {
+            var newGunModel = gunList[gunListPos].gunModel;
+            gunMeshFilter.sharedMesh = newGunModel.GetComponent<MeshFilter>().sharedMesh;
+            gunMeshRenderer.sharedMaterial = newGunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        }
     }
 
     void selectGun()

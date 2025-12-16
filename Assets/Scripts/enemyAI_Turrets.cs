@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
+using static enemyAI_Guard;
 
 public class enemyAI_Turrets : MonoBehaviour, IDamage
 {
@@ -30,8 +31,19 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         Poison
     }
 
+    public enum turretState
+    {
+        Idle,
+        Aggro
+    }
+
+    public turretState state = turretState.Idle;
+
     Color colorOrig;
     Color colorOrigHead;
+    MaterialPropertyBlock propBlock;
+    MaterialPropertyBlock propBlockHead;
+    static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
     float fireTimer;
     float angleToPlayer;
@@ -48,16 +60,24 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 
     void Start()
     {
-        colorOrig = model.material.color;
-        colorOrigHead = modelHead.material.color;
+        propBlock = new MaterialPropertyBlock();
+        propBlockHead = new MaterialPropertyBlock();
 
-        // levi addition - difficulty HP modifier
+        model.GetPropertyBlock(propBlock);
+        colorOrig = propBlock.GetColor(colorId);
+        if (colorOrig == Color.clear)
+            colorOrig = model.sharedMaterial.color;
+
+        modelHead.GetPropertyBlock(propBlockHead);
+        colorOrigHead = propBlockHead.GetColor(colorId);
+        if (colorOrigHead == Color.clear)
+            colorOrigHead = modelHead.sharedMaterial.color;
+
         if(difficultyManager.instance != null)
         {
             HP = Mathf.RoundToInt(HP * difficultyManager.instance.GetHealthMultiplier());
         }
 
-        //gameManager.instance.UpdateGameGoal(1);
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
     }
@@ -65,6 +85,25 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     {
         fireTimer += Time.deltaTime;
 
+        switch(state)
+        {
+            case turretState.Idle:
+                IdleBehavior();
+                break;
+
+            case turretState.Aggro:
+                AggroBehavior();
+                break;
+        }
+    }
+
+    void IdleBehavior()
+    {
+
+    }
+
+    void AggroBehavior()
+    {
         if (isAggro == true)
         {
             facePlayer();
@@ -75,7 +114,6 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
             facePlayer();
         }
     }
-
     bool canSeePlayer()
     {
         if (playerTransform == null) return false;
@@ -178,11 +216,15 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 
     IEnumerator flashRed()
     {
-        model.material.color = Color.red;
-        modelHead.material.color = Color.red;
+        propBlock.SetColor(colorId, Color.red);
+        model.SetPropertyBlock(propBlock);
+        propBlockHead.SetColor(colorId, Color.red);
+        modelHead.SetPropertyBlock(propBlockHead);
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
-        modelHead.material.color = colorOrigHead;
+        propBlock.SetColor(colorId, colorOrig);
+        model.SetPropertyBlock(propBlock);
+        propBlockHead.SetColor(colorId, colorOrigHead);
+        modelHead.SetPropertyBlock(propBlockHead);
     }
     public void poison(int damage, float rate, float duration)
     {

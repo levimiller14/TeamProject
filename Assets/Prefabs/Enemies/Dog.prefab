@@ -2181,13 +2181,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Dog
   model: {fileID: 2448361995921709233}
   agent: {fileID: 441044843293906150}
+  anim: {fileID: 8044804467640479903}
   doghandler: {fileID: 0}
   HP: 2
-  maxHP: 0
+  maxHP: 5
   faceTargetSpeed: 5
   FOV: 90
   alertRadius: 5
-  barkCooldown: 1
+  barkCooldown: 5
+  roamDist: 4
+  roamPauseTime: 3
+  alertDur: 2
+  roamSpeed: 1.5
+  chaseSpeed: 3.5
+  animTranSpeed: 5
   forwardAnchor: {fileID: 5496527880835942608}
   state: 0
 --- !u!195 &441044843293906150

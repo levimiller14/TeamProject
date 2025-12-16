@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5784084986771524968}
   - component: {fileID: 7929999065151807480}
   - component: {fileID: 8837290818541034396}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet_Taze
   m_TagString: Untagged
   m_Icon: {fileID: 0}

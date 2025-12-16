@@ -24,6 +24,8 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage, IHeal
     [SerializeField] GameObject dropItem;
 
     Color colorOrig;
+    MaterialPropertyBlock propBlock;
+    static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
     float shootTimer;
     float roamTimer;
@@ -58,15 +60,17 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage, IHeal
     void Start()
     {
         maxHP = HP;
-        colorOrig = model.material.color;
+        propBlock = new MaterialPropertyBlock();
+        model.GetPropertyBlock(propBlock);
+        colorOrig = propBlock.GetColor(colorId);
+        if (colorOrig == Color.clear)
+            colorOrig = model.sharedMaterial.color;
 
-        // Levi change - apply difficulty HP modifier
         if(difficultyManager.instance != null)
         {
             HP = Mathf.RoundToInt(HP * difficultyManager.instance.GetHealthMultiplier());
         }
 
-        //gameManager.instance.UpdateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
         if (gameManager.instance.player != null)
@@ -238,9 +242,11 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage, IHeal
 
     IEnumerator flashRed()
     {
-        model.material.color = Color.red;
+        propBlock.SetColor(colorId, Color.red);
+        model.SetPropertyBlock(propBlock);
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        propBlock.SetColor(colorId, colorOrig);
+        model.SetPropertyBlock(propBlock);
     }
     public void onBarkAlert(Vector3 alertPosition, Vector3 alertForward)
     {
@@ -352,8 +358,10 @@ public class enemyAI_Guard_Handler : MonoBehaviour, IDamage, IHeal
 
     IEnumerator flashGreen()
     {
-        model.material.color = new Color(0.4f, 1f, 0.4f);
+        propBlock.SetColor(colorId, new Color(0.4f, 1f, 0.4f));
+        model.SetPropertyBlock(propBlock);
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        propBlock.SetColor(colorId, colorOrig);
+        model.SetPropertyBlock(propBlock);
     }
 }

@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static enemyAI_Dog;
 using static enemyAI_Guard_Handler;
 
 public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
+    [SerializeField] int animTranSpeed;
     [SerializeField] int HP;
     [SerializeField] int maxHP;
     [SerializeField] int faceTargetSpeed;
@@ -16,6 +19,9 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     [SerializeField] int roamPauseTime;
     [SerializeField] float alertDur;
     [SerializeField] guardType type;
+
+    [SerializeField] float roamSpeed;
+    [SerializeField] float chaseSpeed;
 
     //Dogs for use for Hanndler 1 and 2 (2 is for elites)
     [SerializeField] enemyAI_Dog dog;
@@ -28,6 +34,8 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     [SerializeField] GameObject dropItem;
 
     Color colorOrig;
+    MaterialPropertyBlock propBlock;
+    static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
     float shootTimer;
     float roamTimer;
@@ -60,6 +68,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 
     //Is guard Handler or Guard?
     bool isHandler => type == guardType.Handler || type == guardType.EliteHandler;
+    //Is guard elite or not??
     bool isElite => type == guardType.EliteGuard || type == guardType.EliteHandler;
 
     //Range in which guard can see player to shoot
@@ -76,15 +85,17 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     void Start()
     {
         maxHP = HP;
-        colorOrig = model.material.color;
+        propBlock = new MaterialPropertyBlock();
+        model.GetPropertyBlock(propBlock);
+        colorOrig = propBlock.GetColor(colorId);
+        if (colorOrig == Color.clear)
+            colorOrig = model.sharedMaterial.color;
 
-        // Levi addition
         if(difficultyManager.instance != null)
         {
             HP = Mathf.RoundToInt(HP * difficultyManager.instance.GetHealthMultiplier());
         }
 
-        //gameManager.instance.UpdateGameGoal(1);
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
@@ -94,6 +105,9 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 
     void Update()
     {
+        applyStateMovement();
+        locomotionAnim();
+
         shootTimer += Time.deltaTime;
 
         switch(state)
@@ -112,7 +126,31 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
         }
      
     }
+    void locomotionAnim()
+    {
+        float agentSpeedCur = agent.velocity.magnitude / agent.speed;
+        float agentSpeedAnim = anim.GetFloat("Speed");
 
+        anim.SetFloat("Speed", Mathf.Lerp(agentSpeedAnim, agentSpeedCur, Time.deltaTime * animTranSpeed));
+    }
+    void applyStateMovement()
+    {
+        switch (state)
+        {
+            case guardState.Idle:
+                agent.speed = roamSpeed;
+                break;
+
+            case guardState.Alerted:
+
+                agent.speed = roamSpeed;
+                break;
+
+            case guardState.Chase:
+                agent.speed = chaseSpeed;
+                break;
+        }
+    }
     void IdleBehavior()
     {
         if (agent.remainingDistance < 0.01f)
@@ -183,7 +221,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
                 {
                     shoot();
                 }
-
+                agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }
         }
@@ -214,20 +252,25 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     {
         if (!tazed)
         {
+            anim.SetTrigger("Shoot");
             shootTimer = 0;
-
-            // Levi addition damage multiplier
-            GameObject bulletObj = Instantiate(bullet, shootPos.position, transform.rotation);
-
-            // appply dmg mult
-            damage bulletDmg = bulletObj.GetComponent<damage>();
-            
-            if(bulletDmg != null && difficultyManager.instance != null)
-            {
-                bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
-            }
         }
     }
+    
+    public void createBullet()
+    {
+        // Levi addition damage multiplier
+        GameObject bulletObj = Instantiate(bullet, shootPos.position, transform.rotation);
+
+        // appply dmg mult
+        damage bulletDmg = bulletObj.GetComponent<damage>();
+
+        if (bulletDmg != null && difficultyManager.instance != null)
+        {
+            bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+        }
+    }
+
     public void takeDamage(int amount)
     {
         HP -= amount;
@@ -268,13 +311,32 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 
     IEnumerator flashRed()
     {
-        model.material.color = Color.red;
+        propBlock.SetColor(colorId, Color.red);
+        model.SetPropertyBlock(propBlock);
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        propBlock.SetColor(colorId, colorOrig);
+        model.SetPropertyBlock(propBlock);
     }
+
     public void onBarkAlert(Vector3 alertPosition, Vector3 alertForward)
     {
-        //if(isHandler || isElite && )
+        //if (difficultyManager.instance != null)
+        //{
+        //    if (difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Easy)
+        //    {
+        //        if (type != guardType.Handler)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //    if (difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Normal)
+        //    {
+        //        if (type == guardType.EliteHandler && type == guardType.EliteGuard)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //}
         alertTargetPos = alertPosition;
 
         Vector3 playerDir = alertForward;
@@ -383,9 +445,11 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 
     IEnumerator flashGreen()
     {
-        model.material.color = new Color(0.4f, 1f, 0.4f);
+        propBlock.SetColor(colorId, new Color(0.4f, 1f, 0.4f));
+        model.SetPropertyBlock(propBlock);
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        propBlock.SetColor(colorId, colorOrig);
+        model.SetPropertyBlock(propBlock);
     }
 }
 

@@ -20,6 +20,8 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
 
     [SerializeField] GameObject dropItem;
     Color colorOrig;
+    MaterialPropertyBlock propBlock;
+    static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
     float shootTimer;
     float roamTimer;
@@ -40,14 +42,17 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
     void Start()
     {
         maxHP = HP;
-        colorOrig = model.material.color;
-        //gameManager.instance.UpdateGameGoal(1);
+        propBlock = new MaterialPropertyBlock();
+        model.GetPropertyBlock(propBlock);
+        colorOrig = propBlock.GetColor(colorId);
+        if (colorOrig == Color.clear)
+            colorOrig = model.sharedMaterial.color;
+
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
         if (gameManager.instance.player != null)
             playerTransform = gameManager.instance.player.transform;
-
     }
 
     // Update is called once per frame
@@ -170,9 +175,11 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
 
     IEnumerator flashRed()
     {
-        model.material.color = Color.red;
+        propBlock.SetColor(colorId, Color.red);
+        model.SetPropertyBlock(propBlock);
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        propBlock.SetColor(colorId, colorOrig);
+        model.SetPropertyBlock(propBlock);
     }
 
     // poison routines
@@ -243,8 +250,10 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
     
     IEnumerator flashGreen()
     {
-        model.material.color = new Color(0.4f, 1f, 0.4f);
+        propBlock.SetColor(colorId, new Color(0.4f, 1f, 0.4f));
+        model.SetPropertyBlock(propBlock);
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        propBlock.SetColor(colorId, colorOrig);
+        model.SetPropertyBlock(propBlock);
     }
 }

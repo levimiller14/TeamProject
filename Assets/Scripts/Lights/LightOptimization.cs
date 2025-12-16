@@ -17,10 +17,12 @@ public class LightOptimization : MonoBehaviour
 
     public Light lightSource;
     private Transform player;
+    private LightShadows originalShadowMode;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         lightSource = GetComponent<Light>();
+        originalShadowMode = lightSource.shadows;
 
         GameObject playerObj = GameObject.FindGameObjectWithTag(playerTag);
         if (playerObj != null)
@@ -33,8 +35,6 @@ public class LightOptimization : MonoBehaviour
     IEnumerator DistanceCheckRoutine()
     {
         WaitForSeconds wait = new WaitForSeconds(0.25f);
-        float sqrFullQuality = fullQualityDistance * fullQualityDistance;
-        float sqrLowQuality = lowQualityDistance * lowQualityDistance;
         float sqrOff = offDistance * offDistance;
 
         while (true)
@@ -46,8 +46,9 @@ public class LightOptimization : MonoBehaviour
 
             Vector3 origin = player.position + Vector3.up * playerEyeHeight;
             Vector3 toLight = transform.position - origin;
-            float sqrDist = toLight.sqrMagnitude;  //(player.position - transform.position).sqrMagnitude;
+            float sqrDist = toLight.sqrMagnitude;
 
+            // beyond max distance - disable
             if (sqrDist > sqrOff)
             {
                 lightSource.enabled = false;
@@ -55,29 +56,12 @@ public class LightOptimization : MonoBehaviour
                 continue;
             }
 
+            // within range - check occlusion
             float dist = Mathf.Sqrt(sqrDist);
             Ray ray = new Ray(origin, toLight.normalized);
-            if(Physics.Raycast(ray, dist, obstacleMask, QueryTriggerInteraction.Ignore))
-            {
-                lightSource.enabled = false;
-                yield return wait;
-                continue;
-            }
+            bool occluded = Physics.Raycast(ray, dist, obstacleMask, QueryTriggerInteraction.Ignore);
 
-            if (sqrDist <= sqrFullQuality)
-            {
-                lightSource.enabled = true;
-                lightSource.shadows = LightShadows.Soft;
-            }
-            else if (sqrDist <= sqrLowQuality)
-            {
-                lightSource.enabled = true;
-                lightSource.shadows = LightShadows.None;
-            }
-            else if (sqrDist > sqrOff)
-            {
-                lightSource.enabled = false;
-            }
+            lightSource.enabled = !occluded;
 
             yield return wait;
         }

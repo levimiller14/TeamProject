@@ -33,6 +33,7 @@ public class crouchSlide : MonoBehaviour
     [SerializeField] bool autoCreateSparks = true;
     [SerializeField] Color sparkColor = new Color(1f, 0.6f, 0.2f, 1f);
     [SerializeField] Color sparkColorEnd = new Color(1f, 0.3f, 0f, 0f);
+    [SerializeField] Material sparkMaterial;
 
     bool isCrouching;
     bool isSliding;
@@ -154,10 +155,12 @@ public class crouchSlide : MonoBehaviour
 
     Material CreateSparkMaterial()
     {
-        Material mat = new Material(Shader.Find("Particles/Standard Unlit"));
-        if (mat.shader == null)
-            mat = new Material(Shader.Find("Legacy Shaders/Particles/Additive"));
+        // use serialized material if assigned to avoid Shader.Find stutter
+        if (sparkMaterial != null)
+            return sparkMaterial;
 
+        // fallback: use default particle material from renderer settings
+        Material mat = new Material(Shader.Find("Particles/Standard Unlit"));
         mat.SetColor("_Color", Color.white);
         mat.SetFloat("_Mode", 1);
         mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
