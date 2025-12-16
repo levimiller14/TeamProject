@@ -5701,6 +5701,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1030074207}
     m_Modifications:
+    - target: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+      propertyPath: dog
+      value: 
+      objectReference: {fileID: 1608442265}
     - target: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.36828
@@ -5754,6 +5758,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+--- !u!114 &231048667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+  m_PrefabInstance: {fileID: 231048666}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6393a5dcb3f377d44b48a76770669d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard
 --- !u!4 &231218539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 86753616750973805, guid: 5cf60d655d7d1b845b27f7d09a894138, type: 3}
@@ -24328,6 +24343,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1030074207}
     m_Modifications:
+    - target: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+      propertyPath: dog
+      value: 
+      objectReference: {fileID: 2013203472}
     - target: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26.03077
@@ -24381,6 +24400,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+--- !u!114 &1154301975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+  m_PrefabInstance: {fileID: 1154301974}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6393a5dcb3f377d44b48a76770669d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard
 --- !u!4 &1154301976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
@@ -25197,6 +25227,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1030074207}
     m_Modifications:
+    - target: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+      propertyPath: dog
+      value: 
+      objectReference: {fileID: 1577049277}
     - target: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.657349
@@ -25250,6 +25284,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+--- !u!114 &1178264310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+  m_PrefabInstance: {fileID: 1178264309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6393a5dcb3f377d44b48a76770669d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard
 --- !u!1 &1184155983
 GameObject:
   m_ObjectHideFlags: 0
@@ -28750,6 +28795,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1030074207}
     m_Modifications:
+    - target: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+      propertyPath: dog
+      value: 
+      objectReference: {fileID: 1858083212}
     - target: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 106.399506
@@ -28803,6 +28852,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+--- !u!114 &1326099165 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+  m_PrefabInstance: {fileID: 1326099164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6393a5dcb3f377d44b48a76770669d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard
 --- !u!4 &1330006540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 86753616750973805, guid: 5cf60d655d7d1b845b27f7d09a894138, type: 3}
@@ -33813,7 +33873,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1178264310}
     - target: {fileID: 2697344929843741728, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: playerSlowedSpeed
       value: 0.1
@@ -33871,6 +33931,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+--- !u!114 &1577049277 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+  m_PrefabInstance: {fileID: 1577049276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271603ace7468ce4383c659dffc2689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Dog
 --- !u!1 &1580054190
 GameObject:
   m_ObjectHideFlags: 0
@@ -34621,7 +34692,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 231048667}
     - target: {fileID: 2697344929843741728, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: playerSlowedSpeed
       value: 0.1
@@ -34679,6 +34750,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+--- !u!114 &1608442265 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+  m_PrefabInstance: {fileID: 1608442264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271603ace7468ce4383c659dffc2689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Dog
 --- !u!1001 &1610349758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39059,7 +39141,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2098200469}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog
@@ -39113,6 +39195,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+--- !u!114 &1823704510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+  m_PrefabInstance: {fileID: 1823704509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271603ace7468ce4383c659dffc2689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Dog
 --- !u!4 &1825485004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 86753616750973805, guid: 5cf60d655d7d1b845b27f7d09a894138, type: 3}
@@ -39935,7 +40028,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1326099165}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog (1)
@@ -39989,6 +40082,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+--- !u!114 &1858083212 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+  m_PrefabInstance: {fileID: 1858083211}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271603ace7468ce4383c659dffc2689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Dog
 --- !u!4 &1859970315 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 86753616750973805, guid: 5cf60d655d7d1b845b27f7d09a894138, type: 3}
@@ -42652,7 +42756,7 @@ PrefabInstance:
     - target: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: doghandler
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1154301975}
     - target: {fileID: 3186472578279087886, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
       propertyPath: m_Name
       value: Dog (4)
@@ -42706,6 +42810,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+--- !u!114 &2013203472 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704520960292086150, guid: 5ce94e9f554e032458f12f17e14e84a7, type: 3}
+  m_PrefabInstance: {fileID: 2013203471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271603ace7468ce4383c659dffc2689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Dog
 --- !u!1001 &2021991543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45042,6 +45157,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1030074207}
     m_Modifications:
+    - target: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+      propertyPath: dog
+      value: 
+      objectReference: {fileID: 1823704510}
     - target: {fileID: 4621769367970181725, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 104.04428
@@ -45095,6 +45214,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+--- !u!114 &2098200469 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1745217607860516468, guid: f70bb559ed6955a41a7f7d6e5486aa55, type: 3}
+  m_PrefabInstance: {fileID: 2098200468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6393a5dcb3f377d44b48a76770669d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Guard
 --- !u!1001 &2101407226
 PrefabInstance:
   m_ObjectHideFlags: 0
