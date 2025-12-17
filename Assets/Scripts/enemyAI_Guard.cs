@@ -34,6 +34,7 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     [SerializeField] GameObject dropItem;
 
     Color colorOrig;
+
     MaterialPropertyBlock propBlock;
     static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
@@ -320,39 +321,39 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
 
     public void onBarkAlert(Vector3 alertPosition, Vector3 alertForward)
     {
-        //if (difficultyManager.instance != null)
-        //{
-        //    if (difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Easy)
-        //    {
-        //        if (type != guardType.Handler)
-        //        {
-        //            return;
-        //        }
-        //    }
-        //    if (difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Normal)
-        //    {
-        //        if (type == guardType.EliteHandler && type == guardType.EliteGuard)
-        //        {
-        //            return;
-        //        }
-        //    }
-        //}
-        alertTargetPos = alertPosition;
-
-        Vector3 playerDir = alertForward;
-        playerDir.y = 0;
-
-        if (playerDir.sqrMagnitude > 0.01f)
+        if (difficultyManager.instance != null)
         {
-            Quaternion rot = Quaternion.LookRotation(playerDir);
-            transform.rotation = rot;
+            if (difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Easy)
+            {
+                if (type != guardType.Handler)
+                {
+                    return;
+                }
+            }
+            if (difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Normal)
+            {
+                if (type == guardType.EliteHandler && type == guardType.EliteGuard)
+                {
+                    return;
+                }
+            }
         }
-        //moves guard toward anchor
-        agent.stoppingDistance = 0;
-        agent.SetDestination(alertTargetPos);
-        //sets state to alerted
-        state = guardState.Alerted;
-        alertedTimer = 0;
+            alertTargetPos = alertPosition;
+
+            Vector3 playerDir = alertForward;
+            playerDir.y = 0;
+
+            if (playerDir.sqrMagnitude > 0.01f)
+            {
+                Quaternion rot = Quaternion.LookRotation(playerDir);
+                transform.rotation = rot;
+            }
+                //moves guard toward anchor
+                agent.stoppingDistance = 0;
+                agent.SetDestination(alertTargetPos);
+                //sets state to alerted
+                state = guardState.Alerted;
+                alertedTimer = 0;
     }
     public void onDogHit(Vector3 alertPosition)
     {

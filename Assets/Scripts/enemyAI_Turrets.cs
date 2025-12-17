@@ -7,6 +7,8 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] Renderer modelHead;
+    //[SerializeField] Renderer modelHead2;
+    //[SerializeField] Renderer modelHead3;
     [SerializeField] Transform head;
 
     [SerializeField] int HP;
@@ -14,8 +16,12 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     [SerializeField] float FOV;
 
     [SerializeField] GameObject bullet;
+    //[SerializeField] GameObject bullet2;
+    //[SerializeField] GameObject bullet3;
     [SerializeField] float fireRate;
     [SerializeField] Transform firePos;
+    //[SerializeField] Transform firePos2;
+    //[SerializeField] Transform firePos3;
 
     public enum turretWeaponNumber
     {
@@ -37,10 +43,16 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         Aggro
     }
 
+    public turretWeaponNumber weaponNumber = turretWeaponNumber.One;
     public turretState state = turretState.Idle;
+
+    bool isOne => weaponNumber == turretWeaponNumber.One;
+    bool isTwo => weaponNumber == turretWeaponNumber.Two;
+    bool isThree => weaponNumber != turretWeaponNumber.Three;
 
     Color colorOrig;
     Color colorOrigHead;
+
     MaterialPropertyBlock propBlock;
     MaterialPropertyBlock propBlockHead;
     static readonly int colorId = Shader.PropertyToID("_BaseColor");
@@ -180,17 +192,147 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         if (!tazed)
         {
             fireTimer = 0;
+            //if (difficultyManager.instance != null)
+            //{
+            //    if (isOne && difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Easy)
+            //    {
+            //        // Levi addition damage multiplier
+            //        GameObject bulletObj = Instantiate(bullet, firePos.position, head.transform.rotation);
 
-            // Levi addition damage multiplier
-            GameObject bulletObj = Instantiate(bullet, firePos.position, head.transform.rotation);
+            //        // apply dmg mult
+            //        damage bulletDmg = bulletObj.GetComponent<damage>();
 
-            // apply dmg mult
-            damage bulletDmg = bulletObj.GetComponent<damage>();
+            //        if (bulletDmg != null && difficultyManager.instance != null)
+            //        {
+            //            bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //        }
+            //    }
+            //    if (isTwo && difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Normal)
+            //    {
+            //        // Levi addition damage multiplier
+            //        GameObject bulletObj = Instantiate(bullet, firePos.position, head.transform.rotation);
 
-            if (bulletDmg != null && difficultyManager.instance != null)
+            //        // apply dmg mult
+            //        damage bulletDmg = bulletObj.GetComponent<damage>();
+
+            //        if (bulletDmg != null && difficultyManager.instance != null)
+            //        {
+            //            bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //        }
+            //        // Levi addition damage multiplier
+            //        GameObject bulletObj2 = Instantiate(bullet2, firePos2.position, head.transform.rotation);
+
+            //        // apply dmg mult
+            //        damage bulletDmg2 = bulletObj2.GetComponent<damage>();
+
+            //        if (bulletDmg2 != null && difficultyManager.instance != null)
+            //        {
+            //            bulletDmg2.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //        }
+            //    }
+            //    else if(isThree && difficultyManager.instance.currentDifficulty == difficultyManager.Difficulty.Hard)
+            //    {
+            //        // Levi addition damage multiplier
+            //        GameObject bulletObj = Instantiate(bullet, firePos.position, head.transform.rotation);
+
+            //        // apply dmg mult
+            //        damage bulletDmg = bulletObj.GetComponent<damage>();
+
+            //        if (bulletDmg != null && difficultyManager.instance != null)
+            //        {
+            //            bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //        }
+            //        // Levi addition damage multiplier
+            //        GameObject bulletObj2 = Instantiate(bullet2, firePos2.position, head.transform.rotation);
+
+            //        // apply dmg mult
+            //        damage bulletDmg2 = bulletObj2.GetComponent<damage>();
+
+            //        if (bulletDmg2 != null && difficultyManager.instance != null)
+            //        {
+            //            bulletDmg2.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //        }
+            //        // Levi addition damage multiplier
+            //        GameObject bulletObj3 = Instantiate(bullet3, firePos3.position, head.transform.rotation);
+
+            //        // apply dmg mult
+            //        damage bulletDmg3 = bulletObj3.GetComponent<damage>();
+
+            //        if (bulletDmg3 != null && difficultyManager.instance != null)
+            //        {
+            //            bulletDmg3.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //        }
+            //    }
+            //}
+            if (isOne)
             {
-                bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+                // Levi addition damage multiplier
+                GameObject bulletObj = Instantiate(bullet, firePos.position, head.transform.rotation);
+
+                // apply dmg mult
+                damage bulletDmg = bulletObj.GetComponent<damage>();
+
+                if (bulletDmg != null && difficultyManager.instance != null)
+                {
+                    bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+                }
             }
+            //if (isTwo)
+            //{
+            //    // Levi addition damage multiplier
+            //    GameObject bulletObj = Instantiate(bullet, firePos.position, head.transform.rotation);
+
+            //    // apply dmg mult
+            //    damage bulletDmg = bulletObj.GetComponent<damage>();
+
+            //    if (bulletDmg != null && difficultyManager.instance != null)
+            //    {
+            //        bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //    }
+            //    // Levi addition damage multiplier
+            //    GameObject bulletObj2 = Instantiate(bullet2, firePos2.position, head.transform.rotation);
+
+            //    // apply dmg mult
+            //    damage bulletDmg2 = bulletObj2.GetComponent<damage>();
+
+            //    if (bulletDmg2 != null && difficultyManager.instance != null)
+            //    {
+            //        bulletDmg2.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //    }
+            //}
+            //else if (isThree)
+            //{
+            //    // Levi addition damage multiplier
+            //    GameObject bulletObj = Instantiate(bullet, firePos.position, head.transform.rotation);
+
+            //    // apply dmg mult
+            //    damage bulletDmg = bulletObj.GetComponent<damage>();
+
+            //    if (bulletDmg != null && difficultyManager.instance != null)
+            //    {
+            //        bulletDmg.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //    }
+            //    // Levi addition damage multiplier
+            //    GameObject bulletObj2 = Instantiate(bullet2, firePos2.position, head.transform.rotation);
+
+            //    // apply dmg mult
+            //    damage bulletDmg2 = bulletObj2.GetComponent<damage>();
+
+            //    if (bulletDmg2 != null && difficultyManager.instance != null)
+            //    {
+            //        bulletDmg2.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //    }
+            //    // Levi addition damage multiplier
+            //    GameObject bulletObj3 = Instantiate(bullet3, firePos3.position, head.transform.rotation);
+
+            //    // apply dmg mult
+            //    damage bulletDmg3 = bulletObj3.GetComponent<damage>();
+
+            //    if (bulletDmg3 != null && difficultyManager.instance != null)
+            //    {
+            //        bulletDmg3.ApplyDifficultyMultiplier(difficultyManager.instance.GetDamageMultiplier());
+            //    }
+            //}
         }
     }
 
