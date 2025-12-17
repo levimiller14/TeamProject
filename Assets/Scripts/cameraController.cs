@@ -5,7 +5,7 @@ public class cameraController : MonoBehaviour
     // Levi edits/additions
     // changing Serialized Fields to public so I can access in settingsManager.cs
     public float sens;
-    public bool invertY;
+    public bool invertY = false;
     //[SerializeField] int sens;
     //[SerializeField] bool invertY;
     [SerializeField] int lockVertMin, lockVertMax;
@@ -14,8 +14,10 @@ public class cameraController : MonoBehaviour
     public float slideTiltZ;
 
     [Header("----- Movement Tilt -----")]
-    [SerializeField] float moveTiltAmount = 2f;
+    [SerializeField] float moveTiltAmount = 0f; // Levi change - off by default
     [SerializeField] float moveTiltSpeed = 8f;
+
+    public bool IsMovementTiltEnabled => moveTiltAmount > 0f;
 
     float camRotX;
     float currentMoveTilt;
@@ -51,5 +53,11 @@ public class cameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(camRotX, 0, wallTiltZ + slideTiltZ + currentMoveTilt);
 
         transform.parent.Rotate(Vector3.up * mouseX);
+    }
+
+    // Levi addition, toggle tilt method
+    public void SetMovementTilt(bool enabled)
+    {
+        moveTiltAmount = enabled ? 2f : 0;
     }
 }
