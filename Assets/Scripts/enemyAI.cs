@@ -19,8 +19,11 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
     [SerializeField] Transform shootPos;
 
     [SerializeField] GameObject dropItem;
+
     Color colorOrig;
+
     MaterialPropertyBlock propBlock;
+
     static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
     float shootTimer;
@@ -59,6 +62,11 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
     void Update()
     {
         shootTimer += Time.deltaTime;
+
+        if(agent.remainingDistance < 0.01f)
+        {
+            roamTimer += Time.deltaTime;
+        }
 
         if(playerInRange && canSeePlayer())
         {
@@ -113,6 +121,7 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
                 {
                     shoot();
                 }
+
                 agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }

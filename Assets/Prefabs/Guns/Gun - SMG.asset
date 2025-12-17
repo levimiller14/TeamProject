@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4978f39954f5615489e7412b3b1a75b5, type: 3}
+  m_Name: Gun - SMG
+  m_EditorClassIdentifier: Assembly-CSharp::gunStats
+  gunModel: {fileID: 1389226789046872936, guid: 0b240f8136ffe4f0da814d74966c0b01, type: 3}
+  shootDamage: 1
+  shootDist: 150
+  shootRate: 0.1
+  ammoCur: 30
+  ammoMax: 30
+  hitEffect: {fileID: 8180648538125483010, guid: 1fb30076f1640724897ae69c0e9b727d, type: 3}
+  shootSound: []
+  shootSoundVol: 0

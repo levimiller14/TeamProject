@@ -123,7 +123,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * shootDist, Color.yellow);
 #endif
 
-        if(Input.GetButton("Fire1") && shootTimer >= shootRate)
+        if(Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate)
         {
             shoot();
         }
@@ -214,6 +214,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         {
             wallRun.UpdateCameraTilt();
         } // Wall run end
+
+        selectGun();
+        reload();
     }
 
     void jump()
@@ -276,6 +279,8 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     void shoot()
     {
         shootTimer = 0;
+
+        gunList[gunListPos].ammoCur--;
         
         // Levi addition, statTracking
         if(statTracker.instance != null)
@@ -283,24 +288,35 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
             statTracker.instance.IncrementShotsFired();
         }
 
-        Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
+        //Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
 
-        //RaycastHit hit;
-        //if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
-        //{
+        RaycastHit hit;
+        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
+        {
+            Debug.Log(hit.collider.name);
 
-        //    IDamage dmg = hit.collider.GetComponent<IDamage>();
-        //    if (dmg != null)
-        //    {
-        //        dmg.takeDamage(shootDamage);
+            Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
 
-        //        // stat tracking
-        //        if(statTracker.instance != null)
-        //        {
-        //            statTracker.instance.IncrementShotsHit();
-        //        }
-        //    }
-        //}
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            if (dmg != null)
+            {
+                dmg.takeDamage(shootDamage);
+
+                //// stat tracking
+                //if (statTracker.instance != null)
+                //{
+                //    statTracker.instance.IncrementShotsHit();
+                //}
+            }
+        }
+    }
+
+    void reload()
+    {
+        if(Input.GetButtonDown("Reload") && gunList.Count > 0)
+        {
+            gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+        }
     }
 
     public void takeDamage(int amount)
@@ -450,12 +466,15 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
 
-        if (gunMeshFilter != null && gunMeshRenderer != null)
-        {
-            var newGunModel = gunList[gunListPos].gunModel;
-            gunMeshFilter.sharedMesh = newGunModel.GetComponent<MeshFilter>().sharedMesh;
-            gunMeshRenderer.sharedMaterial = newGunModel.GetComponent<MeshRenderer>().sharedMaterial;
-        }
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        //if (gunMeshFilter != null && gunMeshRenderer != null)
+        //{
+        //    var newGunModel = gunList[gunListPos].gunModel;
+        //    gunMeshFilter.sharedMesh = newGunModel.GetComponent<MeshFilter>().sharedMesh;
+        //    gunMeshRenderer.sharedMaterial = newGunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        //}
     }
 
     void selectGun()
