@@ -175,7 +175,7 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
     
     public void createBullet()
     {
-        //Instantiate(bullet, shootPos.position, transform.rotation);
+        Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
     public void weaponColOn()
