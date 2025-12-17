@@ -601,10 +601,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 424859801623380348, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 710107781292288252, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
       propertyPath: m_SizeDelta.x
       value: 20
@@ -725,14 +721,6 @@ PrefabInstance:
       propertyPath: screenTiltToggle
       value: 
       objectReference: {fileID: 337782841}
-    - target: {fileID: 3673561659120231937, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
-      propertyPath: m_margin.w
-      value: 26.523977
-      objectReference: {fileID: 0}
-    - target: {fileID: 3673561659120231937, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
-      propertyPath: m_margin.z
-      value: 31.056458
-      objectReference: {fileID: 0}
     - target: {fileID: 4155127185449524995, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
       propertyPath: m_margin.w
       value: 25.206362
@@ -766,10 +754,6 @@ PrefabInstance:
       value: 71.96239
       objectReference: {fileID: 0}
     - target: {fileID: 4935789592943376920, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4935789592943376920, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
       propertyPath: m_SizeDelta.y
       value: 25
       objectReference: {fileID: 0}
@@ -788,14 +772,6 @@ PrefabInstance:
     - target: {fileID: 5240358376851210973, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
       propertyPath: m_margin.z
       value: 32.252
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240358376851210973, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 5240358376851210973, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6042919608843134183, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -846,9 +822,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5916975170461857000, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
-    - {fileID: 3147316687377159861, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89d0ed69243669544a51684c3d5723a2, type: 3}
