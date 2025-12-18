@@ -39,6 +39,8 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     [SerializeField] AudioClip[] audHurt;
     [Range(0, 1)][SerializeField] float audHurtVol;
 
+    GunRecoil gunRecoil;
+
     bool isPlayingSteps;
     bool isSprinting;
 
@@ -93,6 +95,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         {
             gunMeshFilter = gunModel.GetComponent<MeshFilter>();
             gunMeshRenderer = gunModel.GetComponent<MeshRenderer>();
+            gunRecoil = gunModel.GetComponent<GunRecoil>();
         }
 
         if(wallRun != null)
@@ -314,7 +317,12 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
         gunList[gunListPos].ammoCur--;
         aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
-        
+
+        if (gunRecoil != null)
+        {
+            gunRecoil.TriggerRecoil();
+        }
+
         // Levi addition, statTracking
         if(statTracker.instance != null)
         {
