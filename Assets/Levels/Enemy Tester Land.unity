@@ -3166,7 +3166,7 @@ PrefabInstance:
       objectReference: {fileID: 156290326}
     - target: {fileID: 4614956433496028095, guid: 4da23c3729c2c114eaaf00da51d5b3a8, type: 3}
       propertyPath: fireRate
-      value: 15
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4614956433496028095, guid: 4da23c3729c2c114eaaf00da51d5b3a8, type: 3}
       propertyPath: modelHead

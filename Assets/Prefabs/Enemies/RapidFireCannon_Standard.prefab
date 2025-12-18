@@ -237,7 +237,7 @@ MonoBehaviour:
   bullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
   bullet2: {fileID: 0}
   bullet3: {fileID: 0}
-  fireRate: 15
+  fireRate: 1.5
   firePos: {fileID: 2044265602677285967}
   firePos2: {fileID: 2044265602677285967}
   firePos3: {fileID: 2044265602677285967}
