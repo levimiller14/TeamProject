@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2288293052478368363}
   m_Layer: 9
   m_Name: Shock Panel
-  m_TagString: FrostTrap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
   speed: 0
   destroyTime: 0
   playerSlowedSpeed: 1
+  hitEffect: {fileID: 0}
   slowedSpeed: 0
 --- !u!33 &1653370108857264139
 MeshFilter:

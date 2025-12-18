@@ -599,6 +599,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1248313454818737244}
+  - component: {fileID: 2937146563615950825}
+  - component: {fileID: 4497125872343397530}
   m_Layer: 0
   m_Name: Bip001 R Hand
   m_TagString: Untagged
@@ -622,6 +624,51 @@ Transform:
   - {fileID: 9079118974599687205}
   m_Father: {fileID: 7595698229125150449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2937146563615950825
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617977611633699961}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 0
+  m_Center: {x: -0.72, y: 0, z: 0.12}
+--- !u!114 &4497125872343397530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617977611633699961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e170ff527cca7f42a3e9cab6a16f2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::damage
+  type: 1
+  rb: {fileID: 0}
+  damageAmount: 1
+  damageRate: 0
+  duration: 0
+  speed: 0
+  destroyTime: 0
+  playerSlowedSpeed: 0.1
+  hitEffect: {fileID: 0}
+  slowedSpeed: 0
 --- !u!1 &4782996478630998598
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +779,7 @@ GameObject:
   - component: {fileID: 9131459913279804848}
   - component: {fileID: 6482370066517669312}
   - component: {fileID: 5248415651474435077}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -770,12 +817,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI
   model: {fileID: 1641402607618490183}
   agent: {fileID: 6770019176000849088}
-  HP: 4
-  maxHP: 4
+  anim: {fileID: 9131459913279804848}
+  weaponCol: {fileID: 2937146563615950825}
+  HP: 3
+  maxHP: 3
   faceTargetSpeed: 5
   FOV: 90
-  roamDist: 75
+  roamDist: 25
   roamPauseTime: 3
+  animTranSpeed: 15
   bullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
   shootRate: 0.5
   shootPos: {fileID: 9079118974599687205}
@@ -812,7 +862,7 @@ Animator:
   m_GameObject: {fileID: 5929693755249539364}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f4209d51d1ad0434299f2d498ee076ba, type: 3}
-  m_Controller: {fileID: 9100000, guid: b2199d54ae00e304abb54e092bc7af9a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1f5184d4f6c405c4aa1995ac8024023f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

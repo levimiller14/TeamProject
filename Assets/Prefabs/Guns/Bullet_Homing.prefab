@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7200188377721555174}
   - component: {fileID: 6796269070347065998}
   - component: {fileID: 1929187593404811299}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet_Homing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,6 +55,7 @@ MonoBehaviour:
   speed: 25
   destroyTime: 3
   playerSlowedSpeed: 0.1
+  hitEffect: {fileID: 0}
   slowedSpeed: 0
 --- !u!135 &7200188377721555174
 SphereCollider:

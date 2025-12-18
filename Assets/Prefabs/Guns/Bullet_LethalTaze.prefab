@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5784084986771524968}
   - component: {fileID: 7929999065151807480}
   - component: {fileID: 8837290818541034396}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet_LethalTaze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,6 +55,7 @@ MonoBehaviour:
   speed: 25
   destroyTime: 3
   playerSlowedSpeed: 0.1
+  hitEffect: {fileID: 0}
   slowedSpeed: 0
 --- !u!135 &5784084986771524968
 SphereCollider:

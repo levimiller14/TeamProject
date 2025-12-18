@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem.DualShock;
+using NUnit.Framework.Constraints;
 
 public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 {
@@ -15,11 +17,11 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     // changing HP to public for access in cheatManager.cs
     [Range(1, 10)] public int HP;
     //[Range(1, 10)] [SerializeField] int HP;
-    [Range(1, 5)] [SerializeField] int speed;
-    [Range(2, 5)] [SerializeField] int sprintMod;
-    [Range(5, 20)] [SerializeField] int jumpSpeed;
-    [Range(1, 3)] [SerializeField] int jumpMax;
-    [Range(15, 50)] [SerializeField] int gravity;
+    [Range(1, 5)][SerializeField] int speed;
+    [Range(2, 5)][SerializeField] int sprintMod;
+    [Range(5, 20)][SerializeField] int jumpSpeed;
+    [Range(1, 3)][SerializeField] int jumpMax;
+    [Range(15, 50)][SerializeField] int gravity;
 
     [Header("----- Guns -----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
@@ -29,6 +31,26 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     [SerializeField] float shootRate;
     [SerializeField] GameObject playerBullet;
     [SerializeField] Transform playerShootPos;
+
+    [Header("----- Audio -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0,1)] [SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audReload;
+    [Range(0, 1)][SerializeField] float audReloadVol;
+    [SerializeField] AudioClip[] audEmptyMag;
+    [Range(0, 1)][SerializeField] float audEmptyMagVol;
+
+    GunRecoil gunRecoil;
+
+    bool isPlayingSteps;
+    bool isSprinting;
+    bool isPlayingClick;
+    bool isReloading;
 
     MeshFilter gunMeshFilter;
     MeshRenderer gunMeshRenderer;
@@ -46,10 +68,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     public bool isGodMode = false;
 
     float shootTimer;
+    private Coroutine chipCoroutine;
 
     // status effects
     private Coroutine poisoned;
+    private float remainingPoison;
     private bool tazed;
+    private float remainingTaze;
 
     Vector3 moveDir;
     Vector3 playerVel;
@@ -81,9 +106,10 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         {
             gunMeshFilter = gunModel.GetComponent<MeshFilter>();
             gunMeshRenderer = gunModel.GetComponent<MeshRenderer>();
+            gunRecoil = gunModel.GetComponent<GunRecoil>();
         }
 
-        if(wallRun != null)
+        if (wallRun != null)
         {
             wallRun.controller = controller;
             wallRun.orientation = transform;
@@ -95,24 +121,12 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     // Update is called once per frame
     void Update()
     {
-        if(!gameManager.instance.isPaused)
+        if (!gameManager.instance.isPaused)
         {
             movement();
         }
         sprint();
 
-        // launch pad mechanic - NONFUNCTIONAL - Aaron K
-        // ==================================================
-        //if (controller.isGrounded && launchVelocity.y < 0)
-        //{
-        //    launchVelocity.y = -2f;
-        //}
-        //if (launchVelocity != Vector3.zero || !controller.isGrounded)
-        //{
-        //    launchVelocity.y += gravity * Time.deltaTime;
-        //}
-        //launchVelocity.y -= gravity * Time.deltaTime;
-        //controller.Move(launchVelocity * Time.deltaTime);
     }
 
     void movement()
@@ -123,19 +137,28 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * shootDist, Color.yellow);
 #endif
 
-        if(Input.GetButton("Fire1") && shootTimer >= shootRate)
+        if(Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate && !isReloading)
         {
             shoot();
         }
+        else if(Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur == 0 && !isPlayingClick)
+        {
+            StartCoroutine(playClick());
+        }
 
-        // only block movement when actively being pulled by grapple (not during line extend)
-        bool isGrappling = grappleHook != null && grappleHook.IsGrappling();
+            // only block movement when actively being pulled by grapple (not during line extend)
+            bool isGrappling = grappleHook != null && grappleHook.IsGrappling();
 
         // debug - remove after testing
         // if (grappleHook != null) Debug.Log($"isGrappling: {isGrappling}, lineExtending: {grappleHook.IsLineExtending()}");
 
-        if(controller.isGrounded)
+        if (controller.isGrounded)
         {
+            if(moveDir.normalized.magnitude > 0.3f && !isPlayingSteps)
+            {
+                StartCoroutine(playStep());
+            }
+
             jumpCount = 0;
             if (playerVel.y <= 0)
             {
@@ -182,7 +205,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
             controller.Move(moveDir * speed * Time.deltaTime);
 
             // Wall run start
-            if(wallRun == null || !wallRun.IsWallRunning)
+            if (wallRun == null || !wallRun.IsWallRunning)
             {
                 jump();
 
@@ -214,6 +237,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         {
             wallRun.UpdateCameraTilt();
         } // Wall run end
+
+        selectGun();
+
+        if(Input.GetButtonDown("Reload") && gunList.Count > 0 && !isReloading)
+        {
+            StartCoroutine(reload());
+        }
     }
 
     void jump()
@@ -222,8 +252,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         if (grappleJumpedThisFrame)
             return;
 
-        if(Input.GetButtonDown("Jump") && jumpCount < jumpMax && !tazed)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && !tazed)
         {
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             playerVel.y = jumpSpeed;
             jumpCount++;
         }
@@ -236,24 +267,40 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
     void sprint()
     {
-        if(Input.GetButtonDown("Sprint") && !tazed)
+        if (Input.GetButtonDown("Sprint") && !tazed)
         {
             speed *= sprintMod;
+            isSprinting = true;
         }
-        else if(Input.GetButtonUp("Sprint") && !tazed)
+        else if (Input.GetButtonUp("Sprint") && !tazed)
         {
             speed = speedOrig;
+            isSprinting = false;
         }
+    }
+
+    IEnumerator playStep()
+    {
+        isPlayingSteps = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (isSprinting)
+            yield return new WaitForSeconds(0.3f);
+        else
+            yield return new WaitForSeconds(0.5f);
+
+        isPlayingSteps = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("FrostTrap"))
+        if (other.CompareTag("FrostTrap"))
         {
             damage trapSlow = other.GetComponent<damage>();
             speed = Mathf.RoundToInt(speedOrig * trapSlow.slowedSpeed);
+            gameManager.instance.frostIcon.gameObject.SetActive(true);
+            gameManager.instance.frostRing.gameObject.SetActive(true);
         }
-        if(other.CompareTag("Launch Pad"))
+        if (other.CompareTag("Launch Pad"))
         {
             launchPad padScript = other.GetComponent<launchPad>();
             if (padScript != null)
@@ -270,37 +317,67 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         if (other.CompareTag("FrostTrap"))
         {
             speed = speedOrig;
+            gameManager.instance.frostIcon.gameObject.SetActive(false);
+            gameManager.instance.frostRing.gameObject.SetActive(false);
         }
     }
 
     void shoot()
     {
         shootTimer = 0;
-        
+
+        gunList[gunListPos].ammoCur--;
+        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
+
+        if (gunRecoil != null)
+        {
+            gunRecoil.TriggerRecoil();
+        }
+
         // Levi addition, statTracking
-        if(statTracker.instance != null)
+        if (statTracker.instance != null)
         {
             statTracker.instance.IncrementShotsFired();
         }
 
-        Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
+        //Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
 
-        //RaycastHit hit;
-        //if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
-        //{
+        RaycastHit hit;
+        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
+        {
+            Debug.Log(hit.collider.name);
 
-        //    IDamage dmg = hit.collider.GetComponent<IDamage>();
-        //    if (dmg != null)
-        //    {
-        //        dmg.takeDamage(shootDamage);
+            Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
 
-        //        // stat tracking
-        //        if(statTracker.instance != null)
-        //        {
-        //            statTracker.instance.IncrementShotsHit();
-        //        }
-        //    }
-        //}
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            if (dmg != null)
+            {
+                dmg.takeDamage(shootDamage);
+
+                // stat tracking
+                if (statTracker.instance != null)
+                {
+                    statTracker.instance.IncrementShotsHit();
+                }
+            }
+        }
+    }
+
+    IEnumerator playClick()
+    {
+        isPlayingClick = true;
+        aud.PlayOneShot(audEmptyMag[Random.Range(0, audEmptyMag.Length)], audEmptyMagVol);
+        yield return new WaitForSeconds(0.75f);
+        isPlayingClick = false;
+    }
+
+    IEnumerator reload()
+    {
+        isReloading = true;
+        aud.PlayOneShot(audReload[Random.Range(0, audReload.Length)], audReloadVol);
+        gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+        yield return new WaitForSeconds(0.75f);
+        isReloading = false;
     }
 
     public void takeDamage(int amount)
@@ -311,11 +388,12 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         if (amount > 0)
         {
             HP -= amount;
+            aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
             StartCoroutine(flashRed());
             updatePlayerUI();
         }
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
             // You Died!
             gameManager.instance.youLose();
@@ -324,8 +402,34 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
 
     public void updatePlayerUI()
+    { // Aaron K - added chase bar for loss of life.
+        float targetFill = (float)HP / HPOrig;
+        gameManager.instance.playerHPFrontBar.fillAmount = targetFill;
+
+        if (chipCoroutine != null)
+            StopCoroutine(chipCoroutine);
+        chipCoroutine = StartCoroutine(LerpBackBar(targetFill));
+    }
+
+    // Aaron K - Status Effect Icons
+
+
+    IEnumerator LerpBackBar(float targetFill)
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        Image backBar = gameManager.instance.playerHPBackBar;
+        float startFill = backBar.fillAmount;
+        float duration = 0.5f;
+        float time = 0;
+
+        yield return new WaitForSeconds(0.1f);
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            backBar.fillAmount = Mathf.Lerp(startFill, targetFill, time / duration);
+            yield return null;
+        }
+        backBar.fillAmount = targetFill;
     }
 
     IEnumerator flashRed()
@@ -343,9 +447,9 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
     public void heal(int healAmount)
     {
-        if(HP < HPOrig)
+        if (HP < HPOrig)
         {
-            HP = Mathf.Min(HP +healAmount, HPOrig);
+            HP = Mathf.Min(HP + healAmount, HPOrig);
             updatePlayerUI();
             StartCoroutine(flashGreen());
         }
@@ -377,61 +481,93 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         grappleJumpedThisFrame = true;
     }
 
-    // Launch Pad functionality NONFUNCTIONAL - per no rigidbody - Aaron K
-    //public void Launch(Vector3 launchDirection, float launchForce)
-    //{
-    //    // Set the velocity directly to launch the player
-    //    launchVelocity = launchDirection * launchForce;
-    //}
 
     // poison routines- Aaron K
     public void poison(int damage, float rate, float duration)
-    {
-        if (poisoned != null)
-        {
+    { // poison deals a minimum of 2 ticks (at a duration of 0, start tick and end tick)
+        if (poisoned == null)
+        { // Initial damage tick if not already poisoned
+            takeDamage(damage);
+        }
+        if (poisoned != null && duration > remainingPoison)
+        { // non-stacking poison, && check to prevent short duration overriding long check
             StopCoroutine(poisoned); // cuts off current poison, effective duration reset
         }
         poisoned = StartCoroutine(PoisonRoutine(damage, rate, duration));
     }
 
     private IEnumerator PoisonRoutine(int damage, float rate, float duration)
-    {
-        float timer = 0f;
-        WaitForSeconds wait = new WaitForSeconds(rate);
+    { // Aaron K - reworked Poison Routine, includes status icon
 
-        yield return wait;
+        remainingPoison = duration; // duration check member variable
+        float totalTimer = 0f; // length of duration
+        float damageTimer = 0f; // length of a tick
 
-        while (timer < duration)
+        float durationFix = duration; // Poison lasts a minimum of 1 second
+        if (duration < 1)
         {
-            takeDamage(damage);
-            timer += rate;
-            yield return wait;
+            durationFix = 1;
+            remainingPoison = 1;
         }
+
+        gameManager.instance.poisonIcon.gameObject.SetActive(true);
+        gameManager.instance.poisonRing.gameObject.SetActive(true);
+
+        while(totalTimer < durationFix)
+        {
+            totalTimer += Time.deltaTime;
+            damageTimer += Time.deltaTime;
+            remainingPoison -= Time.deltaTime;
+
+            gameManager.instance.poisonRing.fillAmount = 1f - (totalTimer / durationFix);
+
+            if (damageTimer >= rate)
+            {
+                takeDamage(damage);
+                damageTimer = 0f;
+            }
+            yield return null;
+        }
+        gameManager.instance.poisonIcon.gameObject.SetActive(false);
+        gameManager.instance.poisonRing.gameObject.SetActive(false);
         poisoned = null;
+        remainingPoison = 0f; // stops continual counting
     }
 
-    // Tazed Effect
-    public void taze(/*int damage,*/ float duration)
+
+
+    // Tazed Effect - Aaron K
+    public void taze(float duration)
     {
-        StartCoroutine(TazeRoutine(duration));
+        if (duration > remainingTaze) // to prevent short stun overriding long stun
+        {
+            StartCoroutine(TazeRoutine(duration));
+        }
     }
 
     private IEnumerator TazeRoutine(float duration)
     {
         tazed = true;
+        remainingTaze = duration;
+        gameManager.instance.stunIcon.gameObject.SetActive(true);
+        gameManager.instance.stunRing.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(duration);
-
-        float timer = 0f;
+        float timer = 0;
 
         while (timer < duration)
         {
             timer += Time.deltaTime;
-            tazed = true;
+            remainingTaze -= Time.deltaTime;
             speed = 0;
+            gameManager.instance.stunRing.fillAmount = 1f - (timer / duration);
+            yield return null;
         }
+
         tazed = false;
         speed = speedOrig;
+        gameManager.instance.stunIcon.gameObject.SetActive(false);
+        gameManager.instance.stunRing.gameObject.SetActive(false);
+        remainingTaze = 0; // stop continual counting
     }
 
     public void getGunStats(gunStats gun)
@@ -450,12 +586,15 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
 
-        if (gunMeshFilter != null && gunMeshRenderer != null)
-        {
-            var newGunModel = gunList[gunListPos].gunModel;
-            gunMeshFilter.sharedMesh = newGunModel.GetComponent<MeshFilter>().sharedMesh;
-            gunMeshRenderer.sharedMaterial = newGunModel.GetComponent<MeshRenderer>().sharedMaterial;
-        }
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        //if (gunMeshFilter != null && gunMeshRenderer != null)
+        //{
+        //    var newGunModel = gunList[gunListPos].gunModel;
+        //    gunMeshFilter.sharedMesh = newGunModel.GetComponent<MeshFilter>().sharedMesh;
+        //    gunMeshRenderer.sharedMaterial = newGunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        //}
     }
 
     void selectGun()

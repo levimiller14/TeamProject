@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6984969819890393784}
   m_Layer: 6
   m_Name: playerBullet
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,6 +64,7 @@ MonoBehaviour:
   speed: 25
   destroyTime: 3
   playerSlowedSpeed: 0.1
+  hitEffect: {fileID: 0}
   slowedSpeed: 0
 --- !u!135 &1367939532608329187
 SphereCollider:

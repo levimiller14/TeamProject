@@ -209,7 +209,7 @@ public class playerControllerBackup : MonoBehaviour, IDamage, IHeal
 
     public void updatePlayerUI()
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPOrig;
+        gameManager.instance.playerHPFrontBar.fillAmount = (float)HP / HPOrig;
     }
 
     IEnumerator flashRed()
