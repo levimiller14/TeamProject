@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 24610214785226244}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0.872}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0.845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,8 +152,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.3556337, y: 0, z: -11.107222}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3364523330047243047}
   m_Father: {fileID: 0}
@@ -227,13 +227,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemyAI_Turrets
   model: {fileID: 6026158617385300929}
+  modelHead: {fileID: 4537971426709538888}
+  modelHead2: {fileID: 0}
+  modelHead3: {fileID: 0}
   head: {fileID: 3364523330047243047}
   HP: 5
   facePlayerSpeed: 20
   FOV: 90
   bullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
-  fireRate: 0.5
+  bullet2: {fileID: 0}
+  bullet3: {fileID: 0}
+  fireRate: 15
   firePos: {fileID: 2044265602677285967}
+  firePos2: {fileID: 2044265602677285967}
+  firePos3: {fileID: 2044265602677285967}
+  weaponNumber: 0
+  state: 0
 --- !u!135 &157252670015058183
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -253,7 +262,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 15
   m_Center: {x: -0.000000029802322, y: 0.5, z: 0}
 --- !u!136 &8997835344989490557
 CapsuleCollider:

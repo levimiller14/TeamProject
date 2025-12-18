@@ -52,9 +52,13 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
 
     Color colorOrig;
     Color colorOrigHead;
+    Color colorOrigHead2;
+    Color colorOrigHead3;
 
     MaterialPropertyBlock propBlock;
     MaterialPropertyBlock propBlockHead;
+    MaterialPropertyBlock propBlockHead2;
+    MaterialPropertyBlock propBlockHead3;
     static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
     float fireTimer;
@@ -74,6 +78,8 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
     {
         propBlock = new MaterialPropertyBlock();
         propBlockHead = new MaterialPropertyBlock();
+        propBlockHead2 = new MaterialPropertyBlock();
+        propBlockHead3 = new MaterialPropertyBlock();
 
         model.GetPropertyBlock(propBlock);
         colorOrig = propBlock.GetColor(colorId);
@@ -85,7 +91,23 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         if (colorOrigHead == Color.clear)
             colorOrigHead = modelHead.sharedMaterial.color;
 
-        if(difficultyManager.instance != null)
+        if (modelHead2 != null)
+        {
+            modelHead2.GetPropertyBlock(propBlockHead2);
+            colorOrigHead2 = propBlockHead2.GetColor(colorId);
+            if (colorOrigHead2 == Color.clear)
+                colorOrigHead2 = modelHead2.sharedMaterial.color;
+        }
+
+        if (modelHead3 != null)
+        {
+            modelHead3.GetPropertyBlock(propBlockHead3);
+            colorOrigHead3 = propBlockHead3.GetColor(colorId);
+            if (colorOrigHead3 == Color.clear)
+                colorOrigHead3 = modelHead3.sharedMaterial.color;
+        }
+
+        if (difficultyManager.instance != null)
         {
             HP = Mathf.RoundToInt(HP * difficultyManager.instance.GetHealthMultiplier());
         }
@@ -297,11 +319,35 @@ public class enemyAI_Turrets : MonoBehaviour, IDamage
         model.SetPropertyBlock(propBlock);
         propBlockHead.SetColor(colorId, Color.red);
         modelHead.SetPropertyBlock(propBlockHead);
+
+        if (modelHead2 != null)
+        {
+            propBlockHead2.SetColor(colorId, Color.red);
+            modelHead2.SetPropertyBlock(propBlockHead2);
+        }
+        if (modelHead3 != null)
+        {
+            propBlockHead3.SetColor(colorId, Color.red);
+            modelHead3.SetPropertyBlock(propBlockHead3);
+        }
+
         yield return new WaitForSeconds(0.1f);
         propBlock.SetColor(colorId, colorOrig);
         model.SetPropertyBlock(propBlock);
         propBlockHead.SetColor(colorId, colorOrigHead);
         modelHead.SetPropertyBlock(propBlockHead);
+
+        if(modelHead2 != null)
+        {
+            propBlockHead2.SetColor(colorId, colorOrigHead2);
+            modelHead2.SetPropertyBlock(propBlockHead2);
+        }
+
+        if (modelHead3 != null)
+        {
+            propBlockHead3.SetColor(colorId, colorOrigHead3);
+            modelHead3.SetPropertyBlock(propBlockHead2);
+        }
     }
     public void poison(int damage, float rate, float duration)
     {
