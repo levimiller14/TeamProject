@@ -32,6 +32,26 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     [SerializeField] GameObject playerBullet;
     [SerializeField] Transform playerShootPos;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0,1)] [SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audReload;
+    [Range(0, 1)][SerializeField] float audReloadVol;
+    [SerializeField] AudioClip[] audEmptyMag;
+    [Range(0, 1)][SerializeField] float audEmptyMagVol;
+
+    GunRecoil gunRecoil;
+
+    bool isPlayingSteps;
+    bool isSprinting;
+    bool isPlayingClick;
+    bool isReloading;
+
     MeshFilter gunMeshFilter;
     MeshRenderer gunMeshRenderer;
 
@@ -86,6 +106,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         {
             gunMeshFilter = gunModel.GetComponent<MeshFilter>();
             gunMeshRenderer = gunModel.GetComponent<MeshRenderer>();
+            gunRecoil = gunModel.GetComponent<GunRecoil>();
         }
 
         if (wallRun != null)
@@ -116,19 +137,28 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         Debug.DrawRay(mainCam.transform.position, mainCam.transform.forward * shootDist, Color.yellow);
 #endif
 
-        if (Input.GetButton("Fire1") && shootTimer >= shootRate)
+        if(Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur > 0 && shootTimer >= shootRate && !isReloading)
         {
             shoot();
         }
+        else if(Input.GetButton("Fire1") && gunList.Count > 0 && gunList[gunListPos].ammoCur == 0 && !isPlayingClick)
+        {
+            StartCoroutine(playClick());
+        }
 
-        // only block movement when actively being pulled by grapple (not during line extend)
-        bool isGrappling = grappleHook != null && grappleHook.IsGrappling();
+            // only block movement when actively being pulled by grapple (not during line extend)
+            bool isGrappling = grappleHook != null && grappleHook.IsGrappling();
 
         // debug - remove after testing
         // if (grappleHook != null) Debug.Log($"isGrappling: {isGrappling}, lineExtending: {grappleHook.IsLineExtending()}");
 
         if (controller.isGrounded)
         {
+            if(moveDir.normalized.magnitude > 0.3f && !isPlayingSteps)
+            {
+                StartCoroutine(playStep());
+            }
+
             jumpCount = 0;
             if (playerVel.y <= 0)
             {
@@ -207,6 +237,13 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         {
             wallRun.UpdateCameraTilt();
         } // Wall run end
+
+        selectGun();
+
+        if(Input.GetButtonDown("Reload") && gunList.Count > 0 && !isReloading)
+        {
+            StartCoroutine(reload());
+        }
     }
 
     void jump()
@@ -217,6 +254,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
 
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && !tazed)
         {
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             playerVel.y = jumpSpeed;
             jumpCount++;
         }
@@ -232,11 +270,25 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         if (Input.GetButtonDown("Sprint") && !tazed)
         {
             speed *= sprintMod;
+            isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint") && !tazed)
         {
             speed = speedOrig;
+            isSprinting = false;
         }
+    }
+
+    IEnumerator playStep()
+    {
+        isPlayingSteps = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (isSprinting)
+            yield return new WaitForSeconds(0.3f);
+        else
+            yield return new WaitForSeconds(0.5f);
+
+        isPlayingSteps = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -270,30 +322,58 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
     {
         shootTimer = 0;
 
+        gunList[gunListPos].ammoCur--;
+        aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
+
+        if (gunRecoil != null)
+        {
+            gunRecoil.TriggerRecoil();
+        }
+
         // Levi addition, statTracking
         if (statTracker.instance != null)
         {
             statTracker.instance.IncrementShotsFired();
         }
 
-        Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
+        //Instantiate(playerBullet, playerShootPos.position, mainCam.transform.rotation);
 
-        //RaycastHit hit;
-        //if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
-        //{
+        RaycastHit hit;
+        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootDist, ~ignoreLayer))
+        {
+            Debug.Log(hit.collider.name);
 
-        //    IDamage dmg = hit.collider.GetComponent<IDamage>();
-        //    if (dmg != null)
-        //    {
-        //        dmg.takeDamage(shootDamage);
+            Instantiate(gunList[gunListPos].hitEffect, hit.point, Quaternion.identity);
 
-        //        // stat tracking
-        //        if(statTracker.instance != null)
-        //        {
-        //            statTracker.instance.IncrementShotsHit();
-        //        }
-        //    }
-        //}
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            if (dmg != null)
+            {
+                dmg.takeDamage(shootDamage);
+
+                // stat tracking
+                if (statTracker.instance != null)
+                {
+                    statTracker.instance.IncrementShotsHit();
+                }
+            }
+        }
+    }
+
+    IEnumerator playClick()
+    {
+        isPlayingClick = true;
+        aud.PlayOneShot(audEmptyMag[Random.Range(0, audEmptyMag.Length)], audEmptyMagVol);
+        yield return new WaitForSeconds(0.75f);
+        isPlayingClick = false;
+    }
+
+    IEnumerator reload()
+    {
+        isReloading = true;
+        aud.PlayOneShot(audReload[Random.Range(0, audReload.Length)], audReloadVol);
+        gunList[gunListPos].ammoCur = gunList[gunListPos].ammoMax;
+        yield return new WaitForSeconds(0.75f);
+        isReloading = false;
     }
 
     public void takeDamage(int amount)
@@ -304,6 +384,7 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         if (amount > 0)
         {
             HP -= amount;
+            aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
             StartCoroutine(flashRed());
             updatePlayerUI();
         }
@@ -501,12 +582,15 @@ public class playerController : MonoBehaviour, IDamage, IHeal, IPickup
         shootDist = gunList[gunListPos].shootDist;
         shootRate = gunList[gunListPos].shootRate;
 
-        if (gunMeshFilter != null && gunMeshRenderer != null)
-        {
-            var newGunModel = gunList[gunListPos].gunModel;
-            gunMeshFilter.sharedMesh = newGunModel.GetComponent<MeshFilter>().sharedMesh;
-            gunMeshRenderer.sharedMaterial = newGunModel.GetComponent<MeshRenderer>().sharedMaterial;
-        }
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].gunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        //if (gunMeshFilter != null && gunMeshRenderer != null)
+        //{
+        //    var newGunModel = gunList[gunListPos].gunModel;
+        //    gunMeshFilter.sharedMesh = newGunModel.GetComponent<MeshFilter>().sharedMesh;
+        //    gunMeshRenderer.sharedMaterial = newGunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        //}
     }
 
     void selectGun()

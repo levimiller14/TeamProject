@@ -6,6 +6,8 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
+    [SerializeField] Collider weaponCol;
 
     [SerializeField] int HP;
     [SerializeField] int maxHP;
@@ -13,14 +15,18 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
     [SerializeField] int FOV;
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTime;
+    [SerializeField] int animTranSpeed;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
 
     [SerializeField] GameObject dropItem;
+
     Color colorOrig;
+
     MaterialPropertyBlock propBlock;
+
     static readonly int colorId = Shader.PropertyToID("_BaseColor");
 
     float shootTimer;
@@ -59,6 +65,12 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
     void Update()
     {
         shootTimer += Time.deltaTime;
+        locomotionAnim();
+
+        if(agent.remainingDistance < 0.01f)
+        {
+            roamTimer += Time.deltaTime;
+        }
 
         if(playerInRange && canSeePlayer())
         {
@@ -68,6 +80,14 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
         {
             checkRoam();
         }
+    }
+
+    void locomotionAnim()
+    {
+        float agentSpeedCur = agent.velocity.normalized.magnitude;
+        float agentSpeedAnim = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.MoveTowards(agentSpeedAnim, agentSpeedCur, Time.deltaTime * animTranSpeed));
     }
 
     void checkRoam()
@@ -113,6 +133,7 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
                 {
                     shoot();
                 }
+
                 agent.stoppingDistance = stoppingDistOrig;
                 return true;
             }
@@ -148,8 +169,23 @@ public class enemyAI : MonoBehaviour, IDamage, IHeal
         if (!tazed)
         {
             shootTimer = 0;
-            Instantiate(bullet, shootPos.position, transform.rotation);
+            anim.SetTrigger("Shoot");
         }
+    }
+    
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+
+    public void weaponColOn()
+    {
+        weaponCol.enabled = true;
+    }
+
+    public void weaponColOff()
+    {
+        weaponCol.enabled = false;
     }
 
     public void takeDamage(int amount)

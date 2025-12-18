@@ -84,7 +84,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Enemy 1 Animator
+  m_Name: Old Enemy 1 Animator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed

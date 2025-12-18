@@ -15,8 +15,10 @@ public class damage : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
     [Range(1, 0.1f)] [SerializeField] float playerSlowedSpeed;
+    [SerializeField] ParticleSystem hitEffect;
 
     bool isDamaging;
+    bool hasDealtDamage;
     float laserTimer;
     public float slowedSpeed;
 
@@ -56,27 +58,37 @@ public class damage : MonoBehaviour
         if (other.isTrigger)
             return;
 
+        // prevent multiple damage from same projectile hitting multiple colliders
+        if (hasDealtDamage && (type == damageType.moving || type == damageType.homing))
+            return;
+
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if(dmg != null && type != damageType.DOT && type != damageType.poison)
+        if(dmg != null && type != damageType.DOT && type != damageType.frost)
         {
             dmg.takeDamage(damageAmount);
+            hasDealtDamage = true;
+
             if (type == damageType.shock)
             {
-                dmg.taze(/*damageAmount,*/ duration);
+                dmg.taze(duration);
             }
         }
 
         if(type == damageType.homing || type == damageType.moving)
         {
+            if(hitEffect != null)
+            {
+                Instantiate(hitEffect, transform.position, Quaternion.identity);
+            }
+
             Destroy(gameObject);
         }
-        if (type == damageType.frost)
+
+        if (type == damageType.frost && dmg != null)
         {
             dmg.takeDamage(damageAmount);
         }
-
-        
     }
 
     private void OnTriggerStay(Collider other) // DOT and Poison

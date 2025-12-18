@@ -64,6 +64,7 @@ MonoBehaviour:
   speed: 25
   destroyTime: 3
   playerSlowedSpeed: 0.1
+  hitEffect: {fileID: 0}
   slowedSpeed: 0
 --- !u!135 &1367939532608329187
 SphereCollider:
