@@ -1440,6 +1440,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8152271960265476864, guid: 2af2ba50c23f9f94abb0f4f945ebf27e, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8812180700554100344, guid: 2af2ba50c23f9f94abb0f4f945ebf27e, type: 3}
       propertyPath: m_Name
       value: Shock Trap (lethal)
@@ -1514,6 +1518,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3533541960415599731, guid: 260a9d87613c31149a7258bcb7dbdcca, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3539430443337418182, guid: 260a9d87613c31149a7258bcb7dbdcca, type: 3}
       propertyPath: m_Name
       value: Shock Trap (nonlethal)
