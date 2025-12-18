@@ -2183,8 +2183,8 @@ MonoBehaviour:
   agent: {fileID: 441044843293906150}
   anim: {fileID: 8044804467640479903}
   doghandler: {fileID: 0}
-  HP: 2
-  maxHP: 5
+  HP: 4
+  maxHP: 4
   faceTargetSpeed: 5
   FOV: 90
   alertRadius: 5
@@ -2261,7 +2261,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 12
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3187576685445614846
 GameObject:
@@ -3222,6 +3222,7 @@ MonoBehaviour:
   speed: 0
   destroyTime: 0
   playerSlowedSpeed: 0.1
+  hitEffect: {fileID: 0}
   slowedSpeed: 0
 --- !u!135 &1048671501248032698
 SphereCollider:

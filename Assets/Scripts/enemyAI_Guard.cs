@@ -27,6 +27,10 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
     [SerializeField] enemyAI_Dog dog;
     [SerializeField] enemyAI_Dog dog2;
 
+    //Allied Guards
+    [SerializeField] enemyAI_Guard guard;
+    [SerializeField] enemyAI_Guard guard2;
+
     //[SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -292,6 +296,15 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
             }
         }
 
+            if (guard != null)
+            {
+                guard.onAllyHit(playerTransform.position);
+            }
+            if (guard2 != null)
+            {
+            guard2.onAllyHit(playerTransform.position);
+            }
+
         if (HP <= 0)
         {
             //gameManager.instance.UpdateGameGoal(-1);
@@ -354,6 +367,10 @@ public class enemyAI_Guard : MonoBehaviour, IDamage, IHeal
                 //sets state to alerted
                 state = guardState.Alerted;
                 alertedTimer = 0;
+    }
+    public void onAllyHit(Vector3 alertPosition)
+    {
+        agent.SetDestination(alertPosition);
     }
     public void onDogHit(Vector3 alertPosition)
     {

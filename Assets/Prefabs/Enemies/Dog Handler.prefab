@@ -644,8 +644,8 @@ MonoBehaviour:
   agent: {fileID: 4188803168541586762}
   anim: {fileID: 3060172928351010809}
   animTranSpeed: 2
-  HP: 3
-  maxHP: 0
+  HP: 5
+  maxHP: 5
   faceTargetSpeed: 6
   FOV: 80
   roamDist: 5
@@ -656,6 +656,8 @@ MonoBehaviour:
   chaseSpeed: 3
   dog: {fileID: 0}
   dog2: {fileID: 0}
+  guard: {fileID: 0}
+  guard2: {fileID: 0}
   bullet: {fileID: 2080661851593689554, guid: 4f8f83e6684eaee49b70a76b25ff6ca8, type: 3}
   shootRate: 0.5
   shootPos: {fileID: 3392860874586418139}
