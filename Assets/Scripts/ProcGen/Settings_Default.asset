@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38731a9c86c8a9f4f84f70b995a39a91, type: 3}
+  m_Name: Settings_Default
+  m_EditorClassIdentifier: Assembly-CSharp::levelSettings
+  minRooms: 3
+  maxRooms: 5
+  branchingChance: 0.3
+  maxBranchDepth: 3
+  roomPadding: 0.5
+  maxPlacementAttempts: 10
+  scaleEnemiesWithDepth: 0
+  enemyDensityMultiplier: 1
+  useRandomSeed: 1
+  fixedSeed: 12345
+  logGeneration: 0

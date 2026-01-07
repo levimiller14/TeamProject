@@ -2,10 +2,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
+
+    [Header("----Procedural Generation----")]
+    public levelGenerator levelGen;
+    public bool useProcGen;
 
     // Levi additions
     // reusable dialog framework
@@ -57,6 +62,30 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
+
+        // procedural generation
+        if (useProcGen && levelGen != null)
+        {
+            levelGen.onGenerationComplete += onLevelGenerated;
+            levelGen.generateLevel();
+        }
+    }
+
+    void onLevelGenerated()
+    {
+        // position player at start room spawn
+        Transform spawn = levelGen.getPlayerSpawnPoint();
+        if (spawn != null && player != null)
+        {
+            // disable character controller to teleport
+            CharacterController cc = player.GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;
+
+            player.transform.position = spawn.position;
+            player.transform.rotation = spawn.rotation;
+
+            if (cc != null) cc.enabled = true;
+        }
     }
 
     // Update is called once per frame
