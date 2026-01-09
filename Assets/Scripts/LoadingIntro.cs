@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoadingIntro : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LoadingIntro : MonoBehaviour
     [SerializeField] TMP_Text continueText;
 
     [SerializeField] float loadingBarFilled = 3;
+
+    [SerializeField] string loadScene;
 
     bool startGame;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,7 +30,9 @@ public class LoadingIntro : MonoBehaviour
     {
         if(startGame && Input.anyKeyDown)
         {
-            playGame();
+            //playGame();
+
+            loadMap();
         }
     }
 
@@ -45,9 +50,14 @@ public class LoadingIntro : MonoBehaviour
         continueText.gameObject.SetActive(true);
     }
 
-    void playGame()
+    //void playGame()
+    //{
+    //    gameObject.SetActive(false);
+    //    Debug.Log("continue");
+   // }
+
+    void loadMap()
     {
-        gameObject.SetActive(false);
-        Debug.Log("continue");
+        SceneManager.LoadScene(loadScene);
     }
 }

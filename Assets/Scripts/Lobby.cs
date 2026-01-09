@@ -4,17 +4,18 @@ using UnityEngine.SceneManagement;
 public class Lobby : MonoBehaviour
 {
 
-    [SerializeField] string asylumScene = "LoadingSceneAsylum";
-    [SerializeField] string mansionScene = "LoadingSceneManison";
+    [SerializeField] string asylum = "LoadingIntroAsylum";
+    [SerializeField] string mansion = "LoadingIntroMansion";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public void loadSceneAsylum()
     {
-        SceneManager.LoadScene(asylumScene);
+        SceneManager.LoadScene(asylum);
     }
 
     public void loadSceneMansion()
     {
-        SceneManager.LoadScene(mansionScene);
+        //Debug.Log("Trying to load scene: " + mansion);
+        SceneManager.LoadScene(mansion);
     }
 }
