@@ -456,7 +456,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9be1830d4aa9bbd44acb25533725b894, type: 3}
---- !u!1001 &806410729
+--- !u!1001 &1235575427
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -466,27 +466,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 534a02de04f574a4787bac0400f90420, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.05
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 534a02de04f574a4787bac0400f90420, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 534a02de04f574a4787bac0400f90420, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.05
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 534a02de04f574a4787bac0400f90420, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.39
+      value: -3.323
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 534a02de04f574a4787bac0400f90420, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.21
+      value: 1.659
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 534a02de04f574a4787bac0400f90420, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.09
+      value: 34.022
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 534a02de04f574a4787bac0400f90420, type: 3}
       propertyPath: m_LocalRotation.w
@@ -524,6 +524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doctor
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 534a02de04f574a4787bac0400f90420, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 32e4669436ed6024cb7ce7cf41894f59, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -595,4 +599,4 @@ SceneRoots:
   - {fileID: 772243181}
   - {fileID: 1779523309}
   - {fileID: 190178429}
-  - {fileID: 806410729}
+  - {fileID: 1235575427}
