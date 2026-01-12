@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:67f695762f4fc477738274de6135e495ac8126ee44c054c98e90374f05e09ba0
-size 1026
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Levels/HeistSimulatorScenes/IntroScene.unity
+    guid: 88e7cca3239bcbd4eb634588a7bd6b54
+  - enabled: 1
+    path: Assets/Levels/HeistSimulatorScenes/Lobby.unity
+    guid: 7f41c5037c9efdc4585b3af61c59cf02
+  - enabled: 1
+    path: Assets/Levels/HeistSimulatorScenes/LoadingIntroMansion.unity
+    guid: f93db7bd6d594c7428148591041f6063
+  - enabled: 1
+    path: Assets/Levels/HeistSimulatorScenes/LoadingIntroAsylum.unity
+    guid: a53bdf1ab367e484882aa42a804f5cba
+  - enabled: 1
+    path: Assets/Levels/HeistSimulatorScenes/Asylum.unity
+    guid: 7afae9a60135554409b41c3bc7dfc404
+  - enabled: 1
+    path: Assets/Levels/HeistSimulatorScenes/Mansion.unity
+    guid: a0f59334cbbd22247becea4419c79d54
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_UseUCBPForAssetBundles: 0
